@@ -22,14 +22,14 @@ function Post({ hit }) {
   return (
     <div style={{ marginTop: "10px" }}>
       <span className="hit-path">
-        <a href={hit.frontmatter.path}>
+        <Link to ={hit.frontmatter.path}>
           <Highlight
             attribute="frontmatter.title"
             hit={hit}
             tagName="mark"
             url="frontmatter.path"
           />
-        </a>
+        </Link>
       </span>
     </div>
   )
