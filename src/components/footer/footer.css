@@ -1,0 +1,12 @@
+.footer {
+    height: 40px;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    grid-area: footer;
+}
+
+.footer a {
+    font-size: 150%;
+    margin-left: 2%;
+}

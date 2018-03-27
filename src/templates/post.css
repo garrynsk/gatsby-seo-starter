@@ -1,0 +1,36 @@
+.blog-post {
+    padding-left: 8%;
+    padding-right: 6%;
+    padding-bottom: 6%;
+}
+
+.blog-post-title {
+    margin-bottom: 5%;
+}
+
+.tag {
+    margin: 2px;
+    background-color: rgb(236, 236, 236);
+    padding: 4px;
+    font-size: 90%;
+}
+
+a.tag:hover {
+    background-color: #fff;
+}
+
+.social-container {
+    position: fixed;
+    margin-left: -5%;
+    margin-bottom: 30%;
+    bottom: 0%;
+}
+
+.social-share-button {
+    cursor: pointer;
+    margin: 50%;
+}
+
+.social-share-button:hover:not(:active) {
+    opacity: 0.75;
+}

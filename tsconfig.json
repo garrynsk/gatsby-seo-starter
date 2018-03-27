@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "target": "es6",
+    "jsx": "react",
+    "allowJs": true,
+    "module": "es6",
+    "lib": ["dom", "es2015", "es2017"]
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": ["./src/**/*.spec.ts", "node_modules"]
+}

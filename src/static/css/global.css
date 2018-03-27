@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+@import './normalize.css';
+@import './code-highlight.css';
+a {
+    color: #0B6623;
+    text-decoration: none;
+}
+
+a:link {
+    color: #0B6623;
+}
+
+a:hover {
+    color: #000;
+}
+
+body {
+    font-size: 1.3em;
+    line-height: 150%;
+}
+
+h1 {
+    font-size: 1.6em;
+    font-family: 'Share Tech Mono', monospace;
+}

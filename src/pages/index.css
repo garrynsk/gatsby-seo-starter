@@ -1,0 +1,17 @@
+@import '../static/css/global.css';
+
+body {
+    font-family: 'Cutive Mono', monospace;
+}
+
+.blog-post-preview {
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-bottom: 6%;
+}
+
+.date {
+    color: #777;
+    font-style: italic;
+    font-size: 90%;
+}

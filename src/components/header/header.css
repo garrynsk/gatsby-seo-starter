@@ -1,0 +1,23 @@
+.header {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    grid-area: header;
+}
+
+.title {
+    color: black;
+    font-size: 2vw;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+    margin-left: 2vw;
+}
+
+@media (max-width: 1000px) {
+    .title {
+        font-size: 20px;
+    }
+}
+
+hr {
+    border-width: 1px;
+}

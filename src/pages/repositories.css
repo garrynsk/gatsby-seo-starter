@@ -1,0 +1,32 @@
+.description {
+    font-size: 110%;
+    margin-left: 3vw;
+}
+
+.readme {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 2px 16px;
+    font-size: 80%;
+    background-color: aliceblue;
+    color: rgb(107, 106, 106);
+}
+
+.readme:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.repositories {
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-bottom: 6%;
+}
+
+.repositoryName {
+    text-transform: capitalize;
+}
+
+.readmeTitle {
+    color: rgb(107, 106, 106);
+}
