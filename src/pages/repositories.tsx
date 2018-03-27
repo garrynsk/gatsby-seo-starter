@@ -4,6 +4,8 @@ import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
 import * as config from "../../config"
 import "./repositories.css"
+import Card, { CardActions, CardContent } from "material-ui/Card"
+import Typography from "material-ui/Typography"
 
 export default ({ data }) => {
   const repositories = parseData(data).repositories
@@ -19,17 +21,20 @@ export default ({ data }) => {
               <a href={repository.url}>{repository.name}</a>{" "}
             </h1>
             <div className="description"> {repository.description}</div>
+            <br />
             <div>
               {" "}
               {repository.readme ? (
-                <div>
-                  <h3 className="readmeTitle">Readme:</h3>
-                  <div>
+                <Card>
+                  <CardContent>
+                    <Typography color="textSecondary" className="card-title">
+                      Readme:
+                    </Typography>
                     {repository.readme.text ? (
-                      <div className="readme">{repository.readme.text}</div>
+                      <div>{repository.readme.text}</div>
                     ) : null}
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ) : null}
             </div>
           </div>

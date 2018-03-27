@@ -1,7 +1,7 @@
 module.exports = {
     pathPrefix: "/gatsby-freestyle",
     siteTitle: `Gatsby Freestyle Starter`,
-    siteLogo: "/src/favicon.ico",
+    siteLogo: "/favicon.ico",
     siteUrl: "https://garrynsk.github.io",
     siteDescription: "A GatsbyJS blog starter for hackers.",
     githubAuthor: "garrynsk",
@@ -9,7 +9,9 @@ module.exports = {
     userEmail: `garrynsk@gmail.com`,
     userName: `Zakharova Victoria`,
     userMoto: `Just a scala developer.`,
+    avatar: `/img/avatar.jpg`,
     year: `2018`,
+    headerBackground: `/img/Flying_Herk_in_the_Clouds.svg`,
     algoliaAppId: process.env.ALGOLIA_APP_ID,
     algoliaApiKey: process.env.ALGOLIA_API_KEY,
     disqusShortname: "garrynsk",

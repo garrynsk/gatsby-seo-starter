@@ -1,16 +1,20 @@
 import * as React from "react"
 import Navigation from "../navigation/navigation"
 import "./sidebar.css"
-
+import Avatar from "material-ui/Avatar"
 export default ({
   userName,
   userMoto,
   userEmail,
   algoliaAppId,
   algoliaApiKey,
+  avatar,
 }) => (
   <div className="sidebar">
-    <div className="userName">{userName}</div>
+    <div className="userName">
+      <Avatar alt="Victoria Zakharova" src={avatar} />
+    </div>
+    <div>{userName}</div>
     <div className="userMoto">{userMoto}</div>
     <div className="userEmail">{userEmail}</div>
     <hr />

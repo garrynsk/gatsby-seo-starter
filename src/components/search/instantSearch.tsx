@@ -2,6 +2,10 @@ import * as React from "react"
 import { Component } from "react"
 import * as ReactDOM from "react-dom"
 import Link from "gatsby-link"
+import "./instantSearch.css"
+import TextField from "material-ui/TextField"
+import { connectSearchBox } from "react-instantsearch/connectors"
+
 import {
   InstantSearch,
   Hits,
@@ -9,10 +13,22 @@ import {
   Highlight,
 } from "react-instantsearch/dom"
 
+const MySearchBox = ({ currentRefinement, refine }) => (
+  <TextField
+    label="Search field"
+    id="search"
+    type="search"
+    value={currentRefinement}
+    onChange={e => refine(e.target.value)}
+  />
+)
+
+const ConnectedSearchBox = connectSearchBox(MySearchBox)
+
 function Search() {
   return (
     <div className="container">
-      <SearchBox />
+      <ConnectedSearchBox />
       <Hits hitComponent={Post} />
     </div>
   )
@@ -22,7 +38,7 @@ function Post({ hit }) {
   return (
     <div style={{ marginTop: "10px" }}>
       <span className="hit-path">
-        <Link to ={hit.frontmatter.path}>
+        <Link to={hit.frontmatter.path}>
           <Highlight
             attribute="frontmatter.title"
             hit={hit}

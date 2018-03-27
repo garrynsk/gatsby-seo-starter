@@ -3,18 +3,26 @@ import Header from "../components/header/header"
 import Footer from "../components/footer/footer"
 import Sidebar from "../components/sidebar/sidebar"
 import "./index.css"
+import Helmet from "react-helmet"
 
 export default ({ children, data }) => {
   const metaData = data.site.siteMetadata
   return (
     <div className="default">
-      <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
+      <Helmet title={metaData.siteTitle} />
+
+      <Header
+        title={metaData.siteTitle}
+        blogLink={metaData.siteUrl}
+        headerBackground={metaData.headerBackground}
+      />
       <Sidebar
         userName={metaData.userName}
         userMoto={metaData.userMoto}
         userEmail={metaData.userEmail}
         algoliaAppId={metaData.algoliaAppId}
         algoliaApiKey={metaData.algoliaApiKey}
+        avatar={metaData.avatar}
       />
 
       <div className="content">{children()}</div>
@@ -37,7 +45,9 @@ export const query = graphql`
         userEmail
         userName
         userMoto
+        avatar
         year
+        headerBackground
         algoliaAppId
         algoliaApiKey
         githubUrl

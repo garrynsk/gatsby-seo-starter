@@ -31,9 +31,9 @@ class SEO extends Component {
       {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": blogURL,
-        "name": title,
-        "alternateName": config.siteTitleAlt ? config.siteTitleAlt : "",
+        url: blogURL,
+        name: title,
+        alternateName: config.siteTitleAlt ? config.siteTitleAlt : "",
       },
     ]
     if (postSEO) {
@@ -41,13 +41,13 @@ class SEO extends Component {
         {
           "@context": "http://schema.org",
           "@type": "BreadcrumbList",
-          "itemListElement": [
+          itemListElement: [
             {
               "@type": "ListItem",
-              "position": 1,
-              "item": {
+              position: 1,
+              item: {
                 "@id": postURL,
-                "name": title,
+                name: title,
                 image,
               },
             },
@@ -56,13 +56,13 @@ class SEO extends Component {
         {
           "@context": "http://schema.org",
           "@type": "BlogPosting",
-          "url": blogURL,
-          "name": title,
-          "alternateName": config.siteTitleAlt ? config.siteTitleAlt : "",
-          "headline": title,
-          "image": {
+          url: blogURL,
+          name: title,
+          alternateName: config.siteTitleAlt ? config.siteTitleAlt : "",
+          headline: title,
+          image: {
             "@type": "ImageObject",
-            "url": image,
+            url: image,
           },
           description,
         },

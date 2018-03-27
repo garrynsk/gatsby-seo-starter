@@ -3,7 +3,7 @@ title: "Random text generator"
 date: "2018-03-17T10:30:00.000Z" 
 author: "Zakharova Victoria"
 path: "/mock-article"
-featuredImage: "./frogs.jpg"
+featuredImage: ./frogs.jpg
 tags: ["random"]
 ---
 

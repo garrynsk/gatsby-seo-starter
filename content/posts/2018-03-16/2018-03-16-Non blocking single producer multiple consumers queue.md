@@ -3,12 +3,12 @@ title: "Non blocking single producer many consumers queue"
 date: "2018-03-16T10:30:00.000Z"
 author: "Zakharova Victoria"
 path: "/non-blocking-queue"
-featuredImage: "./queue-front.jpg"
+featuredImage: ./queue-front.jpg
 tags: ["non-blocking", "queue", "Scala"]
 ---
 
 <div style="text-align: center; width: 100%; margin-bottom: 50px;">
-<img src="queue.gif" width="80%">
+<img src="../../img/queue.gif" width="80%">
 </div>
 
 Non-blocking algorithms allows threads to access shared state without blocking: locks, mutexes, semaphores etc. A blocking concurrency algorithm is an algorithm which can block the thread until the action can be performed safely.

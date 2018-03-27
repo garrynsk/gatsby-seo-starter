@@ -3,7 +3,7 @@ import * as React from "react"
 import * as kebabCase from "lodash/kebabCase"
 import Helmet from "react-helmet"
 import Link from "gatsby-link"
-
+import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List"
 const TagsPage = ({
   data: { allMarkdownRemark: { group }, site: { siteMetadata: { siteTitle } } },
 }) => (
@@ -11,15 +11,15 @@ const TagsPage = ({
     <Helmet title={siteTitle} />
     <div>
       <h1>Tags</h1>
-      <ul>
+      <List component="nav">
         {group.map(tag => (
-          <li key={tag.fieldValue}>
+          <ListItem button key={tag.fieldValue}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
+              <ListItemText primary={`${tag.fieldValue} (${tag.totalCount})`} />
             </Link>
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </div>
   </div>
 )

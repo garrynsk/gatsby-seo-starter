@@ -1,7 +1,9 @@
 .header {
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    height: 30vh;
+    margin-bottom: 4vh;
     grid-area: header;
+    background-repeat: no-repeat;
+    border-bottom: 0.5px solid black;
 }
 
 .title {
@@ -21,3 +23,10 @@
 hr {
     border-width: 1px;
 }
+
+.flock {
+    margin-left: 20vw;
+    opacity: 0.6;
+    margin-top: -30vh;
+}
+

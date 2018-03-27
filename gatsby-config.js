@@ -18,7 +18,11 @@ const query = `query {
 
 const queries = [{
     query,
-    transformer: ({ data }) => data.allMarkdownRemark.edges.map(({ node }) => node),
+    transformer: ({
+        data
+    }) => data.allMarkdownRemark.edges.map(({
+        node
+    }) => node),
 }, ];
 
 
@@ -30,7 +34,9 @@ module.exports = {
         userEmail: config.userEmail,
         userName: config.userName,
         userMoto: config.userMoto,
+        avatar: config.avatar,
         year: config.year,
+        headerBackground: config.headerBackground,
         algoliaAppId: config.algoliaAppId,
         algoliaApiKey: config.algoliaApiKey,
         disqusShortname: config.disqusShortname,
@@ -96,6 +102,13 @@ module.exports = {
             options: {
                 path: `${__dirname}/content/posts/`,
                 name: "content",
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                path: `${__dirname}/static/img/`,
+                name: "img",
             },
         },
         {
@@ -190,12 +203,12 @@ module.exports = {
                         // directory in /public during development and build, so
                         // assuming your favicons are in /static/favicons,
                         // you can reference them here
-                        src: `/favicons/android-chrome-192x192.png`,
+                        src: `src/static/img/colored-feather-64-147313.png`,
                         sizes: `192x192`,
                         type: `image/png`,
                     },
                     {
-                        src: `/favicons/android-chrome-512x512.png`,
+                        src: `src/static/img/colored-feather-152-14731.png`,
                         sizes: `512x512`,
                         type: `image/png`,
                     },

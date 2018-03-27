@@ -9,7 +9,9 @@
         "gatsby-plugin-react-helmet": "^2.0.8",
         "react-helmet": "^5.2.0"
     },
-    "keywords": ["gatsby"],
+    "keywords": [
+        "gatsby"
+    ],
     "license": "MIT",
     "scripts": {
         "clean": "rm -rf public/* && rm -rf .cache/*",
@@ -75,12 +77,14 @@
         "graphql-tag": "^2.8.0",
         "js-beautify": "^1.7.5",
         "lodash": "^4.17.5",
+        "material-ui": "^1.0.0-beta.38",
         "prettier": "^1.11.1",
         "react-disqus-thread": "^0.4.0",
         "react-helmet": "^5.2.0",
         "react-icons": "^2.2.7",
         "react-instantsearch": "^5.0.1",
         "react-markdown": "^3.3.0",
+        "react-md": "^1.2.12",
         "react-render-html": "^0.6.0",
         "react-share": "^2.0.0",
         "remark": "^9.0.0",

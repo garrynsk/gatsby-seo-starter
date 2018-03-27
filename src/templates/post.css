@@ -27,6 +27,7 @@ a.tag:hover {
 }
 
 .social-share-button {
+    padding: '50px';
     cursor: pointer;
     margin: 50%;
 }
