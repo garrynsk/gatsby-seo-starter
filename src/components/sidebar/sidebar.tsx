@@ -12,7 +12,12 @@ export default ({
 }) => (
   <div className="sidebar">
     <div className="userName">
-      <Avatar alt="Victoria Zakharova" src={avatar} />
+      <Avatar
+        alt="Victoria Zakharova"
+        src={avatar}
+        size={80}
+        style={{ width: "140px", height: "100px" }}
+      />
     </div>
     <div>{userName}</div>
     <div className="userMoto">{userMoto}</div>

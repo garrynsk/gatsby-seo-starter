@@ -1,8 +1,8 @@
 <div style="color: #f55; font-weight: bold; font-size: 2.5em; margin-left: 15%;">Gatsby Freestyle Starter</div>
 
-The Gatsby starter with bells, whistles and typescript.
+The Gatsby starter with typescript and a lot of goodies.
 
-It is a project for building blogs, especially for programmers, as it can extract a list of repos via GitHub api. It also includes tags, comments, search, social buttons and SEO support.
+It is a project for building blogs, especially programming blogs, as it can extract a list of repos via GitHub api. It also includes tags, comments, search, social buttons and SEO support.
 
 #### Posts
 ![screenshot-post](./src/static/img/screenshot-post.png)

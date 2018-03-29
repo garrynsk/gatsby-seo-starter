@@ -1,11 +1,11 @@
 import * as React from "react"
-
-import "./header.css"
 import img from "./../../../static/img/flock.png"
-export default ({ title, blogLink, headerBackground }) => (
+import "./header.css"
+
+export default ({ title, blogLink }) => (
   <div
     className="header"
-    style={{ backgroundImage: `url(./${headerBackground})` }}
+    style={{ backgroundImage: `url(./img/Flying_Herk_in_the_Clouds.svg)` }}
   >
     <h1 className="title">
       <a href={blogLink}> {title} </a>

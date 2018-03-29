@@ -2,6 +2,7 @@
     padding-left: 8%;
     padding-right: 6%;
     padding-bottom: 6%;
+    margin-top: -10%;
 }
 
 .blog-post-title {
@@ -34,4 +35,8 @@ a.tag:hover {
 
 .social-share-button:hover:not(:active) {
     opacity: 0.75;
+}
+
+.image {
+    box-shadow: 5px 5px 13px #000, 20px 20px #0B6623;
 }

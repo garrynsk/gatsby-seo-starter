@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
 @import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
 @import './normalize.css';
-@import './code-highlight.css';
+@import './code-highlight-scala.css';
 
 a {
     color: #0B6623;
@@ -24,4 +24,57 @@ body {
 h1 {
     font-size: 1.6em;
     font-family: 'Share Tech Mono', monospace;
+}
+
+
+/* Underline */
+
+.underline {
+    background: transparent;
+    position: absolute;
+    display: inline-block;
+    font-size: 3rem;
+    font-weight: normal;
+    text-align: center;
+    color: rgba(0,0,0,.4);
+   
+}
+
+.underline > a {
+text-decoration: underline;
+text-decoration-color:#7FDBFF;
+color: rgba(0,0,0,0.5);
+z-index: 1;
+}
+
+
+.underline > a:before {
+content: "";
+position: absolute;
+display: inline-block;
+background: #7FDBFF;
+width: 100%;
+border-radius: 5px;
+bottom: 0;
+z-index: -1;
+}
+.underline > a:hover:before,
+.underline > a:focus:before {
+animation: .5s forwards hover-v linear;
+animation-fill-mode: forwards;
+}
+@keyframes hover-v {
+0% {
+    transform: scaleX(0);
+    height: 5px;
+    }
+45% {   
+    transform: scaleX(1.05);
+    height: 5px;
+    }
+55% {height: 5px;}
+100% {
+    transform: scaleX(1.05);
+    height: 3.8rem;
+    }
 }

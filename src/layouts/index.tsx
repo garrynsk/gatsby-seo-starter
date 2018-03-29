@@ -4,6 +4,7 @@ import Footer from "../components/footer/footer"
 import Sidebar from "../components/sidebar/sidebar"
 import "./index.css"
 import Helmet from "react-helmet"
+import "./scrollblur"
 
 export default ({ children, data }) => {
   const metaData = data.site.siteMetadata
@@ -11,11 +12,7 @@ export default ({ children, data }) => {
     <div className="default">
       <Helmet title={metaData.siteTitle} />
 
-      <Header
-        title={metaData.siteTitle}
-        blogLink={metaData.siteUrl}
-        headerBackground={metaData.headerBackground}
-      />
+      <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
       <Sidebar
         userName={metaData.userName}
         userMoto={metaData.userMoto}
@@ -26,12 +23,7 @@ export default ({ children, data }) => {
       />
 
       <div className="content">{children()}</div>
-      <Footer
-        facebookUrl={metaData.facebookUrl}
-        twitterUrl={metaData.twitterUrl}
-        linkednUrl={metaData.linkednUrl}
-        githubUrl={metaData.githubUrl}
-      />
+      <Footer socialLinks={metaData.socialLinks} />
     </div>
   )
 }
@@ -47,13 +39,12 @@ export const query = graphql`
         userMoto
         avatar
         year
-        headerBackground
         algoliaAppId
         algoliaApiKey
-        githubUrl
-        facebookUrl
-        twitterUrl
-        linkednUrl
+        socialLinks {
+          label
+          url
+        }
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {

@@ -40,6 +40,7 @@
         "@types/react-helmet": "^5.0.5",
         "algoliasearch": "^3.26.0",
         "bluebird": "^3.5.1",
+        "crossfade": "^1.0.0",
         "eslint": "^4.19.1",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.9.0",
@@ -75,9 +76,11 @@
         "gatsby-transformer-sharp": "^1.6.22",
         "gh-pages": "^1.1.0",
         "graphql-tag": "^2.8.0",
+        "jquery": "^3.3.1",
         "js-beautify": "^1.7.5",
         "lodash": "^4.17.5",
-        "material-ui": "^1.0.0-beta.38",
+        "material-ui": "^1.0.0-beta.39",
+        "material-ui-icons": "^1.0.0-beta.36",
         "prettier": "^1.11.1",
         "react-disqus-thread": "^0.4.0",
         "react-helmet": "^5.2.0",
@@ -95,6 +98,7 @@
         "tslint": "^5.9.1",
         "tslint-microsoft-contrib": "^5.0.3",
         "typescript": "^2.7.2",
+        "withinviewport": "^2.0.0",
         "write-good": "^0.11.3"
     }
 }

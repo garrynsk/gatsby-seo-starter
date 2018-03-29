@@ -14,6 +14,7 @@ You've heard about them many times, but still not sure if you need them? Or mayb
 First of all I'll remind you how they look like.
 
 ```scala
+
 trait Monad[F[_]] {
 
   def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B] = ???

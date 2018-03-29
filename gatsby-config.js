@@ -36,14 +36,10 @@ module.exports = {
         userMoto: config.userMoto,
         avatar: config.avatar,
         year: config.year,
-        headerBackground: config.headerBackground,
         algoliaAppId: config.algoliaAppId,
         algoliaApiKey: config.algoliaApiKey,
         disqusShortname: config.disqusShortname,
-        facebookUrl: config.facebookUrl,
-        linkednUrl: config.linkednUrl,
-        twitterUrl: config.twitterUrl,
-        githubUrl: config.githubUrl,
+        socialLinks: config.socialLinks,
     },
     plugins: [
         `gatsby-plugin-sitemap`,
@@ -134,8 +130,28 @@ module.exports = {
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
-                    "gatsby-remark-prismjs",
+
                     `gatsby-remark-autolink-headers`,
+                    {
+                        resolve: `gatsby-remark-prismjs`,
+                        options: {
+                            classPrefix: "language-scala",
+                            // This is used to allow setting a language for inline code
+                            // (i.e. single backticks) by creating a separator.
+                            // This separator is a string and will do no white-space
+                            // stripping.
+                            // A suggested value for English speakers is the non-ascii
+                            // character '›'.
+                            inlineCodeMarker: '>',
+                            // This lets you set up language aliases.  For example,
+                            // setting this to '{ sh: "bash" }' will let you use
+                            // the language "sh" which will highlight using the
+                            // bash highlighter.
+                            aliases: {
+                                scala: "scala"
+                            },
+                        },
+                    },
                     `gatsby-remark-copy-linked-files`,
                     {
                         resolve: `gatsby-remark-images`,

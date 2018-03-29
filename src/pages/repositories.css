@@ -30,3 +30,39 @@
 .readmeTitle {
     color: rgb(107, 106, 106);
 }
+
+.expand {
+    margin-left: 'auto';
+    animation: spinup 0.5s linear forwards;
+}
+
+.expandOpen {
+    margin-left: 'auto';
+    animation: spindown 0.5s linear forwards;
+}
+
+@keyframes spinup {
+    50% {
+
+        transform: rotate(90deg)
+    }
+    100% {
+
+        transform: rotate(180deg)
+    }
+}
+
+@keyframes spindown {
+    0% {
+
+        transform: rotate(180deg)
+    }
+    50% {
+
+        transform: rotate(90deg)
+    }
+    100% {
+
+        transform: rotate(0deg)
+    }
+}
