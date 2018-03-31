@@ -8,6 +8,7 @@ import ShareButtons from "../components/shareButtons/shareButtons"
 import styled from "styled-components"
 import Typography from 'material-ui/Typography'
 import PostHeader from "../components/postHeader/postHeader"
+import "./post.css"
 
 const BlogPost = styled.div`
   margin-left: 20px;

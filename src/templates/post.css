@@ -1,0 +1,43 @@
+.underline {
+    background: transparent;
+    position: relative;
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color:#7FDBFF;
+    z-index: 1;
+  }
+  
+ 
+  
+  .underline:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    background: #7FDBFF;
+    width: 100%;
+    border-radius: 5px;
+    bottom: 0;
+    z-index: -1;
+  }
+  .underline:hover:before,
+  .underline:focus:before {
+    animation: .5s forwards hover-v linear;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes hover-v {
+    0% {
+        transform: scaleX(0);
+        height: 1rem;
+       }
+    45% {   
+        transform: scaleX(1.05);
+        height: 2rem;
+       }
+    55% {height: 2.3rem}
+    100% {
+        transform: scaleX(1.05);
+        height: 2.5rem;
+       }
+  }
+  
