@@ -132,6 +132,10 @@ Adds GitHub-style links to MarkdownRemark headers.
 
 ## Features
 
+UI
+- [x] material-ui
+- [x] styled-components
+
 Posts in markdown
 - [x] Code syntax highlighting
 - [x] Embedded YouTube videos
@@ -239,32 +243,7 @@ In the file parser/parser.tsx is stored a parser for google API.
 
 #### Embed 
 
-You can include or exclude scripts for embed links from templates/post.tsx. They are defined in the block:
+You can include or exclude scripts for embed links from templates/post.tsx. 
 
 
-#### Custom css
-
-Every tsx file has its own css file.You can define your own or restyle the blog with any other languages.
-
-Global css files are stored in static/css/
-
-* code-highlight.css
-* global.css
-* normalize.css
-
-
-```html
-    <Helmet>
-        <script async src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.5" type="text/javascript"></script>
-        <script async src="https://www.redditstatic.com/comment-embed.js" type="text/javascript"></script>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" type="text/javascript"></script>
-        
-    </Helmet>
-```
-
-#### Issues
-
-Facebook embed posts do not appear instantly. You need to reload the page to see it.
-
-
-<div style="color: #f55; font-weight: bold; font-size: 3em; margin-left: 40%;">Enjoi!</div>
+###Enjoi!
