@@ -13,7 +13,12 @@ const BlogPost = styled.div`
   margin-left: 20px;
 `
 
-const Text = styled(Typography)``
+const Text = styled(Typography)`
+@media (max-width: 1000px) {
+  width: 80vw;
+}
+  
+`
 
 const Embed = (author, title) => (
   <Helmet>

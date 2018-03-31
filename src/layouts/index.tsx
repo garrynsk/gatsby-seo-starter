@@ -13,6 +13,7 @@ const Content = styled.div`
   padding-left: 5%;
   padding-right: 5%;
   grid-area: content;
+  margin-bottom: 50vh;
 `
 
 const Default = styled.div`
@@ -77,7 +78,6 @@ export default class Index extends React.Component {
       return (
         <MuiThemeProvider theme={theme}>
         <Default>
-          <Helmet title={metaData.siteTitle} />
           <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
           <Sidebar
             algoliaAppId={metaData.algoliaAppId}

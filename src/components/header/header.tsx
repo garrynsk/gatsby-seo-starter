@@ -26,14 +26,26 @@ const Header = styled.div`
   width: 100%;
   height: 25vh;
   grid-area: header;
+  color: #0B6623;
 `
 
 const Title = styled(Typography) `
+   
+`
+const ResizesTitle = styled.div `
   z-index: 1;
   padding-top: 5vh;
   padding-left: 3vw;
+  font-size: 150%;
+
+  @media (max-height: 700px) {
+    font-size: 80%;
+  }
 `
-const BlogLink = styled.a``
+
+const BlogLink = styled.a`
+
+`
 
 const Flock = styled.img`
   z-index: -1;
@@ -54,9 +66,14 @@ const Flock = styled.img`
 export default ({ title, blogLink }) => (
   <Header >
     <Plane src="./img/Flying_Herk_in_the_Clouds.svg" />
-    <Title variant="display1" gutterBottom>
-      <BlogLink href={blogLink}> {title} </BlogLink>
+    
+    <Title variant="title" color = "primary" gutterBottom>
+      <BlogLink href={blogLink}>
+        <ResizesTitle>{title}</ResizesTitle>      
+      </BlogLink>
     </Title>
+    
+
     <Flock src="./img/flock-grey.png" alt="flock" />
   </Header>
 )

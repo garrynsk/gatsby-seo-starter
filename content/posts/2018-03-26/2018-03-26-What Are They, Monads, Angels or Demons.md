@@ -7,6 +7,8 @@ featuredImage: ./angels.jpg
 tags: ["monads", "Scala"]
 ---
 
+<div style="width: 100%">
+
 You've heard about them many times, but still not sure if you need them? Or maybe you use them every day and happy with it? In any case, you do not want to miss a chance to discuss them one more time. If it is so, let's begin!
 
 ## Introduction
@@ -327,7 +329,7 @@ So, while monads are not about purity, they still can help us with the issues we
 !!!We have to compose and it is hard.
 
 
-![Transformer](Optimus_Prime.png)
+<div style="width: 100%; text-align: center;" ><img src="https://media.giphy.com/media/Kvcbt8N5wPMdi/giphy.gif" alt="Transformer" /></div>
 
 
 ## Monad Transformers
@@ -393,4 +395,4 @@ So, it is necessarily to write in monadic style? No. Can we write it in imperati
 
 clumsy
 
-
+</div>

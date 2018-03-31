@@ -15,6 +15,7 @@ const Sidebar = styled.div`
     width: 100%;
     margin-left: 0;
   }
+  
 `
 
 export default ({

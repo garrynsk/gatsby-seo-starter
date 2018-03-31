@@ -60,6 +60,7 @@
         "gatsby-plugin-react-helmet": "^2.0.8",
         "gatsby-plugin-sharp": "^1.6.41",
         "gatsby-plugin-sitemap": "^1.2.20",
+        "gatsby-plugin-styled-components": "^2.0.11",
         "gatsby-plugin-twitter": "^1.0.20",
         "gatsby-plugin-typescript": "^1.4.19",
         "gatsby-plugin-webpack-bundle-analyzer": "^0.1.1",
