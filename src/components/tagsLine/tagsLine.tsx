@@ -18,15 +18,13 @@ export default ({ tags }) => (
   <TagLine>
     {tags.map(tag => {
       return (
-        <Tag>
           <Button color="primary">
             <Typography variant="caption">
-              <Link to={`/tags/${kebabCase(tag)}/`}>
+              <Tag to={`/tags/${kebabCase(tag)}/`}>
                 {tag}
-              </Link>
+              </Tag>
             </Typography>
           </Button>
-        </Tag>
       )
     })}
   </TagLine>

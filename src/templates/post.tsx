@@ -42,6 +42,14 @@ export default class Post extends React.Component {
   componentDidMount = () => {
     this.mountFacebook()
     this.mountReddit()
+    this.mountTwitter()
+  }
+
+  mountTwitter = () => {
+    const script = document.createElement("script");
+    script.src = "https://platform.twitter.com/widgets.js";
+    script.async = true;
+    document.body.appendChild(script);
   }
 
   mountReddit = () => {
