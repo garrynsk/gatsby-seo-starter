@@ -5,9 +5,10 @@ import Footer from "../components/footer/footer"
 import Sidebar from "../components/sidebar/sidebar"
 import Helmet from "react-helmet"
 import { MuiThemeProvider } from 'material-ui/styles'
-import theme from "../styles/theme"
 import styled from "styled-components"
 import Typography from 'material-ui/Typography';
+import CssBaseline from 'material-ui/CssBaseline';
+import getPageContext from '../getPageContext.js';
 
 const Content = styled.div`
   padding-left: 5%;
@@ -40,6 +41,8 @@ const Default = styled.div`
 `
 
 export default class Index extends React.Component {
+  pageContext: null 
+
     constructor({ children, data }) {
       super({ children, data} )
       this.state = {
@@ -49,10 +52,19 @@ export default class Index extends React.Component {
       }
     }
 
-    componentDidMount = () => {
-      window.addEventListener('scroll', () => this.handleScroll(this.isOnScreen));
+    componentWillMount = () => {
+      this.pageContext = this.pageContext || getPageContext();
     }
 
+    componentDidMount = () => {
+      window.addEventListener('scroll', () => this.handleScroll(this.isOnScreen));
+
+      const jssStyles = document.querySelector('#jss-server-side');
+      if (jssStyles && jssStyles.parentNode) {
+        jssStyles.parentNode.removeChild(jssStyles);
+      }
+    }
+  
     isOnScreen = (element) => {
       const bounds = element.getBoundingClientRect()
       const y = bounds.y
@@ -73,10 +85,15 @@ export default class Index extends React.Component {
     }
 
     render() {
-      const {metaData, children, onScreen} = this.state;
+      const {metaData, children, onScreen, pageContext} = this.state;
 
       return (
-        <MuiThemeProvider theme={theme}>
+        <MuiThemeProvider
+        theme={this.pageContext.theme}
+        sheetsManager={this.pageContext.sheetsManager}
+      ><div>
+        {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
         <Default>
           <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
           <Sidebar
@@ -88,10 +105,10 @@ export default class Index extends React.Component {
           <Footer socialLinks={metaData.socialLinks} />
     
         </Default>
-        </MuiThemeProvider>
+        </div>
+       </MuiThemeProvider>
       )
     }
-  
 }
 
 export const query = graphql`

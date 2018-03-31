@@ -19,7 +19,7 @@ module.exports = {
     facebookAnalyticsID: " 2021718294759147",
     socialLinks: [{
             label: "GitHub",
-            url: "https://garrynsk.github.io",
+            url: "https://github.com/garrynsk",
         },
         {
             label: "Twitter",
@@ -35,5 +35,5 @@ module.exports = {
     ],
 
     themeColor: "#c62828",
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#fff",
 }

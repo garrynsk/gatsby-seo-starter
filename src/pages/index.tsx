@@ -6,6 +6,7 @@ import * as config from "../../config"
 import PostsList from "../components/postsList/postsList"
 import styled from "styled-components"
 import Typography from 'material-ui/Typography';
+import Reboot from 'material-ui/Reboot';
 
 const BlogPosts = styled.div`
 

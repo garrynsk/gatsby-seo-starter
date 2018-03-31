@@ -51,7 +51,6 @@ module.exports = {
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-catch-links`,
-        `gatsby-plugin-styled-components`,
         {
             resolve: `gatsby-plugin-algolia`,
             options: {
@@ -195,7 +194,7 @@ module.exports = {
                 name: "GatsbyJS",
                 short_name: "GatsbyJS",
                 start_url: "/",
-                background_color: "#f7f0eb",
+                background_color: "#fff",
                 theme_color: "#a2466c",
                 display: "minimal-ui",
                 icons: [{
