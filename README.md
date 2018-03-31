@@ -5,7 +5,7 @@ The Gatsby starter with typescript and a lot of goodies.
 It is a project for building blogs, especially programming blogs, as it can extract a list of repos via GitHub api. It also includes tags, comments, search, social buttons and SEO support.
 
 #### Preview
-[Preview](https://victoriaz.netlify.com/)
+[victoriaz.netlify.com](https://victoriaz.netlify.com/)
 
 ## How to install
 
@@ -244,6 +244,5 @@ In the file parser/parser.tsx is stored a parser for google API.
 #### Embed 
 
 You can include or exclude scripts for embed links from templates/post.tsx. 
-
 
 ### Enjoi!
