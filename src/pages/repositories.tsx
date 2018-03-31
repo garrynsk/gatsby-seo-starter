@@ -11,20 +11,18 @@ import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
-import Divider from 'material-ui/Divider';
+import Typography from "material-ui/Typography"
+import Divider from "material-ui/Divider"
 
 const Repositories = styled.div`
   margin-bottom: 6%;
 `
 
 const Header = styled.div`
-
   margin-bottom: 20px;
 `
 
-const Description = styled(Typography)`
-`
+const Description = styled(Typography)``
 const Name = styled(Typography)`
   padding-bottom: 30px;
 
@@ -35,16 +33,18 @@ const Name = styled(Typography)`
 `
 
 const ResizedTitle = styled.span`
-    @media (max-width: 1000px) {
-        font-size: 60%;
-    }
+  @media (max-width: 1000px) {
+    font-size: 60%;
+  }
 `
 const Title = ({ repository }) => (
   <Header>
     <Name variant="display1">
-      <a href={repository.url}><ResizedTitle>{repository.name}</ResizedTitle></a>
+      <a href={repository.url}>
+        <ResizedTitle>{repository.name}</ResizedTitle>
+      </a>
     </Name>
-    <Description variant = "subheading"> {repository.description}</Description>
+    <Description variant="subheading"> {repository.description}</Description>
   </Header>
 )
 

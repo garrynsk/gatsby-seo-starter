@@ -5,12 +5,10 @@ import SEO from "../components/seo/seo"
 import * as config from "../../config"
 import PostsList from "../components/postsList/postsList"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
-import Reboot from 'material-ui/Reboot';
+import Typography from "material-ui/Typography"
+import Reboot from "material-ui/Reboot"
 
-const BlogPosts = styled.div`
-
-`
+const BlogPosts = styled.div``
 
 export default ({ data }) => {
   const { edges: posts } = data.allMarkdownRemark
@@ -22,7 +20,6 @@ export default ({ data }) => {
       <SEO postEdges={data.allMarkdownRemark.edges} />
 
       <PostsList posts={posts} />
-
     </BlogPosts>
   )
 }

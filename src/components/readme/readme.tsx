@@ -7,16 +7,15 @@ import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import "./readme.css"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
+import Typography from "material-ui/Typography"
 
 const Container = styled.div`
-    margin-bottom: 40px;
-
+  margin-bottom: 40px;
 `
 
 const Text = styled(Typography)`
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 `
 
 export default class Readme extends React.Component {
@@ -56,7 +55,9 @@ export default class Readme extends React.Component {
               </IconButton>
 
               <Collapse in={expanded} timeout="auto" unmountOnExit>
-                {readme.text ? <Text variant = "body2">{readme.text}</Text> : null}
+                {readme.text ? (
+                  <Text variant="body2">{readme.text}</Text>
+                ) : null}
               </Collapse>
             </CardContent>
           </Card>
@@ -65,4 +66,3 @@ export default class Readme extends React.Component {
     )
   }
 }
-

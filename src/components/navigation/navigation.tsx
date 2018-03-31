@@ -4,8 +4,7 @@ import InstantSearch from "../search/instantSearch"
 import { MenuItem, MenuList } from "material-ui/Menu"
 import Paper from "material-ui/Paper"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
-
+import Typography from "material-ui/Typography"
 
 const Navigation = styled(Paper)`
   @media (max-width: 1000px) {
@@ -29,6 +28,6 @@ export default ({ algoliaAppId, algoliaApiKey }) => (
         <MenuItem>Repositories</MenuItem>
       </Link>
     </MenuList>
-    <InstantSearch algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey}/>
+    <InstantSearch algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey} />
   </Navigation>
 )

@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
+import Typography from "material-ui/Typography"
 import plane from "./img/Flying_Herk_in_the_Clouds.svg"
 import flock from "./img/flock-grey.png"
 
@@ -19,20 +19,17 @@ const Plane = styled.img`
   @media (max-width: 1000px) {
     display: none;
   }
-
 `
 
 const Header = styled.div`
   width: 100%;
   height: 25vh;
   grid-area: header;
-  color: #0B6623;
+  color: #0b6623;
 `
 
-const Title = styled(Typography) `
-   
-`
-const ResizesTitle = styled.div `
+const Title = styled(Typography)``
+const ResizesTitle = styled.div`
   z-index: 1;
   padding-top: 5vh;
   padding-left: 3vw;
@@ -43,9 +40,7 @@ const ResizesTitle = styled.div `
   }
 `
 
-const BlogLink = styled.a`
-
-`
+const BlogLink = styled.a``
 
 const Flock = styled.img`
   z-index: -1;
@@ -64,15 +59,14 @@ const Flock = styled.img`
 `
 
 export default ({ title, blogLink }) => (
-  <Header >
+  <Header>
     <Plane src="./img/Flying_Herk_in_the_Clouds.svg" />
-    
-    <Title variant="title" color = "primary" gutterBottom>
+
+    <Title variant="title" color="primary" gutterBottom>
       <BlogLink href={blogLink}>
-        <ResizesTitle>{title}</ResizesTitle>      
+        <ResizesTitle>{title}</ResizesTitle>
       </BlogLink>
     </Title>
-    
 
     <Flock src="./img/flock-grey.png" alt="flock" />
   </Header>

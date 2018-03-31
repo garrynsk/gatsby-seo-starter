@@ -14,6 +14,6 @@ const Footer = styled.div`
 export default ({ socialLinks }) => (
   <Footer>
     <SocialButtons socialLinks={socialLinks} />
-    <NavigationBottom/>
+    <NavigationBottom />
   </Footer>
 )

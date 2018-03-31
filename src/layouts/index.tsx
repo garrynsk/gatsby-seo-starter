@@ -1,14 +1,14 @@
 import * as React from "react"
-import {Component} from "react"
+import { Component } from "react"
 import Header from "../components/header/header"
 import Footer from "../components/footer/footer"
 import Sidebar from "../components/sidebar/sidebar"
 import Helmet from "react-helmet"
-import { MuiThemeProvider } from 'material-ui/styles'
+import { MuiThemeProvider } from "material-ui/styles"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
-import CssBaseline from 'material-ui/CssBaseline';
-import getPageContext from '../getPageContext.js';
+import Typography from "material-ui/Typography"
+import CssBaseline from "material-ui/CssBaseline"
+import getPageContext from "../getPageContext.js"
 import "./index.css"
 
 const Content = styled.div`
@@ -32,84 +32,85 @@ const Default = styled.div`
 
   @keyframes default {
     from {
-        filter: blur(20px);
+      filter: blur(20px);
     }
     to {
-        filter: blur(0px);
+      filter: blur(0px);
     }
   }
-
 `
 
 export default class Index extends React.Component {
-  pageContext: null 
+  pageContext: null
 
-    constructor({ children, data }) {
-      super({ children, data} )
-      this.state = {
-        metaData: data.site.siteMetadata,
-        children: children,
-        onScreen: false,
+  constructor({ children, data }) {
+    super({ children, data })
+    this.state = {
+      metaData: data.site.siteMetadata,
+      children: children,
+      onScreen: false,
+    }
+  }
+
+  componentWillMount = () => {
+    this.pageContext = this.pageContext || getPageContext()
+  }
+
+  componentDidMount = () => {
+    window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
+
+    const jssStyles = document.querySelector("#jss-server-side")
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles)
+    }
+  }
+
+  isOnScreen = element => {
+    const bounds = element.getBoundingClientRect()
+    const y = bounds.y
+    const bottom = window.innerHeight - bounds.bottom
+    this.setState({
+      onScreen: y + bounds.height / 2 > 0 && bottom + bounds.height / 2 > 0,
+    })
+  }
+
+  handleScroll = func => {
+    const els = document.getElementsByClassName("image")
+    Array.prototype.forEach.call(els, element => {
+      func(element)
+      if (this.state.onScreen === true) {
+        element.classList.remove("blur")
+      } else {
+        element.classList.add("blur")
       }
-    }
+    })
+  }
 
-    componentWillMount = () => {
-      this.pageContext = this.pageContext || getPageContext();
-    }
+  render() {
+    const { metaData, children, onScreen } = this.state
 
-    componentDidMount = () => {
-      window.addEventListener('scroll', () => this.handleScroll(this.isOnScreen));
-
-      const jssStyles = document.querySelector('#jss-server-side');
-      if (jssStyles && jssStyles.parentNode) {
-        jssStyles.parentNode.removeChild(jssStyles);
-      }
-    }
-  
-    isOnScreen = (element) => {
-      const bounds = element.getBoundingClientRect()
-      const y = bounds.y
-      const bottom = window.innerHeight - bounds.bottom
-      this.setState({onScreen: y + bounds.height / 2 > 0 && bottom + bounds.height / 2 > 0})
-    }
-
-    handleScroll = (func) => {
-      const els = document.getElementsByClassName("image")
-      Array.prototype.forEach.call(els, (element) => {
-        func(element)
-        if (this.state.onScreen === true) {
-          element.classList.remove("blur")
-        } else {
-          element.classList.add("blur")
-        }
-      })
-    }
-
-    render() {
-      const {metaData, children, onScreen} = this.state;
-
-      return (
-        <MuiThemeProvider
+    return (
+      <MuiThemeProvider
         theme={this.pageContext.theme}
         sheetsManager={this.pageContext.sheetsManager}
-      ><div>
-        {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Default>
-          <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
-          <Sidebar
-            algoliaAppId={metaData.algoliaAppId}
-            algoliaApiKey={metaData.algoliaApiKey}
-          />
-          <Content>{children()}</Content>
-  
-          <Footer socialLinks={metaData.socialLinks} />
-    
-        </Default>
+      >
+        <div>
+          {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Default>
+            <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
+            <Sidebar
+              algoliaAppId={metaData.algoliaAppId}
+              algoliaApiKey={metaData.algoliaApiKey}
+            />
+            <Content>{children()}</Content>
+
+            <Footer socialLinks={metaData.socialLinks} />
+          </Default>
         </div>
-       </MuiThemeProvider>
-      )
-    }
+      </MuiThemeProvider>
+    )
+  }
 }
 
 export const query = graphql`

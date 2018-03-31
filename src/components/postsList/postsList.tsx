@@ -4,14 +4,10 @@ import Img from "gatsby-image"
 import * as kebabCase from "lodash/kebabCase"
 import TagsLine from "../tagsLine/tagsLine"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
+import Typography from "material-ui/Typography"
 import PostHeader from "../postHeader/postHeader"
-const BlogPosts = styled.div`
-
-`
-const BlogPostsPreview = styled.div`
-
-`
+const BlogPosts = styled.div``
+const BlogPostsPreview = styled.div``
 const Title = styled(Typography)`
   padding: 4%;
   padding-left: 0;
@@ -32,8 +28,8 @@ export default ({ posts }) => (
       .filter(post => post.node.frontmatter.title.length > 0)
       .map(({ node: post }) => (
         <BlogPostsPreview key={post.id}>
-          <PostHeader post={post}/>
-          <Excerpt variant = "body2">{post.excerpt}</Excerpt>
+          <PostHeader post={post} />
+          <Excerpt variant="body2">{post.excerpt}</Excerpt>
         </BlogPostsPreview>
       ))}
   </BlogPosts>

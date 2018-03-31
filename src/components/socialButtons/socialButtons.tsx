@@ -32,19 +32,16 @@ const SwitchLink = ({ label }) => {
       break
 
     case "Linkedn":
-
       return <FaLinkedinSquare />
 
       break
 
     case "GitHub":
-
       return <FaGithubSquare />
 
       break
 
     default:
-
       break
   }
 }
@@ -52,13 +49,15 @@ const SwitchLink = ({ label }) => {
 export default ({ socialLinks }) => (
   <Buttons>
     {socialLinks.map(element => (
-          <Tooltip id="tooltip-top" placement="top" title={`Me on ${element.label}`}>
-            <Link href={element.url}>
-              <SwitchLink label = {element.label} />
-            </Link>
-          </Tooltip>
-        )
-      )
-    }
+      <Tooltip
+        id="tooltip-top"
+        placement="top"
+        title={`Me on ${element.label}`}
+      >
+        <Link href={element.url}>
+          <SwitchLink label={element.label} />
+        </Link>
+      </Tooltip>
+    ))}
   </Buttons>
 )

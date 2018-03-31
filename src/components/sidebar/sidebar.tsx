@@ -2,7 +2,6 @@ import * as React from "react"
 import Navigation from "../navigation/navigation"
 import styled from "styled-components"
 
-
 const Sidebar = styled.div`
   grid-area: sidebar;
   font-size: 90%;
@@ -15,13 +14,9 @@ const Sidebar = styled.div`
     width: 100%;
     margin-left: 0;
   }
-  
 `
 
-export default ({
-  algoliaAppId,
-  algoliaApiKey}) =>
-(
+export default ({ algoliaAppId, algoliaApiKey }) => (
   <Sidebar>
     <Navigation algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey} />
   </Sidebar>

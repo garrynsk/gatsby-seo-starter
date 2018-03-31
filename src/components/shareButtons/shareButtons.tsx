@@ -1,7 +1,7 @@
 import * as React from "react"
 import Tooltip from "material-ui/Tooltip"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography';
+import Typography from "material-ui/Typography"
 import {
   FacebookShareButton,
   GooglePlusShareButton,
@@ -20,7 +20,6 @@ import {
   LinkedinIcon,
 } from "react-share"
 
-
 const Container = styled.div`
   position: fixed;
   margin-left: -4vw;
@@ -30,11 +29,10 @@ const Container = styled.div`
   @media (max-width: 1000px) {
     display: none;
   }
-
 `
 
 const ShareButton = styled.div`
-  padding: '50px';
+  padding: "50px";
   cursor: pointer;
   padding-bottom: 3vh;
 
@@ -45,7 +43,6 @@ const ShareButton = styled.div`
 
 export default ({ shareUrl, title, excerpt }) => (
   <Tooltip id="tooltip-top-start" title="Share" placement="top-start">
-
     <Container>
       <ShareButton>
         <FacebookShareButton
@@ -53,7 +50,6 @@ export default ({ shareUrl, title, excerpt }) => (
           quote={excerpt}
           className="social-share-button"
         >
-        
           <FacebookIcon size={32} round={true} />
         </FacebookShareButton>
       </ShareButton>

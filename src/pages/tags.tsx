@@ -4,12 +4,11 @@ import Helmet from "react-helmet"
 import Link from "gatsby-link"
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography'
+import Typography from "material-ui/Typography"
 
 const Tags = styled.div``
 
-const Title = styled(Typography)`
-`
+const Title = styled(Typography)``
 
 const TagsPage = ({
   data: { allMarkdownRemark: { group }, site: { siteMetadata: { siteTitle } } },

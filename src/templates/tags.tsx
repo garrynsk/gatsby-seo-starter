@@ -1,12 +1,11 @@
 import * as React from "react"
 import Link from "gatsby-link"
 import styled from "styled-components"
-import Typography from 'material-ui/Typography'
-import Button from 'material-ui/Button';
+import Typography from "material-ui/Typography"
+import Button from "material-ui/Button"
 
 const Title = styled(Typography)`
   padding-bottom: 20px;
-
 `
 
 const Post = styled.div`
@@ -17,9 +16,9 @@ const TitleButton = styled(Button)`
 `
 
 const ResizedTitle = styled.span`
-    @media (max-width: 1000px) {
-        font-size: 60%;
-    }
+  @media (max-width: 1000px) {
+    font-size: 60%;
+  }
 `
 const Date = styled(Typography)`
   padding-left: 40px;
@@ -35,18 +34,24 @@ const Tags = ({ pathContext, data }) => {
 
   return (
     <div>
-      <Title variant="display1"><ResizedTitle>{tagHeader}</ResizedTitle></Title>
+      <Title variant="display1">
+        <ResizedTitle>{tagHeader}</ResizedTitle>
+      </Title>
       {edges.map(({ node }) => {
         const { path, title, date } = node.frontmatter
         return (
           <Post>
-            <Link to={path}><TitleButton >{title}</TitleButton></Link>
+            <Link to={path}>
+              <TitleButton>{title}</TitleButton>
+            </Link>
             <Date variant="caption">{date}</Date>
           </Post>
         )
       })}
 
-     <Link to="/tags"><Button> All tags </Button></Link>
+      <Link to="/tags">
+        <Button> All tags </Button>
+      </Link>
     </div>
   )
 }
