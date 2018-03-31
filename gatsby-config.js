@@ -40,8 +40,6 @@ module.exports = {
         algoliaApiKey: config.algoliaApiKey,
         disqusShortname: config.disqusShortname,
         socialLinks: config.socialLinks,
-        googleAnalyticsID,
-        facebookAnalyticsID,
     },
     plugins: [
         `gatsby-plugin-sitemap`,
