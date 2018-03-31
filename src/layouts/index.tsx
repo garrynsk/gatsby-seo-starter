@@ -9,6 +9,7 @@ import styled from "styled-components"
 import Typography from 'material-ui/Typography';
 import CssBaseline from 'material-ui/CssBaseline';
 import getPageContext from '../getPageContext.js';
+import "./index.css"
 
 const Content = styled.div`
   padding-left: 5%;
@@ -85,7 +86,7 @@ export default class Index extends React.Component {
     }
 
     render() {
-      const {metaData, children, onScreen, pageContext} = this.state;
+      const {metaData, children, onScreen} = this.state;
 
       return (
         <MuiThemeProvider
