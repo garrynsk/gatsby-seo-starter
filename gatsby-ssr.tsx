@@ -1,17 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import {
     renderToString
 } from 'react-dom/server';
 import {
     JssProvider
 } from 'react-jss';
+import * as getPageContext from './src/getPageContext';
 import {
     ServerStyleSheet,
     StyleSheetManager
-} from 'styled-components'
-import getPageContext from './src/getPageContext';
-
-exports.replaceRenderer = ({
+  } from 'styled-components'
+  
+export default ({
     bodyComponent,
     replaceBodyHTMLString,
     setHeadComponents
@@ -26,16 +26,16 @@ exports.replaceRenderer = ({
         }
         generateClassName = {
             pageContext.generateClassName
-        } >
-        <
-        StyleSheetManager sheet = {
+        } ><StyleSheetManager sheet = {
             sheet.instance
-        } > {
+        } >
+        {
             React.cloneElement(bodyComponent, {
                 pageContext,
             })
-        } < /StyleSheetManager></JssProvider > ,
+        } < /StyleSheetManager></JssProvider>,
     );
+
 
     replaceBodyHTMLString(bodyHTML);
     setHeadComponents(

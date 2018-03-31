@@ -7,8 +7,7 @@ import Helmet from "react-helmet"
 import { MuiThemeProvider } from "material-ui/styles"
 import styled from "styled-components"
 import Typography from "material-ui/Typography"
-import CssBaseline from "material-ui/CssBaseline"
-import * as getPageContext from "../getPageContext.js"
+import withRoot from "../withRoot"
 import "./index.css"
 
 const Content = styled.div`
@@ -42,8 +41,7 @@ const Default = styled.div`
 
 
 
-export default class Index extends React.Component {
-  pageContext: null
+class Index extends React.Component {
 
   constructor({ children, data }) {
     super({ children, data })
@@ -54,17 +52,9 @@ export default class Index extends React.Component {
     }
   }
 
-  componentWillMount = () => {
-    this.pageContext = this.pageContext || getPageContext()
-  }
 
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
-
-    const jssStyles = document.querySelector("#jss-server-side")
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles)
-    }
   }
 
   isOnScreen = element => {
@@ -92,13 +82,7 @@ export default class Index extends React.Component {
     const { metaData, children, onScreen } = this.state
 
     return (
-      <MuiThemeProvider
-        theme={this.pageContext.theme}
-        sheetsManager={this.pageContext.sheetsManager}
-      >
-        <div>
-          {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
+
           <Default>
             <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
             <Sidebar
@@ -109,11 +93,12 @@ export default class Index extends React.Component {
 
             <Footer socialLinks={metaData.socialLinks} />
           </Default>
-        </div>
-      </MuiThemeProvider>
+
     )
   }
 }
+
+export default withRoot(Index)
 
 export const query = graphql`
   query IndexLayoutQuery {
