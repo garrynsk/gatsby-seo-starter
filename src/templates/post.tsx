@@ -18,29 +18,14 @@ const Text = styled(Typography)``
 const Embed = (author, title) => (
   <Helmet>
     title={`${author} - ${title}`}
-    <script
-      async
-      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.5"
-      type="text/javascript"
-    />
-    <script
-      async
-      src="https://www.redditstatic.com/comment-embed.js"
-      type="text/javascript"
-    />
-    <script
-      async
-      src="https://platform.twitter.com/widgets.js"
-      type="text/javascript"
-    />
   </Helmet>
 )
 
 export default class Post extends React.Component {
 
   constructor({data}) {
-    super(data)
-    this.forceUpdate()
+    super({data})
+
     this.state = {
       disqus: data.site.siteMetadata.disqusShortname,
       post : data.markdownRemark,
@@ -48,7 +33,6 @@ export default class Post extends React.Component {
       title : data.markdownRemark.frontmatter.title,
       excerpt: data.markdownRemark.excerpt,
     }
- 
   }
   componentDidMount = () => {
     this.mountFacebook()
