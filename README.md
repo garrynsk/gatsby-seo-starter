@@ -1,13 +1,12 @@
-<div style="color: #f55; font-weight: bold; font-size: 2.5em; margin-left: 15%;">Gatsby Freestyle Starter</div>
+# Gatsby Freestyle Starter
 
 The Gatsby starter with typescript and a lot of goodies.
 
 It is a project for building blogs, especially programming blogs, as it can extract a list of repos via GitHub api. It also includes tags, comments, search, social buttons and SEO support.
 
-#### Posts
-![screenshot-post](./src/static/img/screenshot-post.png)
-#### Repositories
-![screenshot-repositories](./src/static/img/screenshot-repositories.png)
+#### Preview
+[Preview](https://victoriaz.netlify.com/)
+
 ## How to install
 
 Verify if npm and node are installed on your machine:
@@ -27,7 +26,7 @@ Otherwise, install them:
 Install the starter:
 
 ```bash
-gatsby new YourProjectName https://github.com/garrynsk/gatsby-freestyle-starter
+gatsby new YourProjectName https://github.com/garrynsk/gatsby-freestyle
 ```
 
 If you want to configure installed plugins, navigate to gatsby-config.js in the root directory and edit it as you wish.
