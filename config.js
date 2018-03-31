@@ -34,6 +34,6 @@ module.exports = {
         }
     ],
 
-    themeColor: "#c62828",
+    themeColor: "#fff",
     backgroundColor: "#fff",
 }

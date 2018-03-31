@@ -19,3 +19,7 @@ a:hover {
 .image {
     box-shadow: 5px 5px 13px #000, 20px 20px #0B6623;
 }
+
+body {
+    background-color: #FFF;
+}

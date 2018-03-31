@@ -58,6 +58,9 @@ export const theme = createMuiTheme({
           },
         },
     palette: {
+      background: {
+        default: '#fff',
+      },
       primary: {
         // light: will be calculated from palette.primary.main,
         main: '#0B6623',
@@ -65,10 +68,10 @@ export const theme = createMuiTheme({
         // contrastText: will be calculated to contast with palette.primary.main
       },
       secondary: {
-       // light: '#0066ff',
+        light: '#FFF',
         main: '#333',
         // dark: will be calculated from palette.secondary.main,
-       // contrastText: '#ffcc00',
+        contrastText: '#FFF',
       },
       // error: will us the default color
     },

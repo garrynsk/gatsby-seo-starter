@@ -195,7 +195,7 @@ module.exports = {
                 short_name: "GatsbyJS",
                 start_url: "/",
                 background_color: "#fff",
-                theme_color: "#a2466c",
+                theme_color: "#fff",
                 display: "minimal-ui",
                 icons: [{
                         src: `src/static/img/colored-feather-48-147313.png`,
