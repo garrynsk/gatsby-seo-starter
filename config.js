@@ -1,5 +1,5 @@
 module.exports = {
-    pathPrefix: "/gatsby-freestyle",
+    pathPrefix: "/",
     siteTitle: `VictoriaZ programming sketches`,
     siteLogo: "/favicon.ico",
     siteUrl: "https://garrynsk.github.io",
@@ -15,21 +15,22 @@ module.exports = {
     algoliaAppId: process.env.ALGOLIA_APP_ID,
     algoliaApiKey: process.env.ALGOLIA_API_KEY,
     disqusShortname: "garrynsk",
-    googleAnalyticsID: "UA-47311644-5",
+    googleAnalyticsID: "UA-116706361-1",
+    facebookAnalyticsID: " 2021718294759147",
     socialLinks: [{
             label: "GitHub",
             url: "https://garrynsk.github.io",
         },
         {
             label: "Twitter",
-            url: "https://garrynsk.github.io",
+            url: "https://twitter.com/zakharovavi",
         }, {
             label: "Linkedn",
             url: "https://garrynsk.github.io",
         },
         {
             label: "Facebook",
-            url: "https://garrynsk.github.io"
+            url: "https://www.facebook.com/nitrographceo"
         }
     ],
 

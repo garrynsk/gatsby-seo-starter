@@ -40,6 +40,8 @@ module.exports = {
         algoliaApiKey: config.algoliaApiKey,
         disqusShortname: config.disqusShortname,
         socialLinks: config.socialLinks,
+        googleAnalyticsID,
+        facebookAnalyticsID,
     },
     plugins: [
         `gatsby-plugin-sitemap`,
@@ -118,7 +120,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
-                trackingId: "YOUR_GOOGLE_ANALYTICS_TRACKING_ID",
+                trackingId: config.googleAnalyticsID,
                 // Puts tracking script in the head instead of the body
                 head: false,
                 // Setting this parameter is optional
@@ -137,17 +139,7 @@ module.exports = {
                         resolve: `gatsby-remark-prismjs`,
                         options: {
                             classPrefix: "language-scala",
-                            // This is used to allow setting a language for inline code
-                            // (i.e. single backticks) by creating a separator.
-                            // This separator is a string and will do no white-space
-                            // stripping.
-                            // A suggested value for English speakers is the non-ascii
-                            // character '›'.
                             inlineCodeMarker: '>',
-                            // This lets you set up language aliases.  For example,
-                            // setting this to '{ sh: "bash" }' will let you use
-                            // the language "sh" which will highlight using the
-                            // bash highlighter.
                             aliases: {
                                 scala: "scala"
                             },
@@ -169,9 +161,6 @@ module.exports = {
                     {
                         resolve: `gatsby-remark-responsive-image`,
                         options: {
-                            // It's important to specify the maxWidth (in pixels) of
-                            // the content container as this plugin uses this as the
-                            // base for generating different widths of each image.
                             maxWidth: 590,
                         },
                     },
@@ -195,14 +184,9 @@ module.exports = {
         {
             resolve: `gatsby-plugin-facebook-analytics`,
             options: {
-                appId: "YOUR_APP_ID",
-                // Include facebook analytics in development.
-                // Defaults to false meaning the library will only be loaded in production.
+                appId: config.facebookAnalyticsID,
                 includeInDevelopment: false,
-                // Include debug version of sdk
-                // Defaults to false meaning the library will load sdk.js
                 debug: false,
-                // Can select your language, default will load english
                 language: "en_US",
             },
         },
@@ -216,11 +200,7 @@ module.exports = {
                 theme_color: "#a2466c",
                 display: "minimal-ui",
                 icons: [{
-                        // Everything in /static will be copied to an equivalent
-                        // directory in /public during development and build, so
-                        // assuming your favicons are in /static/favicons,
-                        // you can reference them here
-                        src: `src/static/img/colored-feather-64-147313.png`,
+                        src: `src/static/img/colored-feather-48-147313.png`,
                         sizes: `192x192`,
                         type: `image/png`,
                     },

@@ -16,7 +16,7 @@
     "scripts": {
         "clean": "rm -rf public/* && rm -rf .cache/*",
         "build": "npm run clean && node_modules/.bin/gatsby build",
-        "deploy": "npm run clean && npm run build:pp && node_modules/.bin/gh-pages -d public",
+        "deploy": "npm run clean && npm run build:pp && node_modules/.bin/gh-pages -d public -b master",
         "build:pp": "npm run clean && node_modules/.bin/gatsby build --prefix-paths",
         "serve": "node_modules/.bin/gatsby serve",
         "develop": "npm run clean && node_modules/.bin/gatsby develop",
