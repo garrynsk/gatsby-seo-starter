@@ -5,6 +5,10 @@ import {
 import {
     JssProvider
 } from 'react-jss';
+import {
+    ServerStyleSheet,
+    StyleSheetManager
+} from 'styled-components'
 import getPageContext from './src/getPageContext';
 
 exports.replaceRenderer = ({
@@ -14,6 +18,7 @@ exports.replaceRenderer = ({
 }) => {
     // Get the context of the page to collected side effects.
     const pageContext = getPageContext();
+    const sheet = new ServerStyleSheet()
 
     const bodyHTML = renderToString( <
         JssProvider registry = {
@@ -22,25 +27,31 @@ exports.replaceRenderer = ({
         generateClassName = {
             pageContext.generateClassName
         } >
-        {
+        <
+        StyleSheetManager sheet = {
+            sheet.instance
+        } > {
             React.cloneElement(bodyComponent, {
                 pageContext,
             })
-        } <
-        /JssProvider>,
+        } < /StyleSheetManager></JssProvider > ,
     );
 
     replaceBodyHTMLString(bodyHTML);
-    setHeadComponents([ <
-        style
-        type = "text/css"
-        id = "server-side-jss"
-        key = "server-side-jss"
-        dangerouslySetInnerHTML = {
-            {
-                __html: pageContext.sheetsRegistry.toString()
+    setHeadComponents(
+        [ <
+            style
+            type = "text/css"
+            id = "server-side-jss"
+            key = "server-side-jss"
+            dangerouslySetInnerHTML = {
+                {
+                    __html: pageContext.sheetsRegistry.toString()
+                }
             }
-        }
-        />,
-    ]);
+            />,
+            sheet.getStyleElement({
+                compact: process.NODE_ENV === 'production',
+            }),
+        ]);
 };

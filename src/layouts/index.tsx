@@ -8,7 +8,7 @@ import { MuiThemeProvider } from "material-ui/styles"
 import styled from "styled-components"
 import Typography from "material-ui/Typography"
 import CssBaseline from "material-ui/CssBaseline"
-import getPageContext from "../getPageContext.js"
+import * as getPageContext from "../getPageContext.js"
 import "./index.css"
 
 const Content = styled.div`
@@ -39,6 +39,8 @@ const Default = styled.div`
     }
   }
 `
+
+
 
 export default class Index extends React.Component {
   pageContext: null

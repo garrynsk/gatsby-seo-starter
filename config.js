@@ -16,7 +16,7 @@ module.exports = {
     algoliaApiKey: process.env.ALGOLIA_API_KEY,
     disqusShortname: "garrynsk",
     googleAnalyticsID: "UA-116706361-1",
-    facebookAnalyticsID: " 2021718294759147",
+    facebookAnalyticsID: "2021718294759147",
     socialLinks: [{
             label: "GitHub",
             url: "https://github.com/garrynsk",
