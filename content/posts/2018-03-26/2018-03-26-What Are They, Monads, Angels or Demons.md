@@ -1,5 +1,5 @@
 ---
-title: "What Are They, Monads, Angels or Demons?"
+title: "What are they, monads, angels or demons?"
 date: "2018-03-26T10:30:00.000Z"
 author: "Zakharova Victoria"
 path: "/monads"
@@ -199,7 +199,7 @@ sumIO(1, 2) == () // false
 
 ```
 
-Thus, <span style="background-color: green;"> a pure function can be with or without side effects </span>, but [evaluation of the result does not cause any semantically observable side effect or output, such as mutation of mutable objects or output to I/O devices](https://en.wikipedia.org/wiki/Pure_function). For example:
+Thus, <span class="underline"> a pure function can be with or without side effects </span>, but [evaluation of the result does not cause any semantically observable side effect or output, such as mutation of mutable objects or output to I/O devices](https://en.wikipedia.org/wiki/Pure_function). For example:
 
 ```scala
 
@@ -214,7 +214,7 @@ pureFunction(2) // always 2
 
 ```
 
-And <span style="background-color: green;"> a function without side effects can be impure.</span> For example:
+And <span  class="underline"> a function without side effects can be impure.</span> For example:
 
 ```scala
 
@@ -311,7 +311,7 @@ Option(println(4)) // prints 4
 
 ```
 
-Same with Future, List, Try and other monads in Scala. So, <span style="background-color: green;"> while monads in scala still abide monad laws, they can't be considered pure. </span> So, functional programming is about pure functions and side effects, but monads are completely orthogonal concepts.
+Same with Future, List, Try and other monads in Scala. So, <span  class="underline"> while monads in scala still abide monad laws, they can't be considered pure. </span> So, functional programming is about pure functions and side effects, but monads are completely orthogonal concepts.
 
 So, while monads are not about purity, they still can help us with the issues we listed in the beginning of the section.
 

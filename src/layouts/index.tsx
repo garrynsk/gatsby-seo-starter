@@ -5,31 +5,61 @@ import Sidebar from "../components/sidebar/sidebar"
 import "./index.css"
 import Helmet from "react-helmet"
 import "./scrollblur"
+import { MuiThemeProvider } from 'material-ui/styles'
+import theme from "../styles/theme"
+import styled from "styled-components"
+import Typography from 'material-ui/Typography';
+
+const Content = styled.div`
+  padding-left: 5%;
+  padding-right: 5%;
+  grid-area: content;
+`
+
+const Default = styled.div`
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-areas: "header  header" "sidebar content" "footer  footer";
+  transform: translateY(10);
+  animation: default 0.5s both;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "header  header" "content content" "sidebar sidebar" "footer footer";
+  }
+
+  @keyframes default {
+    from {
+        filter: blur(20px);
+    }
+    to {
+        filter: blur(0px);
+    }
+  }
+
+`
 
 export default ({ children, data }) => {
   const metaData = data.site.siteMetadata
   return (
-    <div className="default">
+    <MuiThemeProvider theme={theme}>
+    <Default>
       <Helmet title={metaData.siteTitle} />
-
       <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
       <Sidebar
-        userName={metaData.userName}
-        userMoto={metaData.userMoto}
-        userEmail={metaData.userEmail}
         algoliaAppId={metaData.algoliaAppId}
         algoliaApiKey={metaData.algoliaApiKey}
-        avatar={metaData.avatar}
       />
-
-      <div className="content">{children()}</div>
+      <Content>{children()}</Content>
       <Footer socialLinks={metaData.socialLinks} />
-    </div>
+      
+    </Default>
+    </MuiThemeProvider>
   )
 }
 
 export const query = graphql`
-  query AboutQuery {
+  query IndexLayoutQuery {
     site {
       siteMetadata {
         siteUrl

@@ -1,28 +1,27 @@
 import * as React from "react"
 import Navigation from "../navigation/navigation"
-import "./sidebar.css"
-import Avatar from "material-ui/Avatar"
+import styled from "styled-components"
+
+
+const Sidebar = styled.div`
+  grid-area: sidebar;
+  font-size: 90%;
+  margin-left: 10%;
+  margin-bottom: 10vh;
+  text-align: center;
+  text-line: 5px;
+
+  @media (max-width: 1300px) {
+    width: 100%;
+    margin-left: 0;
+  }
+`
+
 export default ({
-  userName,
-  userMoto,
-  userEmail,
   algoliaAppId,
-  algoliaApiKey,
-  avatar,
-}) => (
-  <div className="sidebar">
-    <div className="userName">
-      <Avatar
-        alt="Victoria Zakharova"
-        src={avatar}
-        size={80}
-        style={{ width: "140px", height: "100px" }}
-      />
-    </div>
-    <div>{userName}</div>
-    <div className="userMoto">{userMoto}</div>
-    <div className="userEmail">{userEmail}</div>
-    <hr />
+  algoliaApiKey}) =>
+(
+  <Sidebar>
     <Navigation algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey} />
-  </div>
+  </Sidebar>
 )

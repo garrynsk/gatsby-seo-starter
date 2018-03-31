@@ -45,6 +45,7 @@ module.exports = {
         `gatsby-plugin-sitemap`,
         `gatsby-plugin-offline`,
         //`gatsby-plugin-debug-build`,
+        `gatsby-plugin-twitter`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-typescript`,
         `gatsby-transformer-sharp`,

@@ -1,15 +1,23 @@
 import * as React from "react"
+import {Component} from 'react'
 import Helmet from "react-helmet"
-import Img from "gatsby-image"
-import "./post.css"
 import Link from "gatsby-link"
 import SEO from "../components/seo/seo"
 import * as ReactDisqusThread from "react-disqus-thread"
-import TagsLine from "../components/tagsLine/tagsLine"
 import ShareButtons from "../components/shareButtons/shareButtons"
+import styled from "styled-components"
+import Typography from 'material-ui/Typography'
+import PostHeader from "../components/postHeader/postHeader"
 
-const Embed = () => (
+const BlogPost = styled.div`
+  margin-left: 20px;
+`
+
+const Text = styled(Typography)``
+
+const Embed = (author, title) => (
   <Helmet>
+    title={`${author} - ${title}`}
     <script
       async
       src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.5"
@@ -23,45 +31,56 @@ const Embed = () => (
     <script
       async
       src="https://platform.twitter.com/widgets.js"
-      charset="utf-8"
       type="text/javascript"
     />
   </Helmet>
 )
 
-export default ({ data }) => {
-  const { markdownRemark: post } = data
-  const shareUrl = post.frontmatter.path
-  const title = post.frontmatter.title
-  return (
-    <div className="blog-post">
-      <div id="fb-root" />
-      <Helmet> title={`${post.frontmatter.author} - ${title}`}</Helmet>
-      <Embed />
-      <SEO postPath={shareUrl} postNode={post} postSEO />
-      <div>
-        <Img
-          fadeIn={true}
-          className="image"
-          alt={post.frontmatter.featuredImage.name}
-          sizes={post.frontmatter.featuredImage.childImageSharp.sizes}
-        />
-        <h1 className="blog-post-title">{title}</h1>
-        <TagsLine tags={post.frontmatter.tags} />
-        <ShareButtons shareUrl={shareUrl} title={title} />
-        <div
-          className="inner-text"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
-        <ReactDisqusThread
-          shortname={data.site.siteMetadata.disqusShortname}
-          identifier={title}
-          title={title}
-          url={shareUrl}
-        />
-      </div>
-    </div>
-  )
+export default class Post extends React.Component {
+
+  constructor({data}) {
+    super(data)
+    this.forceUpdate()
+    this.state = {
+      disqus: data.site.siteMetadata.disqusShortname,
+      post : data.markdownRemark,
+      shareUrl : data.markdownRemark.frontmatter.path,
+      title : data.markdownRemark.frontmatter.title,
+      excerpt: data.markdownRemark.excerpt,
+    }
+ 
+  }
+  
+
+
+
+  render() {
+    const {disqus, post, shareUrl, title, excerpt} = this.state
+
+    return (
+      <BlogPost>
+        <div id="fb-root"/>
+          
+          <Embed author ={post.frontmatter.author} title={title} />
+          <SEO postPath={shareUrl} postNode={post} postSEO />
+          <PostHeader post={post}/>
+          <ShareButtons shareUrl={shareUrl} title={title} excerpt={excerpt}/>
+          <Text
+            id="text"
+            variant="body2"
+            className="inner-text"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
+          <ReactDisqusThread
+            shortname={disqus}
+            identifier={title}
+            title={title}
+            url={shareUrl}
+          />
+      </BlogPost>
+    )
+  }
+
 }
 
 export const pageQuery = graphql`
@@ -73,6 +92,7 @@ export const pageQuery = graphql`
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
+      excerpt(pruneLength: 250)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         path

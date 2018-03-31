@@ -4,18 +4,25 @@ import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
 import * as config from "../../config"
 import PostsList from "../components/postsList/postsList"
+import styled from "styled-components"
+import Typography from 'material-ui/Typography';
+
+const BlogPosts = styled.div`
+
+`
 
 export default ({ data }) => {
   const { edges: posts } = data.allMarkdownRemark
 
   return (
-    <div className="blog-posts">
+    <BlogPosts>
       <Helmet title={config.siteTitle} />
 
       <SEO postEdges={data.allMarkdownRemark.edges} />
 
       <PostsList posts={posts} />
-    </div>
+
+    </BlogPosts>
   )
 }
 

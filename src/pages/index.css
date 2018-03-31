@@ -1,17 +1,21 @@
-@import '/../../static/css/global.css';
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+@import '../../static/css/normalize.css';
+@import '../../static/css/code-highlight-scala.css';
 
-body {
-    font-family: 'Cutive Mono', monospace;
+a {
+    color: #0B6623;
+    text-decoration: none;
 }
 
-.blog-post-preview {
-    margin-left: 6%;
-    margin-right: 6%;
-    margin-bottom: 6%;
+a:link {
+    color: #0B6623;
 }
 
-.date {
-    color: #777;
-    font-style: italic;
-    font-size: 90%;
+a:hover {
+    color: #000;
+}
+
+.image {
+    box-shadow: 5px 5px 13px #000, 20px 20px #0B6623;
 }

@@ -1,5 +1,30 @@
 import * as React from "react"
 import Link from "gatsby-link"
+import styled from "styled-components"
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button';
+
+const Title = styled(Typography)`
+  padding-bottom: 20px;
+
+`
+
+const Post = styled.div`
+  padding-bottom: 20px;
+`
+const TitleButton = styled(Button)`
+  text-align: left;
+`
+
+const ResizedTitle = styled.span`
+    @media (max-width: 1000px) {
+        font-size: 60%;
+    }
+`
+const Date = styled(Typography)`
+  padding-left: 40px;
+  font-style: italic;
+`
 
 const Tags = ({ pathContext, data }) => {
   const { tag } = pathContext
@@ -10,19 +35,18 @@ const Tags = ({ pathContext, data }) => {
 
   return (
     <div>
-      <h1>{tagHeader}</h1>
-      <ul>
-        {edges.map(({ node }) => {
-          const { path, title } = node.frontmatter
-          return (
-            <li key={path}>
-              <Link to={path}>{title}</Link>
-            </li>
-          )
-        })}
-      </ul>
+      <Title variant="display1"><ResizedTitle>{tagHeader}</ResizedTitle></Title>
+      {edges.map(({ node }) => {
+        const { path, title, date } = node.frontmatter
+        return (
+          <Post>
+            <Link to={path}><TitleButton >{title}</TitleButton></Link>
+            <Date variant="caption">{date}</Date>
+          </Post>
+        )
+      })}
 
-      <Link to="/tags">All tags</Link>
+     <Link to="/tags"><Button> All tags </Button></Link>
     </div>
   )
 }
@@ -41,6 +65,7 @@ export const pageQuery = graphql`
         node {
           frontmatter {
             title
+            date(formatString: "MMMM DD, YYYY")
             path
           }
         }

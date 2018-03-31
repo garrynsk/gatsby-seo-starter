@@ -6,54 +6,59 @@ import {
   FaGithubSquare,
   FaTwitterSquare,
 } from "react-icons/lib/fa"
+import styled from "styled-components"
 
-const SwitchLink = ({ element }) => {
-  switch (element.label) {
-    case "Facebook": {
-      return (
-        <Tooltip id="tooltip-top" placement="top" title="More about me">
-          <a href={element.url}>
-            <FaFacebookSquare />
-          </a>
-        </Tooltip>
-      )
+const Link = styled.a`
+  font-size: 150%;
+  margin-left: 2%;
+`
+
+const Buttons = styled.div`
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`
+
+const SwitchLink = ({ label }) => {
+  switch (label) {
+    case "Facebook":
+      return <FaFacebookSquare />
+
       break
-    }
-    case "Twitter": {
-      return (
-        <Tooltip id="tooltip-top" placement="top" title="More about me">
-          <a href={element.url}>
-            <FaTwitterSquare />
-          </a>
-        </Tooltip>
-      )
+
+    case "Twitter":
+      return <FaTwitterSquare />
+
       break
-    }
-    case "Linkedn": {
-      return (
-        <Tooltip id="tooltip-top" placement="top" title="More about me">
-          <a href={element.url}>
-            <FaLinkedinSquare />
-          </a>
-        </Tooltip>
-      )
+
+    case "Linkedn":
+
+      return <FaLinkedinSquare />
+
       break
-    }
-    case "GitHub": {
-      return (
-        <Tooltip id="tooltip-top" placement="top" title="More about me">
-          <a href={element.url}>
-            <FaGithubSquare />
-          </a>
-        </Tooltip>
-      )
+
+    case "GitHub":
+
+      return <FaGithubSquare />
+
       break
-    }
+
     default:
+
       break
   }
 }
 
 export default ({ socialLinks }) => (
-  <div>{socialLinks.map(element => <SwitchLink element={element} />)}</div>
+  <Buttons>
+    {socialLinks.map(element => (
+          <Tooltip id="tooltip-top" placement="top" title={`Me on ${element.label}`}>
+            <Link href={element.url}>
+              <SwitchLink label = {element.label} />
+            </Link>
+          </Tooltip>
+        )
+      )
+    }
+  </Buttons>
 )

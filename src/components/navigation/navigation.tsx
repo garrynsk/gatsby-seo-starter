@@ -1,12 +1,20 @@
 import * as React from "react"
 import Link from "gatsby-link"
-import "./navigation.css"
 import InstantSearch from "../search/instantSearch"
 import { MenuItem, MenuList } from "material-ui/Menu"
 import Paper from "material-ui/Paper"
+import styled from "styled-components"
+import Typography from 'material-ui/Typography';
+
+
+const Navigation = styled(Paper)`
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`
 
 export default ({ algoliaAppId, algoliaApiKey }) => (
-  <Paper className="navigation">
+  <Navigation>
     <MenuList>
       <Link to="/">
         <MenuItem>Home</MenuItem>
@@ -21,6 +29,6 @@ export default ({ algoliaAppId, algoliaApiKey }) => (
         <MenuItem>Repositories</MenuItem>
       </Link>
     </MenuList>
-    <InstantSearch algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey} />
-  </Paper>
+    <InstantSearch algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey}/>
+  </Navigation>
 )

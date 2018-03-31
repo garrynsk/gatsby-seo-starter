@@ -3,87 +3,56 @@ import { Component } from "react"
 import { parseData } from "../parser/parser"
 import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
+import Readme from "../components/readme/readme"
 import * as config from "../../config"
-import "./repositories.css"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Typography from "material-ui/Typography"
 import Collapse from "material-ui/transitions/Collapse"
-import Button from "material-ui/Button"
+import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
-import TouchRipple from "material-ui/ButtonBase/Ripple"
-import Checkboxes from "../components/checkboxes"
+import styled from "styled-components"
+import Typography from 'material-ui/Typography';
+import Divider from 'material-ui/Divider';
 
-class Readme extends React.Component {
-  constructor({ readme }) {
-    super(readme)
+const Repositories = styled.div`
+  margin-bottom: 6%;
+`
 
-    this.state = {
-      expanded: false,
-      readme: readme,
+const Header = styled.div`
+
+  margin-bottom: 20px;
+`
+
+const Description = styled(Typography)`
+`
+const Name = styled(Typography)`
+  padding-bottom: 30px;
+
+  @media (max-width: 1000px) {
+    font-size: 60%;
+    padding-bottom: 5px;
+  }
+`
+
+const ResizedTitle = styled.span`
+    @media (max-width: 1000px) {
+        font-size: 60%;
     }
-  }
-
-  handleExpandClick = () => {
-    this.setState({ expanded: !this.state.expanded })
-  }
-
-  render() {
-    const { expanded, readme } = this.state
-
-    return (
-      <div>
-        {readme ? (
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" className="card-title">
-                Readme:
-              </Typography>
-
-              <Button
-                variant="fab"
-                style={{
-                  maxWidth: "6px",
-                  width: "6px",
-                  height: "6px",
-                  paddingTop: "4px",
-                  paddingRight: "18px",
-                  paddingBottom: "4px",
-                  paddingLeft: "18px",
-                }}
-                className={expanded ? "expand" : "expandOpen"}
-                onClick={this.handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="Show more"
-                color="primary"
-              >
-                <ExpandMoreIcon />
-              </Button>
-
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                {readme.text ? <div>{readme.text}</div> : null}
-              </Collapse>
-            </CardContent>
-          </Card>
-        ) : null}
-      </div>
-    )
-  }
-}
-
+`
 const Title = ({ repository }) => (
-  <div>
-    <h1 className="repositoryName">
-      <a href={repository.url}>{repository.name}</a>
-    </h1>
-    <div className="description"> {repository.description}</div>
-  </div>
+  <Header>
+    <Name variant="display1">
+      <a href={repository.url}><ResizedTitle>{repository.name}</ResizedTitle></a>
+    </Name>
+    <Description variant = "subheading"> {repository.description}</Description>
+  </Header>
 )
 
 export default ({ data }) => {
   const repositories = parseData(data).repositories
 
   return (
-    <div className="repositories">
+    <Repositories>
       <Helmet title={config.siteTitle} />
       <SEO postEdges={data.githubData.data.user.repositories.edges} />
 
@@ -92,12 +61,12 @@ export default ({ data }) => {
           <div>
             <Title repository={repository} />
 
-            <br />
+            <Divider />
             <Readme readme={repository.readme} />
           </div>
         )
       })}
-    </div>
+    </Repositories>
   )
 }
 
