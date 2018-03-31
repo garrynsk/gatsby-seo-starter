@@ -1,10 +1,9 @@
 import * as React from "react"
+import {Component} from "react"
 import Header from "../components/header/header"
 import Footer from "../components/footer/footer"
 import Sidebar from "../components/sidebar/sidebar"
-import "./index.css"
 import Helmet from "react-helmet"
-import "./scrollblur"
 import { MuiThemeProvider } from 'material-ui/styles'
 import theme from "../styles/theme"
 import styled from "styled-components"
@@ -39,23 +38,60 @@ const Default = styled.div`
 
 `
 
-export default ({ children, data }) => {
-  const metaData = data.site.siteMetadata
-  return (
-    <MuiThemeProvider theme={theme}>
-    <Default>
-      <Helmet title={metaData.siteTitle} />
-      <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
-      <Sidebar
-        algoliaAppId={metaData.algoliaAppId}
-        algoliaApiKey={metaData.algoliaApiKey}
-      />
-      <Content>{children()}</Content>
-      <Footer socialLinks={metaData.socialLinks} />
-      
-    </Default>
-    </MuiThemeProvider>
-  )
+export default class Index extends React.Component {
+    constructor({ children, data }) {
+      super({ children, data} )
+      this.state = {
+        metaData: data.site.siteMetadata,
+        children: children,
+        onScreen: false,
+      }
+    }
+
+    componentDidMount = () => {
+      window.addEventListener('scroll', () => this.handleScroll(this.isOnScreen));
+    }
+
+    isOnScreen = (element) => {
+      const bounds = element.getBoundingClientRect()
+      const y = bounds.y
+      const bottom = window.innerHeight - bounds.bottom
+      this.setState({onScreen: y + bounds.height / 2 > 0 && bottom + bounds.height / 2 > 0})
+    }
+
+    handleScroll = (func) => {
+      const els = document.getElementsByClassName("image")
+      Array.prototype.forEach.call(els, (element) => {
+        func(element)
+        if (this.state.onScreen === true) {
+          element.classList.remove("blur")
+        } else {
+          element.classList.add("blur")
+        }
+      })
+    }
+
+    render() {
+      const {metaData, children, onScreen} = this.state;
+
+      return (
+        <MuiThemeProvider theme={theme}>
+        <Default>
+          <Helmet title={metaData.siteTitle} />
+          <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
+          <Sidebar
+            algoliaAppId={metaData.algoliaAppId}
+            algoliaApiKey={metaData.algoliaApiKey}
+          />
+          <Content>{children()}</Content>
+  
+          <Footer socialLinks={metaData.socialLinks} />
+    
+        </Default>
+        </MuiThemeProvider>
+      )
+    }
+  
 }
 
 export const query = graphql`

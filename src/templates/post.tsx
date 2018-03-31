@@ -50,8 +50,24 @@ export default class Post extends React.Component {
     }
  
   }
-  
+  componentDidMount = () => {
+    this.mountFacebook()
+    this.mountReddit()
+  }
 
+  mountReddit = () => {
+    const script = document.createElement("script");
+    script.src = "https://www.redditstatic.com/comment-embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }
+
+  mountFacebook = () => {
+    const script = document.createElement("script");
+    script.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.5";
+    script.async = true;
+    document.body.appendChild(script);
+  }
 
 
   render() {
