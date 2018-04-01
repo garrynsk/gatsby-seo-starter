@@ -6,6 +6,27 @@ import TagsLine from "../tagsLine/tagsLine"
 import styled from "styled-components"
 import Typography from "material-ui/Typography"
 import PostHeader from "../postHeader/postHeader"
+
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 40% 60% ;
+  grid-gap: 10px;
+  margin-bottom: 6%;
+
+  @media (max-width: 1500px) {
+    grid-template-columns: 100%;
+  
+  }
+`
+
+const Box = styled.div`
+  border-radius: 5px;
+  padding: 20px;
+
+`
+
+
 const BlogPosts = styled.div``
 const BlogPostsPreview = styled.div``
 const Title = styled(Typography)`
@@ -20,6 +41,7 @@ const Date = styled(Typography)`
 const Excerpt = styled(Typography)`
   padding-bottom: 5%;
   padding-top: 2%;
+
 `
 
 export default ({ posts }) => (
@@ -29,7 +51,12 @@ export default ({ posts }) => (
       .map(({ node: post }) => (
         <BlogPostsPreview key={post.id}>
           <PostHeader post={post} />
-          <Excerpt variant="body2">{post.excerpt}</Excerpt>
+          <Wrapper><Box><Excerpt variant="body2">{post.excerpt}</Excerpt></Box><Box>
+          <Img
+          className="image"
+          alt={post.frontmatter.featuredImage.name}
+          sizes={post.frontmatter.featuredImage.childImageSharp.sizes}
+        /></Box></Wrapper>
         </BlogPostsPreview>
       ))}
   </BlogPosts>

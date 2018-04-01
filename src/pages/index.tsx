@@ -29,7 +29,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
-          excerpt(pruneLength: 250)
+          excerpt(pruneLength: 400)
           id
           frontmatter {
             title
@@ -39,7 +39,7 @@ export const pageQuery = graphql`
             featuredImage {
               name
               childImageSharp {
-                sizes(maxWidth: 1900) {
+                sizes(maxWidth: 900) {
                   src
                   srcSet
                   ...GatsbyImageSharpSizes

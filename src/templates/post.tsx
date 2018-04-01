@@ -9,9 +9,14 @@ import styled from "styled-components"
 import Typography from "material-ui/Typography"
 import PostHeader from "../components/postHeader/postHeader"
 import "./post.css"
+import Img from "gatsby-image"
 
 const BlogPost = styled.div`
   margin-left: 20px;
+`
+
+const Image = styled(Img)`
+  margin-bottom: 6%;
 `
 
 const Text = styled(Typography)`
@@ -19,6 +24,7 @@ const Text = styled(Typography)`
     width: 80vw;
   }
 `
+
 
 const Embed = (author, title) => <Helmet>title={`${author} - ${title}`}</Helmet>
 
@@ -71,14 +77,19 @@ export default class Post extends React.Component {
 
         <Embed author={post.frontmatter.author} title={title} />
         <SEO postPath={shareUrl} postNode={post} postSEO />
+        <Image
+          className="image"
+          alt={post.frontmatter.featuredImage.name}
+          sizes={post.frontmatter.featuredImage.childImageSharp.sizes}
+        />
         <PostHeader post={post} />
         <ShareButtons shareUrl={shareUrl} title={title} excerpt={excerpt} />
-        <Text
+       <Text
           id="text"
           variant="body2"
           className="inner-text"
           dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+        />     
         <ReactDisqusThread
           shortname={disqus}
           identifier={title}
