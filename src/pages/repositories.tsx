@@ -34,8 +34,17 @@ const Name = styled(Typography)`
 
 const ResizedTitle = styled.span`
   @media (max-width: 1000px) {
-    font-size: 60%;
+    font-size: 50%;
+    line-height: 1em;
   }
+`
+
+const ResizedText = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 70%;
+    line-height: 1em;
+  }
+
 `
 const Title = ({ repository }) => (
   <Header>
@@ -44,7 +53,7 @@ const Title = ({ repository }) => (
         <ResizedTitle>{repository.name}</ResizedTitle>
       </a>
     </Name>
-    <Description variant="subheading"> {repository.description}</Description>
+    <Description variant="subheading"> <ResizedText>{repository.description}</ResizedText></Description>
   </Header>
 )
 

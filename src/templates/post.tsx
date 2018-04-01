@@ -4,7 +4,6 @@ import Helmet from "react-helmet"
 import Link from "gatsby-link"
 import SEO from "../components/seo/seo"
 import * as ReactDisqusThread from "react-disqus-thread"
-import ShareButtons from "../components/shareButtons/shareButtons"
 import styled from "styled-components"
 import Typography from "material-ui/Typography"
 import PostHeader from "../components/postHeader/postHeader"
@@ -16,16 +15,24 @@ const BlogPost = styled.div`
 `
 
 const ImageStyled = styled(Image)`
-  margin-bottom: 6%;
+  margin-bottom: 15%;
+  
 `
 
 const Text = styled(Typography)`
+  padding-top: 10%;
   @media (max-width: 1000px) {
     width: 80vw;
+    padding-top: 0;
   }
 `
 
-
+const ResizedText = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 80%;
+    line-height: 1.3em;
+  }
+`
 const Embed = (author, title) => <Helmet>title={`${author} - ${title}`}</Helmet>
 
 export default class Post extends React.Component {
@@ -37,7 +44,6 @@ export default class Post extends React.Component {
       post: data.markdownRemark,
       shareUrl: data.markdownRemark.frontmatter.path,
       title: data.markdownRemark.frontmatter.title,
-      excerpt: data.markdownRemark.excerpt,
     }
   }
   componentDidMount = () => {
@@ -69,7 +75,7 @@ export default class Post extends React.Component {
   }
 
   render() {
-    const { disqus, post, shareUrl, title, excerpt } = this.state
+    const { disqus, post, shareUrl, title } = this.state
 
     return (
       <BlogPost>
@@ -81,13 +87,10 @@ export default class Post extends React.Component {
           featuredImage={post.frontmatter.featuredImage}
         />
         <PostHeader post={post} />
-        <ShareButtons shareUrl={shareUrl} title={title} excerpt={excerpt} />
        <Text
-          id="text"
           variant="body2"
-          className="inner-text"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />     
+        ><ResizedText id="text" className="inner-text" dangerouslySetInnerHTML={{ __html: post.html }}/>
+        </Text>     
         <ReactDisqusThread
           shortname={disqus}
           identifier={title}
@@ -108,7 +111,6 @@ export const pageQuery = graphql`
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
-      excerpt(pruneLength: 250)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         path

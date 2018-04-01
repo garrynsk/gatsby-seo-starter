@@ -14,7 +14,8 @@ const Content = styled.div`
   padding-left: 5%;
   padding-right: 5%;
   grid-area: content;
-  margin-bottom: 50vh;
+  margin-bottom: 5%;
+
 `
 
 const Default = styled.div`
@@ -38,8 +39,6 @@ const Default = styled.div`
     }
   }
 `
-
-
 
 class Index extends React.Component {
 
@@ -134,7 +133,6 @@ export const query = graphql`
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
-          excerpt(pruneLength: 250)
           id
           headings {
             depth

@@ -25,6 +25,14 @@ const Email = styled(Typography)`
 `
 const Description = styled(Typography)``
 
+const ResizedText = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 85%;
+    line-height: 1.5em;
+  }
+`
+
+
 export default ({ data }) => {
   const { siteMetadata: site } = data.site
   return (
@@ -57,10 +65,10 @@ export default ({ data }) => {
       </User>
       <Divider />
       <Description variant="body2">
-        I am a scala developer, who loves functional programming (including
+        <ResizedText>I am a scala developer, who loves functional programming (including
         category theory, cats, scalaz etc.). I want to build something special,
         that's why I develop a project named Mutator. By the way, I'm fond of
-        elm.
+        elm.</ResizedText>
       </Description>
     </About>
   )

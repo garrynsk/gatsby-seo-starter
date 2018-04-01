@@ -14,20 +14,7 @@ const Navigation = styled(Paper)`
 
 export default ({ algoliaAppId, algoliaApiKey }) => (
   <Navigation>
-    <MenuList>
-      <Link to="/">
-        <MenuItem>Home</MenuItem>
-      </Link>
-      <Link to="/about">
-        <MenuItem>About me</MenuItem>
-      </Link>
-      <Link to="/tags">
-        <MenuItem>Tags</MenuItem>
-      </Link>
-      <Link to="/repositories">
-        <MenuItem>Repositories</MenuItem>
-      </Link>
-    </MenuList>
+    
     <InstantSearch algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey} />
   </Navigation>
 )

@@ -10,11 +10,16 @@ import Image from "../image/image"
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 40% 60% ;
+  grid-template-columns: 50% 50% ;
   grid-gap: 10px;
   margin-bottom: 6%;
 
   @media (max-width: 1500px) {
+    grid-template-columns: 60% 40%;
+  
+  }
+
+  @media (max-width: 600px) {
     grid-template-columns: 100%;
   
   }
@@ -23,7 +28,9 @@ const Wrapper = styled.div`
 const Box = styled.div`
   border-radius: 5px;
   padding: 20px;
-
+  @media (max-width: 1000px) {
+    padding: 0%;
+  }
 `
 
 
@@ -32,6 +39,8 @@ const BlogPostsPreview = styled.div``
 const Title = styled(Typography)`
   padding: 4%;
   padding-left: 0;
+
+
 `
 
 const Date = styled(Typography)`
@@ -43,7 +52,12 @@ const Excerpt = styled(Typography)`
   padding-top: 2%;
 
 `
-
+const ResizedText = styled.span`
+@media (max-width: 1000px) {
+  font-size: 80%;
+  line-height: 1.3em;
+}
+`
 export default ({ posts }) => (
   <BlogPosts>
     {posts
@@ -51,7 +65,7 @@ export default ({ posts }) => (
       .map(({ node: post }) => (
         <BlogPostsPreview key={post.id}>
           <PostHeader post={post} />
-          <Wrapper><Box><Excerpt variant="body2">{post.excerpt}</Excerpt></Box><Box>
+          <Wrapper><Box><Excerpt variant="body2"><ResizedText>{post.excerpt}</ResizedText></Excerpt></Box><Box>
           <Image featuredImage = {post.frontmatter.featuredImage}/></Box></Wrapper>
         </BlogPostsPreview>
       ))}

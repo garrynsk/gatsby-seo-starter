@@ -1,10 +1,12 @@
 import * as React from "react"
 import SocialButtons from "../socialButtons/socialButtons"
 import styled from "styled-components"
+import { ThemeProvider } from "styled-components"
 import NavigationBottom from "../navigationBottom/navigationBottom"
+import { theme } from "../../theme"
 
 const Footer = styled.div`
-  height: 50px;
+  height: ${(props) => props.theme.grid.footer.height};
   position: fixed;
   bottom: 0%;
   width: 100%;
@@ -12,8 +14,10 @@ const Footer = styled.div`
 `
 
 export default ({ socialLinks }) => (
-  <Footer>
-    <SocialButtons socialLinks={socialLinks} />
-    <NavigationBottom />
-  </Footer>
+  <ThemeProvider theme={theme}>
+    <Footer>
+      <SocialButtons socialLinks={socialLinks} />
+      <NavigationBottom />
+    </Footer>
+  </ThemeProvider>
 )

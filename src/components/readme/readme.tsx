@@ -18,6 +18,14 @@ const Text = styled(Typography)`
   overflow-wrap: break-word;
 `
 
+const ResizedText = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 70%;
+    line-height: 2em;
+  }
+
+`
+
 export default class Readme extends React.Component {
   constructor({ readme }) {
     super(readme)
@@ -41,7 +49,7 @@ export default class Readme extends React.Component {
           <Card>
             <CardContent>
               <Typography color="textSecondary" className="card-title">
-                Readme:
+                <ResizedText>Readme:</ResizedText>
               </Typography>
 
               <IconButton
@@ -56,7 +64,7 @@ export default class Readme extends React.Component {
 
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 {readme.text ? (
-                  <Text variant="body2">{readme.text}</Text>
+                  <Text variant="body2"><ResizedText>{readme.text}</ResizedText></Text>
                 ) : null}
               </Collapse>
             </CardContent>

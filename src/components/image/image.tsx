@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import { withTheme } from 'material-ui/styles';
 
 const Underline = styled.div`
-
+    padding-bottom: 10%;
     :after {
         content: '\00a0';
         background:
@@ -20,7 +20,6 @@ const Underline = styled.div`
 const Image = styled(Img)`
         box-shadow: 5px 5px 13px #000;
 
-
     `
 
 const StyledUnderline = withTheme()(Underline)
@@ -32,7 +31,8 @@ export default ({featuredImage}) => {
           className="image"
           alt={featuredImage.name}
           sizes={featuredImage.childImageSharp.sizes}
-        /></StyledUnderline>
+        />
+    </StyledUnderline>
 
 )
 }

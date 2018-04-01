@@ -39,6 +39,14 @@ pre[class*="language-"] {
     background-color: #333;
 }
 
+@media (max-width: 1000px) {
+    code[class*="language-"], pre[class*="language-"] {
+        font-size: 85%;
+        line-height: 1.5em;
+
+    }
+}
+
 /* Inline code */
 :not(pre) > code[class*="language-"] {
     padding: .2em;

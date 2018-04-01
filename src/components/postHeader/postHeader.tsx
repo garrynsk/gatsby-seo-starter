@@ -11,11 +11,21 @@ const Title = styled(Typography)`
   padding-left: 0;
 `
 
-const ResizedTitle = styled.span`
+const ResizedText = styled.span`
   @media (max-width: 1000px) {
-    font-size: 60%;
+    font-size: 50%;
+    line-height: 0.5em;
+    
   }
 `
+const ResizedDate = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 70%;
+    line-height: 1em;
+    
+  }
+`
+
 
 const Date = styled(Typography)`
   font-style: italic;
@@ -27,11 +37,11 @@ export default ({ post }) => (
 
     <Title variant="display1">
       <Link to={post.frontmatter.path}>
-        <ResizedTitle>{post.frontmatter.title}</ResizedTitle>
+        <ResizedText>{post.frontmatter.title}</ResizedText>
       </Link>
     </Title>
 
-    <Date variant="caption">{post.frontmatter.date}</Date>
+    <Date variant="caption"><ResizedDate>{post.frontmatter.date}</ResizedDate></Date>
 
     <TagsLine tags={post.frontmatter.tags} />
   </PostHeader>

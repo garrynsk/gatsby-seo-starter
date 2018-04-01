@@ -10,17 +10,33 @@ const Tags = styled.div``
 
 const Title = styled(Typography)``
 
+const ResizedTitle = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 60%;
+    line-height: 1em;
+    
+  }
+`
+
+const ResizedText = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 70%;
+    line-height: 1em;
+    
+  }
+`
+
 const TagsPage = ({
   data: { allMarkdownRemark: { group }, site: { siteMetadata: { siteTitle } } },
 }) => (
   <Tags>
     <Helmet title={siteTitle} />
-    <Title variant="display2">Tags</Title>
+    <Title variant="display2"><ResizedTitle>Tags</ResizedTitle></Title>
     <List component="nav">
       {group.map(tag => (
         <ListItem button key={tag.fieldValue}>
           <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-            <ListItemText primary={`${tag.fieldValue} (${tag.totalCount})`} />
+            <ListItemText primary={<ResizedText>{tag.fieldValue} ({tag.totalCount})</ResizedText>} />
           </Link>
         </ListItem>
       ))}

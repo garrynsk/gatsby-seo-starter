@@ -14,14 +14,24 @@ const Tag = styled(Link)`
   margin-left: 0;
 `
 
+const ResizedText = styled.span`
+  @media (max-width: 1000px) {
+    font-size: 60%;
+    margin: 0;
+    line-height: 1em;
+    
+  }
+`
+
+
 export default ({ tags }) => (
   <TagLine>
     {tags.map(tag => {
       return (
         <Tag to={`/tags/${kebabCase(tag)}/`}>
-          <Button color="primary">
+          <Button color="primary" >
             <Typography variant="caption" color="primary">
-              {tag}
+              <ResizedText>{tag}</ResizedText>
             </Typography>
           </Button>
         </Tag>
