@@ -6,7 +6,7 @@ import TagsLine from "../tagsLine/tagsLine"
 import styled from "styled-components"
 import Typography from "material-ui/Typography"
 import PostHeader from "../postHeader/postHeader"
-
+import Image from "../image/image"
 
 const Wrapper = styled.div`
   display: grid;
@@ -52,11 +52,7 @@ export default ({ posts }) => (
         <BlogPostsPreview key={post.id}>
           <PostHeader post={post} />
           <Wrapper><Box><Excerpt variant="body2">{post.excerpt}</Excerpt></Box><Box>
-          <Img
-          className="image"
-          alt={post.frontmatter.featuredImage.name}
-          sizes={post.frontmatter.featuredImage.childImageSharp.sizes}
-        /></Box></Wrapper>
+          <Image featuredImage = {post.frontmatter.featuredImage}/></Box></Wrapper>
         </BlogPostsPreview>
       ))}
   </BlogPosts>

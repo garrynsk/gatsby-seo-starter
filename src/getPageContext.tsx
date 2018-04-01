@@ -15,7 +15,7 @@ const theme = createMuiTheme({
     // Use the system font over Roboto.
     fontFamily: "Cutive Mono, monospace",
     fontSize: 20,
-
+ 
     display1: {
       fontFamily: "Share Tech Mono, monospace",
       textTransform: "capitalize",
@@ -59,15 +59,15 @@ const theme = createMuiTheme({
     },
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: "#0B6623",
+      main: "#F50057",
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contast with palette.primary.main
     },
     secondary: {
-      light: "#FFF",
-      main: "#333",
+      // light: "#",
+      main: "#7500B9",
       // dark: will be calculated from palette.secondary.main,
-      contrastText: "#FFF",
+      // contrastText: "#FFF",
     },
     // error: will us the default color
   },

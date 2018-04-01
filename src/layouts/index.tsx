@@ -53,8 +53,20 @@ class Index extends React.Component {
   }
 
 
+  mountSumo = () => {
+    const script = document.createElement("script")
+    script.innerHTML = `(function(s,u,m,o,j,v){j=u.createElement(m);
+                              v=u.getElementsByTagName(m)[0];
+                              j.async=1;j.src=o;j.dataset.sumoSiteId='e0c26837cb4b10b763371f1c76be9e44017998245cd17659c26996bb34bf6129';
+                              v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');`
+    script.async = true
+    script.type = "text/javascript"
+    document.body.appendChild(script)
+  }
+
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
+    this.mountSumo()
   }
 
   isOnScreen = element => {

@@ -9,13 +9,13 @@ import styled from "styled-components"
 import Typography from "material-ui/Typography"
 import PostHeader from "../components/postHeader/postHeader"
 import "./post.css"
-import Img from "gatsby-image"
+import Image from "../components/image/image"
 
 const BlogPost = styled.div`
   margin-left: 20px;
 `
 
-const Image = styled(Img)`
+const ImageStyled = styled(Image)`
   margin-bottom: 6%;
 `
 
@@ -77,10 +77,8 @@ export default class Post extends React.Component {
 
         <Embed author={post.frontmatter.author} title={title} />
         <SEO postPath={shareUrl} postNode={post} postSEO />
-        <Image
-          className="image"
-          alt={post.frontmatter.featuredImage.name}
-          sizes={post.frontmatter.featuredImage.childImageSharp.sizes}
+        <ImageStyled
+          featuredImage={post.frontmatter.featuredImage}
         />
         <PostHeader post={post} />
         <ShareButtons shareUrl={shareUrl} title={title} excerpt={excerpt} />

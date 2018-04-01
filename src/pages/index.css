@@ -4,20 +4,16 @@
 @import '../../static/css/code-highlight-scala.css';
 
 a {
-    color: #0B6623;
+    color: #000;
     text-decoration: none;
 }
 
 a:link {
-    color: #0B6623;
-}
-
-a:hover {
     color: #000;
 }
 
-.image {
-    box-shadow: 5px 5px 13px #000, 20px 20px #0B6623;
+a:hover {
+    color: #F50057;
 }
 
 body {
