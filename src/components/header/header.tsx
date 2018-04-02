@@ -1,63 +1,71 @@
 import * as React from "react"
+import {Component} from "react"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
+import { ThemeProvider } from "styled-components"
 import plane from "./img/Flying_Herk_in_the_Clouds.svg"
 import Navigation from "../navigationTop/navigationTop"
+import { LocalLink, BlogTitle, theme } from "../../theme"
 
 const Plane = styled.img`
   position: fixed;
   z-index: -1;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 15%;
   left:5%;
   top:10%;
 
-  @media (max-width: 1200px) {
-    width: 20%;
-  }
 
-  @media (max-width: 1000px) {
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
     display: none;
   }
 `
 
 const Header = styled.div`
   width: 100%;
-  height: 30%;
+  height: ${(props) => props.theme.grid.height};
   grid-area: header;
-  color: #0b6623;
-  text-align: right;
 `
 
-const Title = styled(Typography)`
-  
-`
-const ResizesTitle = styled.div`
-  z-index: 1;
+const PositionedTitle = styled(BlogTitle)`
   padding-top: 10%;
   padding-bottom: 10%;
-  font-size: 150%;
-  padding-right: 5%;
+  padding-left:  ${(props) => props.theme.grid.paddingLeft};
+  float: right;
+  padding-right: ${(props) => props.theme.grid.paddingRight};
   
-  @media (max-width: 700px) {
+  @media (max-width: ${(props) => props.theme.screen.px700}) {
     padding-top: 15%;
-    font-size: 80%;
   }
 
 `
 
-const BlogLink = styled.a``
+export default class HeaderComponent extends React.Component   {
 
 
-export default ({ title, blogLink }) => (
-  <Header>
-    <Plane src="./img/Flying_Herk_in_the_Clouds.svg" />
 
-    <Title variant="title" color="primary" gutterBottom>
-      <BlogLink href={blogLink}>
-        <ResizesTitle>{title}</ResizesTitle>
-      </BlogLink>
-    </Title>
-    <Navigation/>
-  </Header>
-)
+  constructor({ title, blogLink }){
+    super(title, blogLink)
+    this.state= {
+      title: title,
+      blogLink: blogLink,
+
+    }
+  }
+
+  render(){
+    const {title, blogLink} = this.state
+    return  (
+      <ThemeProvider theme={theme}>
+        <Header>
+          <Plane src="./img/Flying_Herk_in_the_Clouds.svg" />
+            <PositionedTitle>
+              <LocalLink href={blogLink}>
+                {title}
+              </LocalLink>
+            </PositionedTitle>
+          <Navigation/>
+        </Header>
+      </ThemeProvider>
+    )
+  }
+}

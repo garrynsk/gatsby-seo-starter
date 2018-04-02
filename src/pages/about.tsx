@@ -9,33 +9,45 @@ import Avatar from "material-ui/Avatar"
 import styled from "styled-components"
 import Typography from "material-ui/Typography"
 import Divider from "material-ui/Divider"
+import styled from "styled-components"
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, Title, CasualText } from "../theme"
 
-const About = styled.div``
+const About = styled.div`
+  padding-right: 50%;
+
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
+    margin-bottom: 50px;
+    padding-left: ${(props) => props.theme.grid.paddingLeft};
+    padding-right: ${(props) => props.theme.grid.paddingRight};
+  }
+`
 
 const User = styled.div`
   margin-bottom: 30px;
 `
 
-const Name = styled(Typography)``
-
-const Moto = styled(Typography)``
-
-const Email = styled(Typography)`
-  font-style: italic;
+const Name = styled(Title)`
+  padding-bottom: 20px;
 `
-const Description = styled(Typography)``
 
-const ResizedText = styled.span`
-  @media (max-width: 1000px) {
-    font-size: 85%;
-    line-height: 1.5em;
-  }
+const Moto = styled(CasualText)`
+  padding-bottom: 20px;
+`
+
+const Email = styled(CasualText)`
+  font-style: italic;
+  font-size: 96%;
+`
+const Description = styled(CasualText)`
+  padding-top: 20px;
 `
 
 
 export default ({ data }) => {
   const { siteMetadata: site } = data.site
   return (
+    <ThemeProvider theme={theme}>
     <About>
       <Helmet title={config.siteTitle} />
       <SEO />
@@ -53,24 +65,25 @@ export default ({ data }) => {
       />
 
       <User>
-        <Name variant="body1" gutterBottom>
+        <Name>
           {site.userName}
         </Name>
-        <Moto variant="body1" gutterBottom>
+        <Moto>
           {site.userMoto}
         </Moto>
-        <Email variant="caption" gutterBottom>
+        <Email>
           {site.userEmail}
         </Email>
       </User>
       <Divider />
-      <Description variant="body2">
-        <ResizedText>I am a scala developer, who loves functional programming (including
+      <Description>
+        I am a scala developer, who loves functional programming (including
         category theory, cats, scalaz etc.). I want to build something special,
         that's why I develop a project named Mutator. By the way, I'm fond of
-        elm.</ResizedText>
+        elm.
       </Description>
     </About>
+    </ThemeProvider>
   )
 }
 

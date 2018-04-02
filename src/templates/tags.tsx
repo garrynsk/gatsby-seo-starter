@@ -1,29 +1,23 @@
 import * as React from "react"
 import Link from "gatsby-link"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
 import Button from "material-ui/Button"
-
-const Title = styled(Typography)`
-  padding-bottom: 20px;
-`
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, Title, CasualText, Date } from "../theme"
 
 const Post = styled.div`
-  padding-bottom: 20px;
+  padding-top: 30px;
 `
-const TitleButton = styled(Button)`
-  text-align: left;
+const Container= styled.div`
+padding-right: ${(props) => props.theme.grid.paddingRight};
+
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
+    padding-left: ${(props) => props.theme.grid.paddingLeft};
+    
+  }
+
 `
 
-const ResizedTitle = styled.span`
-  @media (max-width: 1000px) {
-    font-size: 60%;
-  }
-`
-const Date = styled(Typography)`
-  padding-left: 40px;
-  font-style: italic;
-`
 
 const Tags = ({ pathContext, data }) => {
   const { tag } = pathContext
@@ -33,26 +27,28 @@ const Tags = ({ pathContext, data }) => {
   } tagged with "${tag}"`
 
   return (
-    <div>
-      <Title variant="display1">
-        <ResizedTitle>{tagHeader}</ResizedTitle>
+    <ThemeProvider theme={theme}>
+    <Container>
+      <Title>
+        {tagHeader}
       </Title>
       {edges.map(({ node }) => {
         const { path, title, date } = node.frontmatter
         return (
           <Post>
-            <Link to={path}>
-              <TitleButton>{title}</TitleButton>
-            </Link>
-            <Date variant="caption">{date}</Date>
+            <CasualText><GatsbyLink to={path}>
+              {title}
+            </GatsbyLink></CasualText>
+            <Date>{date}</Date>
           </Post>
         )
       })}
 
       <Link to="/tags">
-        <Button> All tags </Button>
+        <Button  color="primary"> All tags </Button>
       </Link>
-    </div>
+    </Container>
+    </ThemeProvider>
   )
 }
 

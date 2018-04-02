@@ -6,54 +6,45 @@ import SEO from "../components/seo/seo"
 import Readme from "../components/readme/readme"
 import * as config from "../../config"
 import Card, { CardActions, CardContent } from "material-ui/Card"
-import Typography from "material-ui/Typography"
 import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
 import Divider from "material-ui/Divider"
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, Title, CasualText, LocalLink } from "../theme"
 
 const Repositories = styled.div`
-  margin-bottom: 6%;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding-right: ${(props) => props.theme.grid.paddingRight};
+
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
+    padding-left: ${(props) => props.theme.grid.paddingLeft};
+  }
+
 `
 
 const Header = styled.div`
-  margin-bottom: 20px;
-`
-
-const Description = styled(Typography)``
-const Name = styled(Typography)`
-  padding-bottom: 30px;
-
-  @media (max-width: 1000px) {
-    font-size: 60%;
-    padding-bottom: 5px;
-  }
-`
-
-const ResizedTitle = styled.span`
-  @media (max-width: 1000px) {
-    font-size: 50%;
-    line-height: 1em;
-  }
-`
-
-const ResizedText = styled.span`
-  @media (max-width: 1000px) {
-    font-size: 70%;
-    line-height: 1em;
-  }
 
 `
-const Title = ({ repository }) => (
+
+const Description = styled(CasualText)`
+  padding-bottom: 20px;
+`
+const Name = styled(Title)`
+  padding-bottom: 20px;
+`
+
+const RepositoryHeader = ({ repository }) => (
   <Header>
-    <Name variant="display1">
-      <a href={repository.url}>
-        <ResizedTitle>{repository.name}</ResizedTitle>
-      </a>
+    <Name>
+      <LocalLink href={repository.url}>
+        {repository.name}
+      </LocalLink>
     </Name>
-    <Description variant="subheading"> <ResizedText>{repository.description}</ResizedText></Description>
+    <Description>{repository.description}</Description>
   </Header>
 )
 
@@ -61,6 +52,7 @@ export default ({ data }) => {
   const repositories = parseData(data).repositories
 
   return (
+    <ThemeProvider theme={theme}>
     <Repositories>
       <Helmet title={config.siteTitle} />
       <SEO postEdges={data.githubData.data.user.repositories.edges} />
@@ -68,7 +60,7 @@ export default ({ data }) => {
       {repositories.map(repository => {
         return (
           <div>
-            <Title repository={repository} />
+            <RepositoryHeader repository={repository} />
 
             <Divider />
             <Readme readme={repository.readme} />
@@ -76,6 +68,7 @@ export default ({ data }) => {
         )
       })}
     </Repositories>
+    </ThemeProvider>
   )
 }
 

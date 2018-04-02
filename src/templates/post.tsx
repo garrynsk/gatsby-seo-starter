@@ -1,38 +1,32 @@
 import * as React from "react"
 import { Component } from "react"
 import Helmet from "react-helmet"
-import Link from "gatsby-link"
 import SEO from "../components/seo/seo"
 import * as ReactDisqusThread from "react-disqus-thread"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
 import PostHeader from "../components/postHeader/postHeader"
-import "./post.css"
 import Image from "../components/image/image"
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, Title, CasualText } from "../theme"
 
 const BlogPost = styled.div`
-  margin-left: 20px;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  
+  padding-right: ${(props) => props.theme.grid.paddingRight};
+
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
+
+    padding-left: ${(props) => props.theme.grid.paddingLeft};
+    
+  }
 `
 
 const ImageStyled = styled(Image)`
   margin-bottom: 15%;
-  
 `
 
-const Text = styled(Typography)`
-  padding-top: 10%;
-  @media (max-width: 1000px) {
-    width: 80vw;
-    padding-top: 0;
-  }
-`
-
-const ResizedText = styled.span`
-  @media (max-width: 1000px) {
-    font-size: 80%;
-    line-height: 1.3em;
-  }
-`
 const Embed = (author, title) => <Helmet>title={`${author} - ${title}`}</Helmet>
 
 export default class Post extends React.Component {
@@ -78,26 +72,27 @@ export default class Post extends React.Component {
     const { disqus, post, shareUrl, title } = this.state
 
     return (
-      <BlogPost>
-        <div id="fb-root" />
+      <ThemeProvider theme={theme}>
+        <BlogPost>
+          <Helmet title={`${title}`} >
+            <link rel="stylesheet" href="./css/post.css"/></Helmet>
+          <div id="fb-root" />
 
-        <Embed author={post.frontmatter.author} title={title} />
-        <SEO postPath={shareUrl} postNode={post} postSEO />
-        <ImageStyled
-          featuredImage={post.frontmatter.featuredImage}
-        />
-        <PostHeader post={post} />
-       <Text
-          variant="body2"
-        ><ResizedText id="text" className="inner-text" dangerouslySetInnerHTML={{ __html: post.html }}/>
-        </Text>     
-        <ReactDisqusThread
-          shortname={disqus}
-          identifier={title}
-          title={title}
-          url={shareUrl}
-        />
-      </BlogPost>
+          <Embed author={post.frontmatter.author} title={title} />
+          <SEO postPath={shareUrl} postNode={post} postSEO />
+          <ImageStyled
+            featuredImage={post.frontmatter.featuredImage}
+          />
+          <PostHeader post={post} />
+          <CasualText id="text" className="inner-text" dangerouslySetInnerHTML={{ __html: post.html }}/> 
+          <ReactDisqusThread
+            shortname={disqus}
+            identifier={title}
+            title={title}
+            url={shareUrl}
+          />
+        </BlogPost>
+      </ThemeProvider>
     )
   }
 }

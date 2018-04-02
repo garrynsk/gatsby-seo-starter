@@ -4,24 +4,14 @@ import Helmet from "react-helmet"
 import Link from "gatsby-link"
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, Title, CasualText } from "../theme"
 
-const Tags = styled.div``
+const Tags = styled.div`
+  padding-right: ${(props) => props.theme.grid.paddingRight};
 
-const Title = styled(Typography)``
-
-const ResizedTitle = styled.span`
-  @media (max-width: 1000px) {
-    font-size: 60%;
-    line-height: 1em;
-    
-  }
-`
-
-const ResizedText = styled.span`
-  @media (max-width: 1000px) {
-    font-size: 70%;
-    line-height: 1em;
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
+    padding-left: ${(props) => props.theme.grid.paddingLeft};
     
   }
 `
@@ -29,19 +19,21 @@ const ResizedText = styled.span`
 const TagsPage = ({
   data: { allMarkdownRemark: { group }, site: { siteMetadata: { siteTitle } } },
 }) => (
+  <ThemeProvider theme={theme}>
   <Tags>
     <Helmet title={siteTitle} />
-    <Title variant="display2"><ResizedTitle>Tags</ResizedTitle></Title>
-    <List component="nav">
+    <Title variant="display2">Tags</Title>
+    <List component="nav" >
       {group.map(tag => (
         <ListItem button key={tag.fieldValue}>
-          <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-            <ListItemText primary={<ResizedText>{tag.fieldValue} ({tag.totalCount})</ResizedText>} />
-          </Link>
+          <CasualText><GatsbyLink to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+            {tag.fieldValue} ({tag.totalCount})
+          </GatsbyLink></CasualText>
         </ListItem>
       ))}
     </List>
   </Tags>
+  </ThemeProvider>
 )
 
 export default TagsPage

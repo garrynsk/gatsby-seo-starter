@@ -6,13 +6,11 @@ import Sidebar from "../components/sidebar/sidebar"
 import Helmet from "react-helmet"
 import { MuiThemeProvider } from "material-ui/styles"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
 import withRoot from "../withRoot"
-import "./index.css"
+import { FadeLoader } from 'react-spinners';
 
 const Content = styled.div`
-  padding-left: 5%;
-  padding-right: 5%;
+
   grid-area: content;
   margin-bottom: 5%;
 
@@ -20,8 +18,8 @@ const Content = styled.div`
 
 const Default = styled.div`
   display: grid;
-  grid-template-columns: 25% 75%;
-  grid-template-areas: "header  header" "sidebar content" "footer  footer";
+  grid-template-columns: 20% 10% 70%;
+  grid-template-areas: "header header header" "sidebar gap content" "footer footer footer";
   transform: translateY(10);
   animation: default 0.5s both;
 
@@ -48,9 +46,9 @@ class Index extends React.Component {
       metaData: data.site.siteMetadata,
       children: children,
       onScreen: false,
+      loading: true,
     }
   }
-
 
   mountSumo = () => {
     const script = document.createElement("script")
@@ -63,9 +61,30 @@ class Index extends React.Component {
     document.body.appendChild(script)
   }
 
+  mountHojar = () => {
+    const script = document.createElement("script")
+    script.innerHTML = `
+          (function(h,o,t,j,a,r){
+              h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+              h._hjSettings={hjid:834359,hjsv:6};
+              a=o.getElementsByTagName('head')[0];
+              r=o.createElement('script');r.async=1;
+              r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+              a.appendChild(r);
+          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      `
+    script.async = true
+    script.type = "text/javascript"
+    document.body.appendChild(script)
+  }
+
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
     this.mountSumo()
+    this.mountHojar()
+    this.setState({
+      loading: false,
+    })
   }
 
   isOnScreen = element => {
@@ -90,21 +109,33 @@ class Index extends React.Component {
   }
 
   render() {
-    const { metaData, children, onScreen } = this.state
+    const { metaData, children, onScreen, loading } = this.state
 
     return (
 
-          <Default>
-            <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
-            <Sidebar
-              algoliaAppId={metaData.algoliaAppId}
-              algoliaApiKey={metaData.algoliaApiKey}
-            />
-            <Content>{children()}</Content>
-
-            <Footer socialLinks={metaData.socialLinks} />
-          </Default>
-
+          <div>
+            {loading ? <FadeLoader
+              color={'#F50057'} 
+              loading={loading} 
+              style = {{margin: "0 auto"}}
+            /> :
+            <Default> 
+              <Helmet>
+                <link rel="stylesheet" href="./css/normalize.css"/>
+                <link rel="stylesheet" href="./css/code-highlight-scala.css"/>
+                <link rel="stylesheet" href="./css/layout.css"/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono"/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono"/>
+              </Helmet>
+              <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
+              <Sidebar
+                algoliaAppId={metaData.algoliaAppId}
+                algoliaApiKey={metaData.algoliaApiKey}
+              />
+              <Content>{children()}</Content>
+              <Footer socialLinks={metaData.socialLinks} /> 
+            </Default>  }
+          </div>
     )
   }
 }

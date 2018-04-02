@@ -10,12 +10,17 @@ const theme = createMuiTheme({
         marginBottom: "1px",
       },
     },
+    MuiTextField: {
+      underlineStyle: {
+        color: "primary",
+      },
+    },
   },
   typography: {
     // Use the system font over Roboto.
     fontFamily: "Cutive Mono, monospace",
     fontSize: 20,
- 
+
     display1: {
       fontFamily: "Share Tech Mono, monospace",
       textTransform: "capitalize",
@@ -57,17 +62,18 @@ const theme = createMuiTheme({
     background: {
       default: "#fff",
     },
+
     primary: {
       // light: will be calculated from palette.primary.main,
       main: "#F50057",
-      // dark: will be calculated from palette.primary.main,
+       dark: "#000",
       // contrastText: will be calculated to contast with palette.primary.main
     },
     secondary: {
-      // light: "#",
-      main: "#7500B9",
+      //light: "#FFF",
+      main: "#F50057",
       // dark: will be calculated from palette.secondary.main,
-      // contrastText: "#FFF",
+      contrastText: "#FFF",
     },
     // error: will us the default color
   },

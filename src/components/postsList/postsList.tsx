@@ -1,73 +1,87 @@
 import * as React from "react"
-import Link from "gatsby-link"
-import Img from "gatsby-image"
-import * as kebabCase from "lodash/kebabCase"
+import { Component } from "react"
 import TagsLine from "../tagsLine/tagsLine"
-import styled from "styled-components"
-import Typography from "material-ui/Typography"
 import PostHeader from "../postHeader/postHeader"
 import Image from "../image/image"
+import styled from "styled-components"
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, PostTitle, Date, CasualText } from "../../theme"
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 50% 50% ;
-  grid-gap: 10px;
-  margin-bottom: 6%;
+  grid-template-columns: 55% 5% 40% ;
+  margin-top: 5%;
 
-  @media (max-width: 1500px) {
-    grid-template-columns: 60% 40%;
-  
+  @media (max-width: ${(props) => props.theme.screen.px700}) {
+    grid-template-columns: 63% 4% 33% ;
   }
 
-  @media (max-width: 600px) {
-    grid-template-columns: 100%;
-  
-  }
 `
 
 const Box = styled.div`
-  border-radius: 5px;
-  padding: 20px;
-  @media (max-width: 1000px) {
-    padding: 0%;
+  @media (max-width: ${(props) => props.theme.screen.px1500}) {
+    margin-bottom: 30px;
+  }
+  
+`
+
+const BlogPosts = styled.div`
+  padding-right: ${(props) => props.theme.grid.paddingRight}
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
+    padding-left: ${(props) => props.theme.grid.paddingLeft}
   }
 `
-
-
-const BlogPosts = styled.div``
-const BlogPostsPreview = styled.div``
-const Title = styled(Typography)`
-  padding: 4%;
-  padding-left: 0;
-
-
+const BlogPostsPreview = styled.div`
+  
 `
 
-const Date = styled(Typography)`
-  font-style: italic;
-`
+export default class PostList extends React.Component {
+  constructor({ posts }) {
+    super(posts);
+    this.state = {posts: posts, width: 0, height: 0 };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+  
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
 
-const Excerpt = styled(Typography)`
-  padding-bottom: 5%;
-  padding-top: 2%;
+  render() {
+    const {posts, width, height} = this.state
 
-`
-const ResizedText = styled.span`
-@media (max-width: 1000px) {
-  font-size: 80%;
-  line-height: 1.3em;
+    return (
+      <ThemeProvider theme={theme} >
+      <BlogPosts>
+        {posts
+          .filter(post => post.node.frontmatter.title.length > 0)
+          .map(({ node: post }) => (
+            <BlogPostsPreview key={post.id}>
+              <PostHeader post={post} />
+              <Wrapper>
+    
+                <Box>
+                  <CasualText>{width < 700 ? post.shortExcerpt : post.longExcerpt}</CasualText>
+                </Box>
+                <Box></Box>
+                <Box>
+                  <Image featuredImage = {post.frontmatter.featuredImage}/>
+                </Box>
+    
+              </Wrapper>
+            </BlogPostsPreview>
+          ))}
+      </BlogPosts>
+      </ThemeProvider>
+    )
+  }
+  
 }
-`
-export default ({ posts }) => (
-  <BlogPosts>
-    {posts
-      .filter(post => post.node.frontmatter.title.length > 0)
-      .map(({ node: post }) => (
-        <BlogPostsPreview key={post.id}>
-          <PostHeader post={post} />
-          <Wrapper><Box><Excerpt variant="body2"><ResizedText>{post.excerpt}</ResizedText></Excerpt></Box><Box>
-          <Image featuredImage = {post.frontmatter.featuredImage}/></Box></Wrapper>
-        </BlogPostsPreview>
-      ))}
-  </BlogPosts>
-)

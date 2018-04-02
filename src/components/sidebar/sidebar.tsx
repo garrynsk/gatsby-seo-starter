@@ -1,23 +1,23 @@
 import * as React from "react"
-import Navigation from "../navigation/navigation"
 import styled from "styled-components"
+import InstantSearch from "../search/instantSearch"
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, CasualText } from "../../theme"
 
 const Sidebar = styled.div`
   grid-area: sidebar;
-  font-size: 90%;
-  margin-left: 10%;
-  margin-bottom: 10vh;
-  text-align: center;
-  text-line: 5px;
-
-  @media (max-width: 1300px) {
+  
+  @media (max-width: ${(props) => props.theme.screen.px1000}) {
     width: 100%;
-    margin-left: 0;
+    margin-bottom: 150px;
+    padding-right: ${(props) => props.theme.grid.paddingRight};
   }
 `
 
 export default ({ algoliaAppId, algoliaApiKey }) => (
-  <Sidebar>
-    <Navigation algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey} />
-  </Sidebar>
+  <ThemeProvider theme={theme}>
+    <Sidebar>
+      <InstantSearch algoliaAppId={algoliaAppId} algoliaApiKey={algoliaApiKey} />
+    </Sidebar>
+  </ThemeProvider>
 )

@@ -1,12 +1,13 @@
 import * as React from "react"
 import { Component } from "react"
 import * as ReactDOM from "react-dom"
-import Link from "gatsby-link"
-import "./instantSearch.css"
 import TextField from "material-ui/TextField"
 import { connectSearchBox } from "react-instantsearch/connectors"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
+import { ThemeProvider } from "styled-components"
+import { theme, GatsbyLink, CasualText } from "../../theme"
+import Helmet from "react-helmet"
+
 import {
   InstantSearch,
   Hits,
@@ -18,15 +19,19 @@ const Container = styled.div`
   width: 100%;
 `
 const ResultsContainer = styled(Hits)`
-  margin-top: 10px;
-  padding: 10px;
+
 `
 
-const SearchResult = styled(Typography)`
+const SearchResult = styled(CasualText)`
   text-align: left;
-  padding: 5px;
-  text-transform: capitalize;
+  padding-top: 20px;
 `
+
+const SearchPaper = styled.div`
+  padding-left: ${(props) => props.theme.grid.paddingLeft};
+
+`
+
 const MySearchBox = ({ currentRefinement, refine }) => (
   <TextField
     label="Search field"
@@ -34,7 +39,7 @@ const MySearchBox = ({ currentRefinement, refine }) => (
     type="search"
     value={currentRefinement}
     onChange={event => refine(event.target.value)}
-    style={{ width: "80%" }}
+    style={{ width: "100%"}}
   />
 )
 
@@ -43,6 +48,7 @@ const ConnectedSearchBox = connectSearchBox(MySearchBox)
 function Search() {
   return (
     <Container>
+       <Helmet><link rel="stylesheet" href="./css/instantSearch.css"/></Helmet>
       <ConnectedSearchBox />
       <ResultsContainer hitComponent={Post} />
     </Container>
@@ -51,26 +57,31 @@ function Search() {
 
 function Post({ hit }) {
   return (
-    <SearchResult variant="subheading">
-      <Link to={hit.frontmatter.path}>
+    <SearchResult>
+      <GatsbyLink to={hit.frontmatter.path}>
         <Highlight
           attribute="frontmatter.title"
           hit={hit}
           tagName="mark"
           url="frontmatter.path"
         />
-      </Link>
+      </GatsbyLink>
     </SearchResult>
   )
 }
 
+
 export default ({ algoliaAppId, algoliaApiKey }) => (
-  <InstantSearch
-    appId={algoliaAppId}
-    apiKey={algoliaApiKey}
-    indexName="myblog"
-    urlSync="[true]"
-  >
-    <Search />
-  </InstantSearch>
+  <ThemeProvider theme={theme} >
+    <SearchPaper>
+      <InstantSearch
+        appId={algoliaAppId}
+        apiKey={algoliaApiKey}
+        indexName="myblog"
+        urlSync="[true]"
+      >
+      <Search />
+      </InstantSearch>
+    </SearchPaper>
+  </ThemeProvider>
 )

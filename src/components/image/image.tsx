@@ -1,10 +1,13 @@
 import * as React from "react"
 import styled from "styled-components"
+import { ThemeProvider } from "styled-components"
+import { theme } from "../../theme"
 import Img from "gatsby-image"
-import { withTheme } from 'material-ui/styles';
 
-const Underline = styled.div`
+const ImageBorder = styled.div`
+
     padding-bottom: 10%;
+
     :after {
         content: '\00a0';
         background:
@@ -13,26 +16,24 @@ const Underline = styled.div`
         background-size: 100% 2px;
         float:left;
         width:100%;
-    }   
+    }
 `
 
-
 const Image = styled(Img)`
-        box-shadow: 5px 5px 13px #000;
 
-    `
+    box-shadow: ${(props) => props.theme.shadow.smallGrey};
 
-const StyledUnderline = withTheme()(Underline)
-export default ({featuredImage}) => {
+`
 
-    return (
-    <StyledUnderline>
-        <Image
-          className="image"
-          alt={featuredImage.name}
-          sizes={featuredImage.childImageSharp.sizes}
-        />
-    </StyledUnderline>
-
+export default ({featuredImage}) =>  (
+    <ThemeProvider theme={theme}>
+        <ImageBorder>
+            <Image
+                className="image"
+                alt={featuredImage.name}
+                sizes={featuredImage.childImageSharp.sizes}
+            />
+        </ImageBorder>
+    </ThemeProvider>
 )
-}
+

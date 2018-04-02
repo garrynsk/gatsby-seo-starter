@@ -91,6 +91,7 @@
         "react-markdown": "^3.3.0",
         "react-render-html": "^0.6.0",
         "react-share": "^2.1.0",
+        "react-spinners": "^0.2.6",
         "remark": "^9.0.0",
         "remark-cli": "^5.0.0",
         "remark-preset-lint-recommended": "^3.0.1",

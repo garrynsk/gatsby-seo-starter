@@ -1,12 +1,8 @@
 import * as React from "react"
-import "./index.css"
 import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
-import * as config from "../../config"
 import PostsList from "../components/postsList/postsList"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
-import Reboot from "material-ui/Reboot"
 
 const BlogPosts = styled.div``
 
@@ -15,7 +11,8 @@ export default ({ data }) => {
 
   return (
     <BlogPosts>
-      <Helmet title={config.siteTitle} />
+      <Helmet title={`Home page - ${data.site.siteMetadata.siteTitle}`} >
+    </Helmet>
 
       <SEO postEdges={data.allMarkdownRemark.edges} />
 
@@ -26,10 +23,17 @@ export default ({ data }) => {
 
 export const pageQuery = graphql`
   query IndexQuery {
+    site {
+      siteMetadata {
+        siteUrl
+        siteTitle
+      }
+    }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
-          excerpt(pruneLength: 250)
+          shortExcerpt: excerpt(pruneLength: 70)
+          longExcerpt: excerpt(pruneLength: 400)
           id
           frontmatter {
             title
