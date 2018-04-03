@@ -4,6 +4,8 @@ import styled from "styled-components"
 import Button from "material-ui/Button"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, Title, CasualText, Date } from "../theme"
+import Helmet from "react-helmet"
+import plane from "../../img/Flying_Herk_in_the_Clouds.svg"
 
 const Post = styled.div`
   padding-top: 30px;
@@ -29,6 +31,7 @@ const Tags = ({ pathContext, data }) => {
   return (
     <ThemeProvider theme={theme}>
     <Container>
+
       <Title>
         {tagHeader}
       </Title>

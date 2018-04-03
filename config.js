@@ -3,6 +3,7 @@ module.exports = {
     siteTitle: `VictoriaZ programming sketches`,
     siteLogo: "/favicon.ico",
     siteUrl: "https://victoriaz.netlify.com",
+    siteUrlShort: "victoriaz.netlify.com",
     siteDescription: "A Scala programming blog. Ideas, opinions and technologies.",
     siteKeyWords: "Scala, programming, blog, experience, opinions",
     githubAuthor: "garrynsk",

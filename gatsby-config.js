@@ -30,7 +30,9 @@ module.exports = {
     pathPrefix: config.pathPrefix,
     siteMetadata: {
         siteUrl: config.siteUrl,
+        siteUrlShort: config.siteUrlShort,
         siteTitle: config.siteTitle,
+        siteDescription: config.siteDescription,
         userEmail: config.userEmail,
         userName: config.userName,
         userMoto: config.userMoto,
@@ -40,6 +42,8 @@ module.exports = {
         algoliaApiKey: config.algoliaApiKey,
         disqusShortname: config.disqusShortname,
         socialLinks: config.socialLinks,
+        title: config.siteTitle,
+        description: config.siteDescription,
     },
     plugins: [
         `gatsby-plugin-sitemap`,
@@ -51,6 +55,57 @@ module.exports = {
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-catch-links`,
+        {
+        resolve: `gatsby-plugin-feed`,
+        options: {
+            query: `
+              {
+                site {
+                  siteMetadata {
+                    title
+                    description
+                    siteUrl
+                    site_url: siteUrl
+                  }
+                }
+              }
+            `,
+            feeds: [
+              {
+                serialize: ({ query: { site, allMarkdownRemark } }) => {
+                  return allMarkdownRemark.edges.map(edge => {
+                    return Object.assign({}, edge.node.frontmatter, {
+                      description: edge.node.excerpt,
+                      url: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
+                      custom_elements: [{ "content:encoded": edge.node.html }],
+                    });
+                  });
+                },
+                query: `
+                  {
+                    allMarkdownRemark(
+                      limit: 1000,
+                      sort: { order: DESC, fields: [frontmatter___date] },
+                    ) {
+                      edges {
+                        node {
+                            excerpt(pruneLength: 250)
+                            html
+                            frontmatter {
+                                date
+                                title
+                                tags
+                            }
+                        }
+                      }
+                    }
+                  }
+                `,
+                output: "/rss.xml",
+              },
+            ],
+          },
+        },
         {
             resolve: `gatsby-plugin-algolia`,
             options: {

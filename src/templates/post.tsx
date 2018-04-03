@@ -36,7 +36,7 @@ export default class Post extends React.Component {
     this.state = {
       disqus: data.site.siteMetadata.disqusShortname,
       post: data.markdownRemark,
-      shareUrl: data.markdownRemark.frontmatter.path,
+      shareUrl: data.site.siteMetadata.siteUrlShort + data.markdownRemark.frontmatter.path,
       title: data.markdownRemark.frontmatter.title,
     }
   }
@@ -102,6 +102,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         disqusShortname
+        siteUrlShort
       }
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
