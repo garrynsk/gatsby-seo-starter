@@ -1,4 +1,7 @@
 const config = require("./config")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const query = `query {
   allMarkdownRemark {
@@ -55,6 +58,17 @@ module.exports = {
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-catch-links`,
+        {
+            resolve: 'gatsby-plugin-purify-css',
+            options: {
+              /* Defaults */
+              styleId: 'gatsby-inlined-css',
+              purifyOptions: {
+                info: true,
+                minify: true
+              }
+            }
+          },
         {
         resolve: `gatsby-plugin-feed`,
         options: {
@@ -266,13 +280,41 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-plugin-nprogress`,
+            resolve: `gatsby-plugin-netlify`,
             options: {
-                // Setting a color is optional.
-                color: `black`,
-                // Disable the loading spinner.
-                showSpinner: true,
+              headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
+              allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
+              mergeSecurityHeaders: true, // boolean to turn off the default security headers
+              mergeLinkHeaders: true, // boolean to turn off the default gatsby js headers
+              mergeCachingHeaders: true, // boolean to turn off the default caching headers
+              transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
+              generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
             },
-        },
+          },
     ],
 }
+
+
+exports.modifyWebpackConfig = ({ config, stage }) => {
+    if (stage == "build-javascript") {
+        return  [
+            new ImageminPlugin({
+                disable: process.env.NODE_ENV !== 'production', // Disable during development
+                pngquant: {
+                quality: '95-100'
+                }
+            }),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                screw_ie8: true,
+                warnings: false
+                },
+                sourceMap: true,
+                cache: true
+            }),
+            new webpack.optimize.ModuleConcatenationPlugin(),
+            new ExtractTextPlugin('style.css')
+          ]
+        
+    }
+};

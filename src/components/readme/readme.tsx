@@ -8,6 +8,7 @@ import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, PostTitle, Date, CasualText } from "../../theme"
 import Helmet from "react-helmet"
+import "./readme.css"
 
 const Container = styled.div`
   margin-bottom: 40px;
@@ -34,7 +35,7 @@ export default class Readme extends React.Component {
     return (
       <ThemeProvider theme={theme}>
       <Container>
-      <Helmet><link rel="stylesheet" href="./css/readme.css"/></Helmet>
+      <Helmet></Helmet>
         {readme ? (
           <Card style={{margin:"0 auto", padding: "0"}}>
             <CardContent>

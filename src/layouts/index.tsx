@@ -7,6 +7,10 @@ import Helmet from "react-helmet"
 import { MuiThemeProvider } from "material-ui/styles"
 import styled from "styled-components"
 import withRoot from "../withRoot"
+import "./normalize.css"
+import "./code-highlight-scala.css"
+import "./layout.css"
+import "./spinner.css"
 
 const Content = styled.div`
 
@@ -79,7 +83,7 @@ class Index extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
-    this.mountSumo()
+   // this.mountSumo()
     this.mountHojar()
     this.setState({
       loading: false,
@@ -114,12 +118,9 @@ class Index extends React.Component {
 
           <div>
               <Helmet>
-                <link rel="stylesheet" href="./css/normalize.css"/>
-                <link rel="stylesheet" href="./css/code-highlight-scala.css"/>
-                <link rel="stylesheet" href="./css/layout.css"/>
-                <link rel="stylesheet" href="./css/spinner.css"/>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono"/>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono"/>
+                <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons' async='async'></script>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" lazyload crossorigin/>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono" lazyload crossorigin/>
               </Helmet>
             {loading ? <div className="loading">Loading&#8230;</div>
              :

@@ -7,6 +7,7 @@ import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, CasualText } from "../../theme"
 import Helmet from "react-helmet"
+import "./instantSearch.css"
 
 import {
   InstantSearch,
@@ -48,7 +49,7 @@ const ConnectedSearchBox = connectSearchBox(MySearchBox)
 function Search() {
   return (
     <Container>
-       <Helmet><link rel="stylesheet" href="./css/instantSearch.css"/></Helmet>
+       <Helmet></Helmet>
       <ConnectedSearchBox />
       <ResultsContainer hitComponent={Post} />
     </Container>

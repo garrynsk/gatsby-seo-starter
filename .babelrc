@@ -1,6 +1,10 @@
 {   "presets": [
       "next/babel"
     ],
+    "env": {
+      "production": {
+        "presets": []
+      },
     "plugins": [
       ["emotion",
         "babel-plugin-styled-components", {
@@ -10,3 +14,4 @@
       }]
     ]
   }
+}

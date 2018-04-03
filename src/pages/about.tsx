@@ -49,7 +49,6 @@ export default ({ data }) => {
   return (
     <ThemeProvider theme={theme}>
     <About>
-      <Helmet title={config.siteTitle} />
       <SEO />
 
       <Avatar
