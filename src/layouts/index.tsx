@@ -7,7 +7,6 @@ import Helmet from "react-helmet"
 import { MuiThemeProvider } from "material-ui/styles"
 import styled from "styled-components"
 import withRoot from "../withRoot"
-import { FadeLoader } from 'react-spinners';
 
 const Content = styled.div`
 
@@ -118,14 +117,12 @@ class Index extends React.Component {
                 <link rel="stylesheet" href="./css/normalize.css"/>
                 <link rel="stylesheet" href="./css/code-highlight-scala.css"/>
                 <link rel="stylesheet" href="./css/layout.css"/>
+                <link rel="stylesheet" href="./css/spinner.css"/>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono"/>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono"/>
               </Helmet>
-            {loading ? <FadeLoader
-              color={'#F50057'} 
-              loading={loading} 
-              style = {{margin: "0 auto"}}
-            /> :
+            {loading ? <div className="loading">Loading&#8230;</div>
+             :
             <Default> 
               <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
               <Sidebar
