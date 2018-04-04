@@ -204,15 +204,14 @@ export default class SEO extends Component {
 
     return (
       <Helmet>
+        <title>{page.title}</title>
         {/* Common tags */}
-        <link href={config.siteUrl} rel="canonical" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="robots" content="index, follow" />
-        <title>{page.title}</title>
         <meta name="description" content={page.description} />
         <meta name="image" content={page.image} />
         <meta name="keywords" content={page.keywords}/>
-          
+        <link href={config.siteUrl} rel="canonical" />
         {/* Schema.org tags */}
         <script type="application/ld+json">
           {JSON.stringify(schemaOrg(article, page))}

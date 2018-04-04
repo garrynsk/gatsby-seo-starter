@@ -81,18 +81,16 @@ class Index extends React.Component {
 
   mountLipperhey = () => {
     const script = document.createElement("script")
-    script.innerHTML =`
-      var lphURL = (("https:" == document.location.protocol) ? "https://analytics.lipperhey.com/" :
-      "http://analytics.lipperhey.com/");
-      document.write(unescape("%3Cscript src='" + lphURL + "tracker.js' type='text/javascript'%3E%3C/script%3E"));
+    script.src ="https://analytics.lipperhey.com/tracker.js" 
+    script.innerHTML = `
       lphTracker.trackPageView(2924528);
     `
     script.defer = true
     script.async = true
     script.type = "text/javascript"
     document.body.appendChild(script)
-  }
 
+  }
 
   mountSumo = () => {
     const script = document.createElement("script")
@@ -127,9 +125,9 @@ class Index extends React.Component {
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
     this.loadFonts()
-   // this.mountSumo()
+    this.mountLipperhey()
+    // this.mountSumo()
     this.mountHojar()
-    //this.mountLipperhey()
     this.setState({
       loading: false,
     })
@@ -160,28 +158,27 @@ class Index extends React.Component {
     const { metaData, children, onScreen, loading } = this.state
 
     return (
-
-          <div>
-              <Helmet>
-                <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons' async='async' defer />
-                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-16-147313.png`} sizes="16x16"/>  
-                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-24-147313.png`} sizes="24x24"/>  
-                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-32-147313.png`} sizes="32x32"/>
-                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-72-147313.png`} sizes="72x72"/>  
-                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-152-147313.png`} sizes="152x152"/>
-              </Helmet>
-            {loading ? <div className="loading">Loading&#8230;</div>
-             :
-            <Default> 
-              <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
-              <Sidebar
-                algoliaAppId={metaData.algoliaAppId}
-                algoliaApiKey={metaData.algoliaApiKey}
-              />
-              <Content>{children()}</Content>
-              <Footer socialLinks={metaData.socialLinks} /> 
-            </Default>  }
-          </div>
+        <div>
+            <Helmet>
+              <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons' async='async' defer />
+              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-16-147313.png`} sizes="16x16"/>  
+              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-24-147313.png`} sizes="24x24"/>  
+              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-32-147313.png`} sizes="32x32"/>
+              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-72-147313.png`} sizes="72x72"/>  
+              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-152-147313.png`} sizes="152x152"/>
+            </Helmet>
+          {loading ? <div className="loading">Loading&#8230;</div>
+            :
+          <Default> 
+            <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
+            <Sidebar
+              algoliaAppId={metaData.algoliaAppId}
+              algoliaApiKey={metaData.algoliaApiKey}
+            />
+            <Content>{children()}</Content>
+            <Footer socialLinks={metaData.socialLinks} /> 
+          </Default>  }
+        </div>
     )
   }
 }
