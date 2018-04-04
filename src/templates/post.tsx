@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Component } from "react"
-import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
 import * as ReactDisqusThread from "react-disqus-thread"
 import styled from "styled-components"
@@ -8,6 +7,8 @@ import PostHeader from "../components/postHeader/postHeader"
 import Image from "../components/image/image"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, Title, CasualText } from "../theme"
+import "./post.css"
+import SEO from "../components/seo/seo"
 
 const BlogPost = styled.div`
   word-break: break-all;
@@ -27,17 +28,41 @@ const ImageStyled = styled(Image)`
   margin-bottom: 15%;
 `
 
-const Embed = (author, title) => <Helmet>title={`${author} - ${title}`}</Helmet>
+//const Embed = (author, title) => <Helmet>title={`${author} - ${title}`}</Helmet>
 
 export default class Post extends React.Component {
+  
   constructor({ data }) {
     super({ data })
+    const metaData = data.site.siteMetadata
+    const post = data.markdownRemark.frontmatter
+    const page = {
+      titleAlt: "Article for Scala blog VictoriaZ: " + post.title,
+      url: metaData.siteUrl + post.path,
+      title: "Article - " + post.title,
+      image: metaData.siteLogo,
+      main: false,
+      description: data.markdownRemark.shortExcerpt,
+      keywords: post.tags,
+    }
+
+    const article = {
+      title: post.title,
+      url: metaData.siteUrl + post.path,
+      imgUrl: metaData.siteUrl + post.featuredImage.childImageSharp.sizes.src,
+      imgWidth: 400,
+      imgHeight: 300,
+      date: post.date,
+      description: data.markdownRemark.longExcerpt,
+    }
 
     this.state = {
-      disqus: data.site.siteMetadata.disqusShortname,
+      disqus: metaData.disqusShortname,
       post: data.markdownRemark,
-      shareUrl: data.site.siteMetadata.siteUrlShort + data.markdownRemark.frontmatter.path,
-      title: data.markdownRemark.frontmatter.title,
+      shareUrl: metaData.siteUrlShort + post.path,
+      title: post.title,
+      page: page,
+      article: article,
     }
   }
   componentDidMount = () => {
@@ -69,17 +94,13 @@ export default class Post extends React.Component {
   }
 
   render() {
-    const { disqus, post, shareUrl, title } = this.state
+    const { disqus, post, shareUrl, title, page, article } = this.state
 
     return (
       <ThemeProvider theme={theme}>
         <BlogPost>
-          <Helmet title={`${title}`} >
-            <link rel="stylesheet" href="./css/post.css"/></Helmet>
+          <SEO page = {page} article = {article} />
           <div id="fb-root" />
-
-          <Embed author={post.frontmatter.author} title={title} />
-          <SEO postPath={shareUrl} postNode={post} postSEO />
           <ImageStyled
             featuredImage={post.frontmatter.featuredImage}
           />
@@ -103,10 +124,14 @@ export const pageQuery = graphql`
       siteMetadata {
         disqusShortname
         siteUrlShort
+        siteUrl
+        siteTitle
+        siteLogo
       }
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
+      longExcerpt: excerpt(pruneLength: 400)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         path

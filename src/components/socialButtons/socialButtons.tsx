@@ -50,7 +50,6 @@ export default ({ socialLinks }) => (
   <Buttons>
     {socialLinks.map(element => (
       <Tooltip
-        id="tooltip-top"
         placement="top"
         title={`Me on ${element.label}`}
       >

@@ -11,6 +11,7 @@ import "./normalize.css"
 import "./code-highlight-scala.css"
 import "./layout.css"
 import "./spinner.css"
+import WebFont from "webfontloader"
 
 const Content = styled.div`
 
@@ -53,12 +54,53 @@ class Index extends React.Component {
     }
   }
 
+
+  loadFonts = () => {
+
+    const script = document.createElement("script")
+    script.innerHTML =`
+                    WebFontConfig = {
+                      google: {
+                        families: ['Share Tech Mono', 'Cutive Mono']
+                      },
+                      timeout: 2000 // Set the timeout to two seconds
+                    };
+                  (function(d) {
+                      var wf = d.createElement('script'), s = d.scripts[0];
+                      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+                      wf.async = true;
+                      s.parentNode.insertBefore(wf, s);
+                  })(document);`
+
+    script.defer = true
+    script.async = true
+    script.type = "text/javascript"
+    document.body.appendChild(script)
+  }
+ 
+
+  mountLipperhey = () => {
+    const script = document.createElement("script")
+    script.innerHTML =`
+      var lphURL = (("https:" == document.location.protocol) ? "https://analytics.lipperhey.com/" :
+      "http://analytics.lipperhey.com/");
+      document.write(unescape("%3Cscript src='" + lphURL + "tracker.js' type='text/javascript'%3E%3C/script%3E"));
+      lphTracker.trackPageView(2924528);
+    `
+    script.defer = true
+    script.async = true
+    script.type = "text/javascript"
+    document.body.appendChild(script)
+  }
+
+
   mountSumo = () => {
     const script = document.createElement("script")
     script.innerHTML = `(function(s,u,m,o,j,v){j=u.createElement(m);
                               v=u.getElementsByTagName(m)[0];
                               j.async=1;j.src=o;j.dataset.sumoSiteId='e0c26837cb4b10b763371f1c76be9e44017998245cd17659c26996bb34bf6129';
                               v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');`
+    script.defer = true
     script.async = true
     script.type = "text/javascript"
     document.body.appendChild(script)
@@ -66,16 +108,17 @@ class Index extends React.Component {
 
   mountHojar = () => {
     const script = document.createElement("script")
-    script.innerHTML = `
-          (function(h,o,t,j,a,r){
+    script.innerHTML = 
+         ` (function(h,o,t,j,a,r){
               h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
               h._hjSettings={hjid:834359,hjsv:6};
               a=o.getElementsByTagName('head')[0];
               r=o.createElement('script');r.async=1;
               r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
               a.appendChild(r);
-          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-      `
+          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`
+      
+    script.defer = true
     script.async = true
     script.type = "text/javascript"
     document.body.appendChild(script)
@@ -83,8 +126,10 @@ class Index extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
+    this.loadFonts()
    // this.mountSumo()
     this.mountHojar()
+    //this.mountLipperhey()
     this.setState({
       loading: false,
     })
@@ -118,9 +163,12 @@ class Index extends React.Component {
 
           <div>
               <Helmet>
-                <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons' async='async'></script>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" lazyload crossorigin/>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono" lazyload crossorigin/>
+                <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons' async='async' defer />
+                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-16-147313.png`} sizes="16x16"/>  
+                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-24-147313.png`} sizes="24x24"/>  
+                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-32-147313.png`} sizes="32x32"/>
+                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-72-147313.png`} sizes="72x72"/>  
+                <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-152-147313.png`} sizes="152x152"/>
               </Helmet>
             {loading ? <div className="loading">Loading&#8230;</div>
              :
@@ -139,6 +187,10 @@ class Index extends React.Component {
 }
 
 export default withRoot(Index)
+
+
+
+
 
 export const query = graphql`
   query IndexLayoutQuery {

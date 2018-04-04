@@ -1,5 +1,4 @@
 import * as React from "react"
-import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
 import PostsList from "../components/postsList/postsList"
 import styled from "styled-components"
@@ -8,15 +7,21 @@ const BlogPosts = styled.div``
 
 export default ({ data }) => {
   const { edges: posts } = data.allMarkdownRemark
+  const page = {
+    titleAlt: "Main page of the Scala blog VictoriaZ",
+    url: data.site.siteMetadata.siteUrl + "",
+    title: "Home page - " + data.site.siteMetadata.siteTitle,
+    image: data.site.siteMetadata.siteLogo,
+    main: true,
+    description: `It is a blog about Scala language.`,
+    keywords: "Scala, blog, articles, programming",
+  }
 
   return (
     <BlogPosts>
-      <Helmet title={`Home page - ${data.site.siteMetadata.siteTitle}`} >
-    </Helmet>
+      <SEO page = {page} article = {null} />
 
-      <SEO postEdges={data.allMarkdownRemark.edges} />
-
-      <PostsList posts={posts} />
+      <PostsList posts = {posts} />
     </BlogPosts>
   )
 }
@@ -27,6 +32,7 @@ export const pageQuery = graphql`
       siteMetadata {
         siteUrl
         siteTitle
+        siteLogo
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {

@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
 import { parseData } from "../parser/parser"
-import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
 import Readme from "../components/readme/readme"
 import * as config from "../../config"
@@ -13,6 +12,7 @@ import styled from "styled-components"
 import Divider from "material-ui/Divider"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, Title, CasualText, LocalLink } from "../theme"
+import SEO from "../components/seo/seo"
 
 const Repositories = styled.div`
   word-break: break-all;
@@ -50,12 +50,21 @@ const RepositoryHeader = ({ repository }) => (
 
 export default ({ data }) => {
   const repositories = parseData(data).repositories
-
+  const page = {
+    titleAlt: "List of GitHub repositories for Scala blog VictoriaZ",
+    url: data.site.siteMetadata.siteUrl + "/repositories",
+    title: "GitHub repositories - " + data.site.siteMetadata.siteTitle,
+    image: data.site.siteMetadata.siteLogo,
+    main: false,
+    description: `These are my GitHub projects.`,
+    keywords: "Scala, GitHub, projects, code",
+  }
+  
   return (
     <ThemeProvider theme={theme}>
     <Repositories>
-      <Helmet title={config.siteTitle} />
-      <SEO postEdges={data.githubData.data.user.repositories.edges} />
+
+      <SEO page={page} article={null} />
 
       {repositories.map(repository => {
         return (
@@ -73,7 +82,15 @@ export default ({ data }) => {
 }
 
 export const pageQuery = graphql`
-  query Github {
+  query RepositoryQuery {
+    site {
+      siteMetadata {
+        siteUrl
+        siteTitle
+        siteLogo
+      }
+    }
+
     githubData {
       data {
         user {
@@ -92,5 +109,5 @@ export const pageQuery = graphql`
         }
       }
     }
-  }
+}
 `

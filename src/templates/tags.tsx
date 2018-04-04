@@ -4,8 +4,8 @@ import styled from "styled-components"
 import Button from "material-ui/Button"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, Title, CasualText, Date } from "../theme"
-import Helmet from "react-helmet"
 import plane from "../../img/Flying_Herk_in_the_Clouds.svg"
+import SEO from "../components/seo/seo"
 
 const Post = styled.div`
   padding-top: 30px;
@@ -20,18 +20,29 @@ padding-right: ${(props) => props.theme.grid.paddingRight};
 
 `
 
-
 const Tags = ({ pathContext, data }) => {
+  const metaData = data.site.siteMetadata
   const { tag } = pathContext
   const { edges, totalCount } = data.allMarkdownRemark
+
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
   } tagged with "${tag}"`
 
+  const page = {
+    titleAlt: `Tag "${tag}" in Scala blog VictoriaZ`,
+    url: metaData.siteUrl + `/tags/${tag}`,
+    title: `Article tag "${tag}" - ` + metaData.siteTitle,
+    image: metaData.siteLogo,
+    main: false,
+    description: `All article I wrote about "${tag}"`,
+    keywords: {tag},
+  }
+
   return (
     <ThemeProvider theme={theme}>
     <Container>
-
+    <SEO page = {page} article = {null} />
       <Title>
         {tagHeader}
       </Title>
@@ -59,6 +70,13 @@ export default Tags
 
 export const pageQuery = graphql`
   query TagPage($tag: String) {
+    site {
+      siteMetadata {
+        siteUrl
+        siteTitle
+        siteLogo
+      }
+    }
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }

@@ -1,17 +1,13 @@
 import * as React from "react"
-import Link from "gatsby-link"
-import Helmet from "react-helmet"
 import SEO from "../components/seo/seo"
 import * as config from "../../config"
-import * as React from "react"
 import Navigation from "../navigation/navigation"
 import Avatar from "material-ui/Avatar"
 import styled from "styled-components"
-import Typography from "material-ui/Typography"
 import Divider from "material-ui/Divider"
-import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, Title, CasualText } from "../theme"
+
 
 const About = styled.div`
   padding-right: 50%;
@@ -46,10 +42,20 @@ const Description = styled(CasualText)`
 
 export default ({ data }) => {
   const { siteMetadata: site } = data.site
+  const page = {
+    titleAlt: "About Scala programmer Zakharova Victoria",
+    url: data.site.siteMetadata.siteUrl + "/about",
+    title: "About Victoria Zakharova - " + data.site.siteMetadata.siteTitle,
+    image: data.site.siteMetadata.siteLogo,
+    main: false,
+    description: "My name is Zakharova Victoria and I'm a Scala programmer.",
+    keywords: "Scala programmer, blog, biography",
+  }
+
   return (
     <ThemeProvider theme={theme}>
     <About>
-      <SEO />
+    <SEO page = {page} article = {null}/ >
 
       <Avatar
         alt="Victoria Zakharova"
@@ -92,6 +98,7 @@ export const query = graphql`
       siteMetadata {
         siteUrl
         siteTitle
+        siteLogo
         userEmail
         userName
         userMoto
@@ -105,3 +112,4 @@ export const query = graphql`
     }
   }
 `
+

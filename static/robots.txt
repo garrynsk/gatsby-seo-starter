@@ -1,0 +1,3 @@
+User-Agent: *
+Disallow:
+Sitemap: https://victoriaz.netlify.com/sitemap.xml
