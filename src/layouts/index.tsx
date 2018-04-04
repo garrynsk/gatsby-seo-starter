@@ -11,7 +11,7 @@ import "./normalize.css"
 import "./code-highlight-scala.css"
 import "./layout.css"
 import "./spinner.css"
-import WebFont from "webfontloader"
+import * as WebFont from "webfontloader"
 
 const Content = styled.div`
 
@@ -77,20 +77,6 @@ class Index extends React.Component {
     script.type = "text/javascript"
     document.body.appendChild(script)
   }
- 
-
-  mountLipperhey = () => {
-    const script = document.createElement("script")
-    script.src ="https://analytics.lipperhey.com/tracker.js" 
-    script.innerHTML = `
-      lphTracker.trackPageView(2924528);
-    `
-    script.defer = true
-    script.async = true
-    script.type = "text/javascript"
-    document.body.appendChild(script)
-
-  }
 
   mountSumo = () => {
     const script = document.createElement("script")
@@ -125,7 +111,6 @@ class Index extends React.Component {
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
     this.loadFonts()
-    this.mountLipperhey()
     // this.mountSumo()
     this.mountHojar()
     this.setState({
@@ -166,7 +151,7 @@ class Index extends React.Component {
               <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-32-147313.png`} sizes="32x32"/>
               <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-72-147313.png`} sizes="72x72"/>  
               <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-152-147313.png`} sizes="152x152"/>
-            </Helmet>
+              </Helmet>
           {loading ? <div className="loading">Loading&#8230;</div>
             :
           <Default> 
