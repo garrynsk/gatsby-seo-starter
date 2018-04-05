@@ -56,7 +56,7 @@ export default class NavigationTop extends React.Component {
     <ThemeProvider theme={theme} >
 
         <Bar position="fixed" color = "inherit">
-          <Buttons fullWidth initialSelectedIndex = {0}  value = {index}>
+          <Buttons fullWidth  value = {index}>
             <NavButton to="/">
                 <Tab style={{fontWeight: "inherit"}} label="Home" value={0} onClick={() => this.handleChange("/")}/>
             </NavButton>

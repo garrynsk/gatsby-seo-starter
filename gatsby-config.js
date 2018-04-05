@@ -1,7 +1,4 @@
 const config = require("./config")
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ImageminPlugin = require('imagemin-webpack-plugin').default
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const query = `query {
   allMarkdownRemark {
@@ -27,7 +24,6 @@ const queries = [{
         node
     }) => node),
 }, ];
-
 
 module.exports = {
     pathPrefix: config.pathPrefix,
@@ -72,6 +68,16 @@ module.exports = {
                 minify: true
               }
             }
+          },
+          {
+            resolve: 'gatsby-plugin-mixpanel',
+            options: {
+              apiToken: 'ccc51377775adf9ac103654869aaff63',
+              pageViews: {
+                '/monads': 'Monads article view', // an event 'Page blog view' will be send to mixpanel a every vist on the /blog page
+                '/about': 'Page about view',
+              }
+            },
           },
         {
         resolve: `gatsby-plugin-feed`,
@@ -271,15 +277,11 @@ module.exports = {
                 theme_color: "#fff",
                 display: "minimal-ui",
                 icons: [{
-                        src: `src/static/img/colored-feather-48-147313.png`,
+                        src: `src/favicon.png`,
                         sizes: `192x192`,
                         type: `image/png`,
                     },
-                    {
-                        src: `src/static/img/favicon.png`,
-                        sizes: `512x512`,
-                        type: `image/png`,
-                    },
+
                 ],
             },
         },
@@ -295,30 +297,23 @@ module.exports = {
               generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
             },
           },
+          {
+            resolve: `gatsby-plugin-favicon`,
+            options: {
+              logo: "./src/favicon.png",
+              injectHTML: true,
+              icons: {
+                android: true,
+                appleIcon: true,
+                appleStartup: true,
+                coast: false,
+                favicons: true,
+                firefox: true,
+                twitter: true,
+                yandex: true,
+                windows: true
+              }
+            }
+          }
     ],
 }
-
-
-exports.modifyWebpackConfig = ({ config, stage }) => {
-    if (stage == "build-javascript") {
-        return  [
-            new ImageminPlugin({
-                disable: process.env.NODE_ENV !== 'production', // Disable during development
-                pngquant: {
-                quality: '95-100'
-                }
-            }),
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                screw_ie8: true,
-                warnings: false
-                },
-                sourceMap: true,
-                cache: true
-            }),
-            new webpack.optimize.ModuleConcatenationPlugin(),
-            new ExtractTextPlugin('style.css')
-          ]
-        
-    }
-};

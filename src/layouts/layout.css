@@ -27,4 +27,14 @@ a:hover {
 
 body {
     background-color: #FFF;
+
+}
+
+@font-face {
+    font-family: "CutiveMono";
+    src: url(../fonts/CutiveMono-Regular.ttf) format("truetype");
+}
+@font-face {
+    font-family: "ShareTechMono";
+    src: url(../fonts/ShareTechMono-Regular.ttf) format("truetype");
 }

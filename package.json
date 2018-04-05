@@ -45,7 +45,6 @@
         "eslint-config-prettier": "^2.9.0",
         "eslint-plugin-import": "^2.10.0",
         "eslint-plugin-jsx-a11y": "^6.0.3",
-        "extract-text-webpack-plugin": "^3.0.2",
         "gatsby": "^1.9.243",
         "gatsby-image": "^1.0.42",
         "gatsby-link": "^1.6.40",
@@ -54,9 +53,11 @@
         "gatsby-plugin-debug-build": "^1.0.0",
         "gatsby-plugin-facebook-analytics": "^1.0.3",
         "gatsby-plugin-fastclick": "^1.0.1",
+        "gatsby-plugin-favicon": "^2.1.1",
         "gatsby-plugin-feed": "^1.3.20",
         "gatsby-plugin-google-analytics": "^1.0.25",
         "gatsby-plugin-manifest": "^1.0.15",
+        "gatsby-plugin-mixpanel": "^1.1.1",
         "gatsby-plugin-netlify": "^1.0.19",
         "gatsby-plugin-offline": "^1.0.15",
         "gatsby-plugin-purify-css": "^2.2.1",
@@ -79,7 +80,6 @@
         "gatsby-transformer-sharp": "^1.6.22",
         "gh-pages": "^1.1.0",
         "graphql-tag": "^2.8.0",
-        "imagemin-webpack-plugin": "^2.1.1",
         "js-beautify": "^1.7.5",
         "jss": "^9.8.1",
         "lodash": "^4.17.5",
@@ -104,8 +104,6 @@
         "tslint": "^5.9.1",
         "tslint-microsoft-contrib": "^5.0.3",
         "typescript": "^2.8.1",
-        "uglifyjs-webpack-plugin": "^1.2.4",
-        "webfontloader": "^1.6.28",
         "write-good": "^0.11.3"
     }
 }

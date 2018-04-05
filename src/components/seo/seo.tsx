@@ -98,39 +98,8 @@ function schemaOrg(article, page ) {
   return schemaOrgJSONLD
 }
 
-function generalMeta(page) {
-// <meta http-equiv="Content-Security-Policy" content="default-src 'self' ${config.siteUrl}; child-src 'none'; object-src 'none'">
- 
 
-  
-}
-
-/*
-function openGraph(){
-  <meta name="twitter:card" value="summary"/>
-  <meta property="og:url" content={postSEO ? postURL : blogURL} />
-  {postSEO ? <meta property="og:type" content="article" /> : null}
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={image} />
-
-
-  <meta property="og:title" content="Title Here" />
-  <meta property="og:site_name" content="Site Name, i.e. Moz" />
-  <meta property="article:published_time" content="2013-09-17T05:59:00+01:00" />
-  <meta property="article:modified_time" content="2013-09-16T19:08:47+01:00" />
-  <meta property="article:section" content="Article Section" />
-  <meta property="article:tag" content="Article Tag" />
-}
-
-
-function facebookID(){
-
-  <meta property="fb:app_id"
-    content={config.siteFBAppID ? config.siteFBAppID : ""}/>
-  <meta property="fb:admins" content="Facebook numberic ID" />
-}
-
+/**
 function twitterCards(){
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -206,8 +175,6 @@ export default class SEO extends Component {
       <Helmet>
         <title>{page.title}</title>
         {/* Common tags */}
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="robots" content="index, follow" />
         <meta name="description" content={page.description} />
         <meta name="image" content={page.image} />
         <meta name="keywords" content={page.keywords}/>
@@ -216,7 +183,28 @@ export default class SEO extends Component {
         <script type="application/ld+json">
           {JSON.stringify(schemaOrg(article, page))}
         </script>
-         
+        <meta property="og:url" content={page.url} />
+        <meta property="og:title" content={page.title} />
+        <meta property="og:description" content={page.description} />
+        <meta property="og:image" content={page.image} />
+        <meta property="og:site_name" content={config.siteTitle} />
+
+       
+     
+       {article ? <meta property="og:type" content="article" /> :
+          <meta property="og:type" content="website" />
+        }
+        {article ?  <meta property="article:published_time" content={article.date} /> :null}
+        {article ?   <meta property="article:modified_time" content={article.date}  /> :null}
+        {article ?   <meta property="article:section" content={article.description} /> :null}
+        {article ?   <meta property="article:tag" content={article.tags} /> :null}
+    
+        
+
+        <meta property="fb:app_id"
+          content={config.facebookAnalyticsID}/>
+        <meta property="fb:admins" content={config.facebookUserID}  />
+
       </Helmet>
     )
   }

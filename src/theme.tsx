@@ -2,47 +2,46 @@ import styled from "styled-components"
 import * as React from "react"
 import Link from "gatsby-link"
 
-
 export const theme = {
     typography: {
         // Use the system font over Roboto.
-        fontFamily: "Cutive Mono, monospace",
+        fontFamily: "CutiveMono",
         fontSize: "1.2em",
         mobileFontSize: "0.9em",
         lineHeight: "1.5em",
         mobileLineHeight: "1.4em",
-        titleFontFamily:  "Share Tech Mono, monospace",
+        titleFontFamily:  "ShareTechMono",
         display1: {
-          fontFamily: "Share Tech Mono, monospace",
+          fontFamily:  "ShareTechMono",
           textTransform: "capitalize",
         },
     
         display2: {
-          fontFamily: "Share Tech Mono, monospace",
+          fontFamily:  "ShareTechMono",
           textTransform: "capitalize",
         },
     
         display3: {
-          fontFamily: "Share Tech Mono, monospace",
+          fontFamily:  "ShareTechMono",
           textTransform: "capitalize",
         },
     
         display4: {
-          fontFamily: "Share Tech Mono, monospace",
+          fontFamily:   "ShareTechMono",
           textTransform: "capitalize",
         },
     
         headline: {
-          fontFamily: "Share Tech Mono, monospace",
+          fontFamily:  "ShareTechMono",
         },
 
     
         subheading: {
-          fontFamily: "Share Tech Mono, monospace",
+          fontFamily:  "ShareTechMono",
         },
     
         caption: {
-          fontFamily: "Share Tech Mono, monospace",
+          fontFamily:   "ShareTechMono",
           fontSize: "18px",
         },
       },
@@ -87,6 +86,7 @@ export const theme = {
     },
 }
 
+
 export const LocalLink = styled.a`
     color: ${(props) => props.theme.palette.primary.dark};
     :hover{
@@ -102,8 +102,10 @@ export const GBLink = ({className, children, to}) => (
 export const GatsbyLink = styled(GBLink)``
 
 export const Title = styled.div`
+    
     font-size: 2em;
     font-family: ${(props) => props.theme.typography.titleFontFamily};
+    
     color: ${(props) => props.theme.palette.primary.dark};
     text-transform: capitalize;
 
@@ -125,9 +127,11 @@ export const PostTitle = Title.extend`
 `
 
 export const Date = styled.div`
-    font-family: ${(props) => props.theme.typography.fontFamily};
     font-size: 1.2em;
     font-style: italic;
+    font-family: ${(props) => props.theme.typography.fontFamily};
+
+
     color: ${(props) => props.theme.palette.secondary.light};
     padding-top: 6px;
     padding-bottom: 2px;
@@ -140,12 +144,13 @@ export const Date = styled.div`
 
 export const Tag =  styled.span`
 
-font-family: ${(props) => props.theme.typography.fontFamily};
-color: ${(props) => props.theme.palette.primary.main};
-:hover{
+    font-size: 1em;
+    font-family: ${(props) => props.theme.typography.fontFamily};
+
     color: ${(props) => props.theme.palette.primary.main};
-}
-font-size: 1em;
+    :hover{
+        color: ${(props) => props.theme.palette.primary.main};
+    }
 
     @media (max-width: ${(props) =>  props.theme.screen.px1000}) {
         font-size: 0.6em;
@@ -153,9 +158,12 @@ font-size: 1em;
 `
 
 export const CasualText = styled.div`
-    font-family: ${(props) => props.theme.typography.fontFamily};
-    color: ${(props) => props.theme.palette.primary.dark};
+
     font-size: ${(props) => props.theme.typography.fontSize};
+    font-family: ${(props) => props.theme.typography.fontFamily};
+
+    color: ${(props) => props.theme.palette.primary.dark};
+    
     line-height: ${(props) => props.theme.typography.lineHeight};
 
     @media (max-width: ${(props) =>  props.theme.screen.px1000}) {

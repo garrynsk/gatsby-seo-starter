@@ -38,28 +38,28 @@ export default class NavigationBottom extends React.Component {
 
               <GatsbyLink to="/">
                 <IconButton aria-label="Home" value={0} onClick={() => this.handleChange(0)} 
-                  color={index === 0 ? "primary" : "default" } touch="true">
+                  color={index === 0 ? "primary" : "default" }>
                   <HomeIcon />
                 </IconButton>
               </GatsbyLink>
 
               <GatsbyLink to="/about">
                 <IconButton aria-label="About" value={1} onClick={() => this.handleChange(1)} 
-                color={index === 1 ? "primary" : "default" } touch="true"> 
+                color={index === 1 ? "primary" : "default" }> 
                   <FaceIcon />
                 </IconButton>
               </GatsbyLink>
 
               <GatsbyLink to="/tags">
                 <IconButton aria-label="Tags" value={2} onClick={() => this.handleChange(2)}  
-                color={index === 2 ? "primary" : "default" } touch="true"> 
+                color={index === 2 ? "primary" : "default" }> 
                   <BookmarkIcon /> 
                 </IconButton>
               </GatsbyLink>
 
               <GatsbyLink to="/repositories">
                 <IconButton aria-label="Repositories" value={3} onClick={() => this.handleChange(3)} 
-                color={index === 3 ? "primary" : "default" } touch="true"> 
+                color={index === 3 ? "primary" : "default" }> 
                   <FolderIcon />
                 </IconButton>
               </GatsbyLink>

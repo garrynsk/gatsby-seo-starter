@@ -18,43 +18,43 @@ const theme = createMuiTheme({
   },
   typography: {
     // Use the system font over Roboto.
-    fontFamily: "Cutive Mono, monospace",
+    fontFamily: "CutiveMono",
     fontSize: 20,
 
     display1: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
       textTransform: "capitalize",
     },
 
     display2: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
       textTransform: "capitalize",
     },
 
     display3: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
       textTransform: "capitalize",
     },
 
     display4: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
       textTransform: "capitalize",
     },
 
     headline: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
     },
 
     title: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
     },
 
     subheading: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
     },
 
     caption: {
-      fontFamily: "Share Tech Mono, monospace",
+      fontFamily: "ShareTechMono",
       fontSize: "18px",
     },
   },

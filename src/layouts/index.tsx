@@ -11,7 +11,6 @@ import "./normalize.css"
 import "./code-highlight-scala.css"
 import "./layout.css"
 import "./spinner.css"
-import * as WebFont from "webfontloader"
 
 const Content = styled.div`
 
@@ -110,7 +109,7 @@ class Index extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
-    this.loadFonts()
+    //this.loadFonts()
     // this.mountSumo()
     this.mountHojar()
     this.setState({
@@ -145,17 +144,24 @@ class Index extends React.Component {
     return (
         <div>
             <Helmet>
+              <html lang="en"/>
+
+              <script type = 'text/javascript' src = "/tagmanager.js" async = "async" defer/>
+              <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+              <meta name="robots" content="index, follow" />
+              <meta name="yandex-verification" content="0ea0b2c5c7e1e0b9" />
               <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons' async='async' defer />
-              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-16-147313.png`} sizes="16x16"/>  
-              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-24-147313.png`} sizes="24x24"/>  
-              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-32-147313.png`} sizes="32x32"/>
-              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-72-147313.png`} sizes="72x72"/>  
-              <link rel="icon" type="image/png" href= {`${metaData.siteUrl}/colored-feather-152-147313.png`} sizes="152x152"/>
-              </Helmet>
+              <script type = 'text/javascript' src ="/heap.js" async = "async" defer/>
+
+             </Helmet>
           {loading ? <div className="loading">Loading&#8230;</div>
             :
           <Default> 
-            <Header title={metaData.siteTitle} blogLink={metaData.siteUrl} />
+            
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6CD8NJ"
+            height="0" width="0" style={{display: "none", visibility: "hidden"}}></iframe></noscript>
+
+            <Header title = {metaData.siteTitle} blogLink = {metaData.siteUrl} />
             <Sidebar
               algoliaAppId={metaData.algoliaAppId}
               algoliaApiKey={metaData.algoliaApiKey}
