@@ -3,7 +3,7 @@ title: "Non blocking single producer many consumers queue"
 date: "2018-03-16T10:30:00.000Z"
 author: "Zakharova Victoria"
 path: "/non-blocking-queue"
-featuredImage: ./queue-front.jpg
+featuredImage: queue-front.jpg
 tags: ["non-blocking", "queue", "Scala"]
 ---
 

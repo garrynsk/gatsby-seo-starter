@@ -3,7 +3,7 @@ title: "What are they, monads, angels or demons?"
 date: "2018-03-26T10:30:00.000Z"
 author: "Zakharova Victoria"
 path: "/monads"
-featuredImage: ./angels.jpg
+featuredImage: angels.jpg
 tags: ["monads", "Scala"]
 ---
 

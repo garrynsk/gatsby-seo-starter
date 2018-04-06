@@ -3,6 +3,83 @@ import * as React from "react"
 import { Component } from "react"
 import Helmet from "react-helmet"
 import * as config from "../../../config"
+import { withPrefix } from 'gatsby-link'
+import * as MetaTags from 'react-meta-tags';
+
+function insertTagToHead(tag) {
+  tag.className = "metaData"
+  const head = document.getElementsByTagName("head")[0]
+  head.insertBefore(tag, head.firstChild);
+
+}
+
+function removePreviousTags(){
+
+  const tags = document.getElementsByClassName("metaData");
+
+  while(tags[0]) {
+    tags[0].parentNode.removeChild(tags[0]);
+  }​
+
+}
+
+function insertTitle(text){
+  const title = document.createElement("title")
+  title.innerHTML = text
+  insertTagToHead(title)
+}
+
+function insertTextScriptToHead(type, innerHTML) {
+  const script = document.createElement("script")
+  script.innerHTML = innerHTML
+  script.defer = true
+  script.async = true
+  script.type = type
+  insertTagToHead(script)
+
+}
+
+function insertLink(href, rel) {
+  const link = document.createElement("link")
+  link.href = href
+  insertTagToHead(link)
+}
+
+function insertScriptToHead(type, src) {
+  const script = document.createElement("script")
+  script.src = src
+  script.defer = true
+  script.async = true
+  script.type = type
+  insertTagToHead(script)
+
+}
+
+function insertHttpToHead(http, content) {
+
+  const meta = document.createElement("meta")
+  meta.httpEquiv = http
+  meta.content = content
+  insertTagToHead(meta)
+}
+
+function insertMetaToHead(name, content) {
+
+  const meta = document.createElement("meta")
+  meta.name = name
+  meta.content = content
+  insertTagToHead(meta)
+}
+
+function insertPropertyMetaToHead(property, content){
+
+  const meta = document.createElement("meta")
+  meta.setAttribute("property", property);
+  meta.content = content
+  insertTagToHead(meta)
+
+}
+
 
 function schemaOrg(article, page ) {
   const schemaOrgJSONLD = 
@@ -135,7 +212,57 @@ function breadcrumbs(){
   </ol>
 
 }*/
+function commonMetaTags(page) {
 
+  insertMetaToHead("robots", "index, follow");
+  insertMetaToHead("description", page.description);
+  insertMetaToHead("image", page.image);
+  insertMetaToHead("keywords", page.keywords);
+  insertLink(config.siteUrl, "canonical")
+  insertTitle(page.title)
+  insertHttpToHead("x-ua-compatible; charset=utf-8", "ie=edge")
+  insertHttpToHead("Content-Type", "text/html; charset=utf-8")
+  insertMetaToHead("viewport", "width=device-width, initial-scale=1.0");
+
+}
+
+function thirdPartyServices() {
+
+  insertMetaToHead("yandex-verification", "0ea0b2c5c7e1e0b9");
+  insertScriptToHead("text/javascript", '//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons');
+  insertScriptToHead("text/javascript", withPrefix("/heap.js"));
+  insertScriptToHead("text/javascript", withPrefix("/tagmanager.js"));
+
+}
+
+function schemaGraph(article, page){
+
+  insertTextScriptToHead("application/ld+json", JSON.stringify(schemaOrg(article, page)));
+}
+
+function openGraph(article, page) {
+
+  insertPropertyMetaToHead("og:url", page.url);
+  insertPropertyMetaToHead("og:title", page.title);
+  insertPropertyMetaToHead("og:description", page.description);
+  insertPropertyMetaToHead("og:image", page.image);
+  insertPropertyMetaToHead("og:site_name", config.siteTitle);
+
+  if (article) {
+    insertPropertyMetaToHead("article:published_time", article.date);
+    insertPropertyMetaToHead("article:modified_time", article.date);
+    insertPropertyMetaToHead("article:section", article.description);
+    insertPropertyMetaToHead("article:tag", article.tags);
+    insertPropertyMetaToHead("og:type", "article");
+
+  } else {
+    insertPropertyMetaToHead("og:type", "website");
+  }
+
+  insertPropertyMetaToHead("fb:app_id", config.facebookAnalyticsID);
+  insertPropertyMetaToHead("fb:admins", config.facebookUserID);
+
+}
 export default class SEO extends Component {
     constructor({page, article}) {
 
@@ -146,65 +273,24 @@ export default class SEO extends Component {
       }
     }
 
+    componentWillMount = () => {
+      removePreviousTags()
+      thirdPartyServices()
+      schemaGraph(this.state.article, this.state.page)
+      openGraph(this.state.article, this.state.page)
+      commonMetaTags(this.state.page)
+     
+    }
+
   render() {
     const { page, article } = this.state
-  /*  let title
-    let description
-    let image
-    let postURL
-    if (postSEO) {
-      const postMeta = postNode.frontmatter
-      title = postMeta.title
-      description = postMeta.description
-        ? postMeta.description
-        : postNode.excerpt
-      image = postMeta.cover
-      postURL = config.siteUrl + config.pathPrefix + postPath
-    } else {
-      title = config.siteTitle
-      description = config.siteDescription
-      image = config.siteLogo
-    }
-    const realPrefix = config.pathPrefix === "/" ? "" : config.pathPrefix
-    image = config.siteUrl + realPrefix + image
-    const blogURL = config.siteUrl + config.pathPrefix
-   
-    */
+
 
     return (
       <Helmet>
-        <title>{page.title}</title>
-        {/* Common tags */}
-        <meta name="description" content={page.description} />
-        <meta name="image" content={page.image} />
-        <meta name="keywords" content={page.keywords}/>
-        <link href={config.siteUrl} rel="canonical" />
-        {/* Schema.org tags */}
-        <script type="application/ld+json">
-          {JSON.stringify(schemaOrg(article, page))}
-        </script>
-        <meta property="og:url" content={page.url} />
-        <meta property="og:title" content={page.title} />
-        <meta property="og:description" content={page.description} />
-        <meta property="og:image" content={page.image} />
-        <meta property="og:site_name" content={config.siteTitle} />
-
-       
-     
-       {article ? <meta property="og:type" content="article" /> :
-          <meta property="og:type" content="website" />
-        }
-        {article ?  <meta property="article:published_time" content={article.date} /> :null}
-        {article ?   <meta property="article:modified_time" content={article.date}  /> :null}
-        {article ?   <meta property="article:section" content={article.description} /> :null}
-        {article ?   <meta property="article:tag" content={article.tags} /> :null}
-    
+      
+        <html lang="en"/>
         
-
-        <meta property="fb:app_id"
-          content={config.facebookAnalyticsID}/>
-        <meta property="fb:admins" content={config.facebookUserID}  />
-
       </Helmet>
     )
   }

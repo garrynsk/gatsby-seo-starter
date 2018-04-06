@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components"
 import plane from "./img/Flying_Herk_in_the_Clouds.svg"
 import Navigation from "../navigationTop/navigationTop"
 import { LocalLink, BlogTitle, theme } from "../../theme"
+import { withPrefix } from 'gatsby-link'
 
 const Plane = styled.img`
   position: fixed;
@@ -57,7 +58,7 @@ export default class HeaderComponent extends React.Component   {
     return  (
       <ThemeProvider theme={theme}>
         <Header>
-          <Plane src="./img/Flying_Herk_in_the_Clouds.svg" alt="Plane in the Clouds"/>
+          <Plane src={withPrefix("/img/Flying_Herk_in_the_Clouds.svg")} alt="Plane in the Clouds"/>
             <PositionedTitle>
               <LocalLink href={blogLink}>
                 {title}

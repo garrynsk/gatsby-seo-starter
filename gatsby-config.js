@@ -58,17 +58,7 @@ module.exports = {
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-catch-links`,
-        {
-            resolve: 'gatsby-plugin-purify-css',
-            options: {
-              /* Defaults */
-              styleId: 'gatsby-inlined-css',
-              purifyOptions: {
-                info: true,
-                minify: true
-              }
-            }
-          },
+
           {
             resolve: 'gatsby-plugin-mixpanel',
             options: {
@@ -172,6 +162,13 @@ module.exports = {
                 },
             },
         },
+        {
+            resolve: `gatsby-plugin-hotjar`,
+            options: {
+              id: 834359,
+              sv: 6
+            },
+          },
 
         {
             resolve: `gatsby-source-filesystem`,

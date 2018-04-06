@@ -1,7 +1,6 @@
 import * as React from "react"
 
 import TagsLine from "../tagsLine/tagsLine"
-import Typography from "material-ui/Typography"
 import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import { theme, GatsbyLink, PostTitle, Date } from "../../theme"

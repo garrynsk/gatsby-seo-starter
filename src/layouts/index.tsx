@@ -3,7 +3,6 @@ import { Component } from "react"
 import Header from "../components/header/header"
 import Footer from "../components/footer/footer"
 import Sidebar from "../components/sidebar/sidebar"
-import Helmet from "react-helmet"
 import { MuiThemeProvider } from "material-ui/styles"
 import styled from "styled-components"
 import withRoot from "../withRoot"
@@ -11,6 +10,7 @@ import "./normalize.css"
 import "./code-highlight-scala.css"
 import "./layout.css"
 import "./spinner.css"
+import { withPrefix } from 'gatsby-link'
 
 const Content = styled.div`
 
@@ -53,42 +53,6 @@ class Index extends React.Component {
     }
   }
 
-
-  loadFonts = () => {
-
-    const script = document.createElement("script")
-    script.innerHTML =`
-                    WebFontConfig = {
-                      google: {
-                        families: ['Share Tech Mono', 'Cutive Mono']
-                      },
-                      timeout: 2000 // Set the timeout to two seconds
-                    };
-                  (function(d) {
-                      var wf = d.createElement('script'), s = d.scripts[0];
-                      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
-                      wf.async = true;
-                      s.parentNode.insertBefore(wf, s);
-                  })(document);`
-
-    script.defer = true
-    script.async = true
-    script.type = "text/javascript"
-    document.body.appendChild(script)
-  }
-
-  mountSumo = () => {
-    const script = document.createElement("script")
-    script.innerHTML = `(function(s,u,m,o,j,v){j=u.createElement(m);
-                              v=u.getElementsByTagName(m)[0];
-                              j.async=1;j.src=o;j.dataset.sumoSiteId='e0c26837cb4b10b763371f1c76be9e44017998245cd17659c26996bb34bf6129';
-                              v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');`
-    script.defer = true
-    script.async = true
-    script.type = "text/javascript"
-    document.body.appendChild(script)
-  }
-
   mountHojar = () => {
     const script = document.createElement("script")
     script.innerHTML = 
@@ -109,9 +73,7 @@ class Index extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("scroll", () => this.handleScroll(this.isOnScreen))
-    //this.loadFonts()
-    // this.mountSumo()
-    this.mountHojar()
+   //this.mountHojar()
     this.setState({
       loading: false,
     })
@@ -143,20 +105,9 @@ class Index extends React.Component {
 
     return (
         <div>
-            <Helmet>
-              <html lang="en"/>
-
-              <script type = 'text/javascript' src = "/tagmanager.js" async = "async" defer/>
-              <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-              <meta name="robots" content="index, follow" />
-              <meta name="yandex-verification" content="0ea0b2c5c7e1e0b9" />
-              <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons' async='async' defer />
-              <script type = 'text/javascript' src ="/heap.js" async = "async" defer/>
-
-             </Helmet>
           {loading ? <div className="loading">Loading&#8230;</div>
             :
-          <Default> 
+          <Default>
             
             <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6CD8NJ"
             height="0" width="0" style={{display: "none", visibility: "hidden"}}></iframe></noscript>
@@ -175,9 +126,6 @@ class Index extends React.Component {
 }
 
 export default withRoot(Index)
-
-
-
 
 
 export const query = graphql`

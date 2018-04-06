@@ -1,7 +1,3 @@
-# Add Caching.
-<FilesMatch ".(jpg|jpeg|png|gif)$">
-    Header set Cache-Control "max-age=7776000"
-</FilesMatch>
 
 # Prevent viewing of htaccess file.
 <Files .htaccess>
@@ -25,11 +21,4 @@ AddOutputFilterByType DEFLATE application/x-javascript
 ExpiresActive On 
 # Default directive
 ExpiresDefault "access plus 1 month"
-# My favicon
-ExpiresByType image/x-icon "access plus 1 year"
-# Images
-ExpiresByType image/gif "access plus 1 year"
-ExpiresByType image/png "access plus 1 year"
-ExpiresByType image/jpg "access plus 1 year"
-ExpiresByType image/jpeg "access plus 1 year"
 </IfModule>

@@ -53,6 +53,7 @@ export default class Post extends React.Component {
       imgWidth: 400,
       imgHeight: 300,
       date: post.date,
+      tags: post.tags,
       description: data.markdownRemark.longExcerpt,
     }
 

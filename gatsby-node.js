@@ -1,5 +1,8 @@
 const path = require("path")
 const _ = require("lodash")
+const { extractTextPlugin } = require(`gatsby-1-config-extract-plugin`);
+const webpack = require("webpack");
+const { store } = require(`./node_modules/gatsby/dist/redux`);
 
 exports.createPages = ({
     boundActionCreators,
@@ -75,6 +78,4 @@ exports.createPages = ({
         })
     })
 }
-
-
 
