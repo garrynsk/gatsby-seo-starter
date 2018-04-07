@@ -178,28 +178,43 @@ function schemaOrg(article, page ) {
 
 
 
-function twitterCards(page){
-  insertMetaToHead("twitter:card", "summary_large_image");
-  insertMetaToHead("twitter:creator", config.twitterID);
-  insertMetaToHead("twitter:title", page.title);
-  insertMetaToHead("twitter:description", page.description);
-  insertMetaToHead("twitter:image", config.siteUrl + page.image);
+function twitterCards(page, article){
+  if(article){
+    insertMetaToHead("twitter:image", config.siteUrl +  article.imgUrl);
+    insertMetaToHead("twitter:image:alt", article.tags);
+    insertMetaToHead("twitter:description", article.description);
+    insertMetaToHead("twitter:title", article.title);
+  }else{
+    insertMetaToHead("twitter:image", config.siteUrl + config.twitterSiteImg);
+    insertMetaToHead("twitter:image:alt", page.keywords);
+    insertMetaToHead("twitter:description", page.description);
+    insertMetaToHead("twitter:title", page.title);
+  }
+  
   insertMetaToHead("twitter:site", config.twitterID);
-  insertMetaToHead("twitter:image:alt", page.keywords);
-
+  insertMetaToHead("twitter:creator", config.twitterID);
+  insertMetaToHead("twitter:card", "summary_large_image");
 }
 
-function commonMetaTags(page) {
+function commonMetaTags(page, article) {
 
   insertMetaToHead("robots", "index, follow");
-  insertMetaToHead("description", page.description);
-  insertMetaToHead("image", config.siteUrl + page.image);
-  insertMetaToHead("keywords", page.keywords);
   insertLink(config.siteUrl, "canonical")
-  insertTitle(page.title)
   insertHttpToHead("x-ua-compatible; charset=utf-8", "ie=edge")
   insertHttpToHead("Content-Type", "text/html; charset=utf-8")
   insertMetaToHead("viewport", "width=device-width, initial-scale=1.0");
+
+  if(article){
+    insertTitle(article.title)
+    insertMetaToHead("description", article.description);
+    insertMetaToHead("image", config.siteUrl + article.imgUrl);
+    insertMetaToHead("keywords", article.tags);
+  }else{
+    insertTitle(page.title)
+    insertMetaToHead("description", page.description);
+    insertMetaToHead("image", config.siteUrl + page.image);
+    insertMetaToHead("keywords", page.keywords);
+  }
 
 }
 
@@ -222,10 +237,11 @@ function openGraph(article, page) {
   insertPropertyMetaToHead("og:url", page.url);
   insertPropertyMetaToHead("og:title", page.title);
   insertPropertyMetaToHead("og:description", page.description);
-  insertPropertyMetaToHead("og:image", config.siteUrl + page.image);
+  
   insertPropertyMetaToHead("og:site_name", config.siteTitle);
 
   if (article) {
+    insertPropertyMetaToHead("og:image", config.siteUrl + article.imgUrl);
     insertPropertyMetaToHead("article:published_time", article.date);
     insertPropertyMetaToHead("article:modified_time", article.date);
     insertPropertyMetaToHead("article:section", article.description);
@@ -256,8 +272,8 @@ export default class SEO extends Component {
       thirdPartyServices()
       schemaGraph(this.state.article, this.state.page)
       openGraph(this.state.article, this.state.page)
-      twitterCards(this.state.page)
-      commonMetaTags(this.state.page)
+      twitterCards(this.state.page, this.state.article)
+      commonMetaTags(this.state.page, this.state.article)
      
     }
 

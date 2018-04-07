@@ -49,7 +49,7 @@ export default class Post extends React.Component {
     const article = {
       title: post.title,
       url: metaData.siteUrl + post.path,
-      imgUrl: metaData.siteUrl + post.featuredImage.childImageSharp.sizes.src,
+      imgUrl: post.featuredImage.childImageSharp.sizes.src,
       imgWidth: 400,
       imgHeight: 300,
       date: post.date,

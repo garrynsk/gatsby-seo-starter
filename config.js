@@ -2,7 +2,7 @@ module.exports = {
     pathPrefix: "/",
     siteTitle: `VictoriaZ programming sketches`,
     siteTitleAlt: `Scala programming blog - VictoriaZ`,
-    siteLogo: "/img/Flying_Herk_in_the_Clouds.svg",
+    siteLogo: "/img/twitterImg.jpg",
     siteUrl: "https://victoriaz.netlify.com",
     siteUrlShort: "victoriaz.netlify.com",
     siteDescription: "A Scala programming blog. Ideas, opinions and technologies.",
@@ -22,6 +22,7 @@ module.exports = {
     facebookAnalyticsID: "2021718294759147",
     facebookUserID: "100016689138564",
     twitterID: "@zakharovavi",
+    twitterSiteImg: "/img/twitterImg.jpg",
     socialLinks: [{
             label: "GitHub",
             url: "https://github.com/garrynsk",
