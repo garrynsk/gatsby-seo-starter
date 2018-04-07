@@ -21,6 +21,7 @@ module.exports = {
     googleAnalyticsID: "UA-116706361-1",
     facebookAnalyticsID: "2021718294759147",
     facebookUserID: "100016689138564",
+    twitterID: "@zakharovavi",
     socialLinks: [{
             label: "GitHub",
             url: "https://github.com/garrynsk",

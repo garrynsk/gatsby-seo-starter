@@ -17,6 +17,10 @@ function withRoot(Component) {
       if (jssStyles && jssStyles.parentNode) {
         jssStyles.parentNode.removeChild(jssStyles);
       }
+      
+ 
+ 
+
     }
 
     pageContext = null;

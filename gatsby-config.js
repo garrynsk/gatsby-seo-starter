@@ -255,7 +255,7 @@ module.exports = {
                 inlineCodeMarker: ">",
             },
         },
-        {
+       /** {
             resolve: `gatsby-plugin-facebook-analytics`,
             options: {
                 appId: config.facebookAnalyticsID,
@@ -263,7 +263,7 @@ module.exports = {
                 debug: false,
                 language: "en_US",
             },
-        },
+        },*/
         {
             resolve: `gatsby-plugin-manifest`,
             options: {

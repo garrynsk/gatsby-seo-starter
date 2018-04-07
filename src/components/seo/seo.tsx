@@ -42,6 +42,7 @@ function insertTextScriptToHead(type, innerHTML) {
 function insertLink(href, rel) {
   const link = document.createElement("link")
   link.href = href
+  link.rel = rel
   insertTagToHead(link)
 }
 
@@ -145,7 +146,7 @@ function schemaOrg(article, page ) {
         "url": article.url,
         "image": {
           "@type": "ImageObject",
-          "url": article.imgUrl,
+          "url": config.siteUrl + article.imgUrl,
           "width": article.imgWidth,
           "height": article.imgHeight
         },
@@ -176,47 +177,23 @@ function schemaOrg(article, page ) {
 }
 
 
-/**
-function twitterCards(){
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta
-    name="twitter:creator"
-    content={config.userTwitter ? config.userTwitter : ""}
-  />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={image} />
-
-
-  <meta name="twitter:site" content="@publisher_handle"/>
-
-  <meta name="twitter:image:src" content="http://www.example.com/image.jpg"/>
+function twitterCards(page){
+  insertMetaToHead("twitter:card", "summary_large_image");
+  insertMetaToHead("twitter:creator", config.twitterID);
+  insertMetaToHead("twitter:title", page.title);
+  insertMetaToHead("twitter:description", page.description);
+  insertMetaToHead("twitter:image", config.siteUrl + page.image);
+  insertMetaToHead("twitter:site", config.twitterID);
+  insertMetaToHead("twitter:image:alt", page.keywords);
 
 }
 
-function breadcrumbs(){
-  <meta itemprop="name" content="The Name or Title Here"/>
-
-  <ol itemscope itemtype="http://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-      <a itemprop="item" href="https://example.com/widgets">
-      <span itemprop="name">Widgets</span></a>
-      <meta itemprop="position" content="1" />
-    </li>
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-      <a itemprop="item" href="https://example.com/widgets/large">
-      <span itemprop="name">Large Widgets</span></a>
-      <meta itemprop="position" content="2" />
-    </li>
-  </ol>
-
-}*/
 function commonMetaTags(page) {
 
   insertMetaToHead("robots", "index, follow");
   insertMetaToHead("description", page.description);
-  insertMetaToHead("image", page.image);
+  insertMetaToHead("image", config.siteUrl + page.image);
   insertMetaToHead("keywords", page.keywords);
   insertLink(config.siteUrl, "canonical")
   insertTitle(page.title)
@@ -245,7 +222,7 @@ function openGraph(article, page) {
   insertPropertyMetaToHead("og:url", page.url);
   insertPropertyMetaToHead("og:title", page.title);
   insertPropertyMetaToHead("og:description", page.description);
-  insertPropertyMetaToHead("og:image", page.image);
+  insertPropertyMetaToHead("og:image", config.siteUrl + page.image);
   insertPropertyMetaToHead("og:site_name", config.siteTitle);
 
   if (article) {
@@ -273,11 +250,13 @@ export default class SEO extends Component {
       }
     }
 
-    componentWillMount = () => {
+    setUpTags = () => {
       removePreviousTags()
+
       thirdPartyServices()
       schemaGraph(this.state.article, this.state.page)
       openGraph(this.state.article, this.state.page)
+      twitterCards(this.state.page)
       commonMetaTags(this.state.page)
      
     }
@@ -287,11 +266,15 @@ export default class SEO extends Component {
 
 
     return (
+      <div>
+
       <Helmet>
       
         <html lang="en"/>
-        
+
       </Helmet>
+        {this.setUpTags()}
+      </div>
     )
   }
 }

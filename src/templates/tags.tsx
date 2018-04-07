@@ -36,7 +36,7 @@ const Tags = ({ pathContext, data }) => {
     image: metaData.siteLogo,
     main: false,
     description: `All article I wrote about "${tag}"`,
-    keywords: {tag},
+    keywords: tag,
   }
 
   return (
