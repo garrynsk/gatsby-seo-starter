@@ -1,8 +1,8 @@
-# Gatsby Freestyle Starter
+# Gatsby SEO Starter
 
 The Gatsby starter with typescript and a lot of goodies.
 
-It is a project for building blogs, especially programming blogs, as it can extract a list of repos via GitHub api. It also includes tags, comments, search, social buttons and SEO support.
+It is a 100% SEO ready gatsby blog starter, especially programming blogs, as it can extract a list of repos via GitHub api. It also includes tags, comments, search, social buttons and SEO support.
 
 #### Preview
 [victoriaz.netlify.com](https://victoriaz.netlify.com/)
@@ -26,7 +26,7 @@ Otherwise, install them:
 Install the starter:
 
 ```bash
-gatsby new YourProjectName https://github.com/garrynsk/gatsby-freestyle
+gatsby new YourProjectName https://github.com/garrynsk/gatsby-seo-starter
 ```
 
 If you want to configure installed plugins, navigate to gatsby-config.js in the root directory and edit it as you wish.
@@ -64,14 +64,20 @@ Adds syntax highlighting to code blocks in markdown files using PrismJS.
 1. [gatsby-plugin-sitemap](https://www.gatsbyjs.org/packages/gatsby-plugin-sitemap/?=gatsby-plugin-sitemap#gatsby-plugin-sitemap)
 Create a sitemap for your Gatsby site.
 
-2. [gatsby-plugin-facebook-analytics](https://www.gatsbyjs.org/packages/gatsby-plugin-facebook-analytics/?=#gatsby-plugin-facebook-analytics)
-Easily add Facebook Analytics to your Gatsby site.
-
 3. [gatsby-plugin-google-analytics](https://www.gatsbyjs.org/packages/gatsby-plugin-google-analytics/?=gatsby-plugin-google-analytics#gatsby-plugin-google-analytics)
 Easily add Google Analytics to your Gatsby site.
 
 4. [gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/?=gatsby-plugin-manifest#gatsby-plugin-manifest)
 Adds support for shipping a manifest.json with your site. To create manifest.json, you need to run gatsby build.
+
+5. [gatsby-plugin-favicon](https://github.com/Creatiwity/gatsby-plugin-favicon)
+Generates all favicons for Web, Android, iOS, ...
+
+6. [gatsby-plugin-hotjar](https://www.gatsbyjs.org/packages/gatsby-plugin-hotjar/)
+Hotjar analytics.
+
+7. [gatsby-plugin-mixpanel](https://github.com/thomascarvalho/gatsby-plugin-mixpanel)
+Plugin to integrate mixpanel (with react-mixpanel) on your gatsby project.
 
 #### UX
 
@@ -83,6 +89,10 @@ Automatically shows the nprogress indicator when a page is delayed in loading (w
 
 3. [gatsby-plugin-algolia](https://www.npmjs.com/package/gatsby-plugin-algolia)
 Search powered by Algolia.
+
+4. [gatsby-plugin-feed](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-feed)
+Create an RSS feed (or multiple feeds) for your Gatsby site.
+
 #### Dev tools
 
 1. [gatsby-plugin-webpack-bundle-analyzer](https://www.gatsbyjs.org/packages/gatsby-plugin-webpack-bundle-analyzer/?=gatsby-plugin-webpack-bundle-analyzer#gatsby-plugin-webpack-bundle-analyzer)
@@ -90,6 +100,9 @@ A Gatsby plugin to help analyze your bundle content with [webpack-bundle-analyze
 
 2. [gatsby-plugin-debug-build](https://www.gatsbyjs.org/packages/gatsby-plugin-debug-build/?=#gatsby-plugin-debug-build)
 Gatsby plugin to force the dev version of builds. NOT FOR USE IN PRODUCTION. This is a debugging utility. Don’t do stupid things with it.
+
+3. [gatsby-plugin-netlify](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-netlify)
+Automatically generates a _headers file and a _redirects file at the root of the public folder to configure HTTP headers and redirects on Netlify.
 
 #### Helpers
 
@@ -116,6 +129,9 @@ Replaces “dumb” punctuation marks with “smart” punctuation marks using t
 
 8. [gatsby-source-filesystem](https://www.gatsbyjs.org/packages/gatsby-source-filesystem/?=gatsby-source-filesystem#gatsby-source-filesystem)
 Plugin for creating File nodes from the file system. 
+
+9. [gatsby-plugin-twitter](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-twitter)
+Loads the Twitter JavaScript for embedding tweets. Let's you add tweets to markdown and in other places
 
 #### Language
 
@@ -164,6 +180,7 @@ SEO
 - [x] Twitter Tags
 - [x] Google analytics
 - [x] Web App Manifest
+- [x] All essential favicons
 
 Development tools
 - [x] TSLint for linting
@@ -171,9 +188,6 @@ Development tools
 - [x] Remark-Lint for linting Markdown
 - [x] write-good for linting English prose
 - [x] gh-pages for deploying to GitHub pages
-
-Lazyboy tools
-- [ ] plop template
 
 ## Customisation
 
@@ -190,7 +204,6 @@ export const query = graphql`
         userEmail
         userName
         userMoto
-        year
         githubUrl
         facebookUrl
         twitterUrl
@@ -201,9 +214,44 @@ export const query = graphql`
 }
 ```
 
+#### SEO
+
+I spend quite some time wrapping my head around how to make seo works in gatsby, but finally it works.
+You must know, that [react-helmet doesn't work with Facebook scrapper](https://github.com/nfl/react-helmet/issues/26). It just fails to fetch dynamic tags. So you have to use some kind of prerendering.
+
+I allow myself to cite [@cjimmy](https://github.com/cjimmy):
+
+###### Convert your app to server-side rendering
+This is the most obvious solution but the most onerous. You won't be able to use client-side definitions like window in your js. If you're using React Router, you'll have to find a way to mirror the routes between server and client. If you're like me, you might be serverless, and running a server would be a lot more work. On the other hand, your page will likely load faster, and crawlers will see what your users would. This is a non-exhaustive list of tradeoffs.
+
+###### Use a pre-rendering service
+Prerender.io, Render-tron, and Prerender.cloud to name a few, give you a way to server-side render when the user-agent is a bot. Some CDNs like Netlify and Roast.io do this for you so you don't have to run your own server.
+The downside to this is this is yet another service to pay for.
+
+###### Pre-render on your own
+A couple of packages exist for rendering your React app statically. Graphcool's Prep, React-Snap, React-Snapshot were ones I've found that all essentially run a local server to render the site and download the html files. The files won't be pretty, but if all you're looking for is the <head> generated by React Helmet, this will do.
+
+I tried Prep, React-Snap, but they failed. So I ended up using Netlify prerendering feature. It works just fine.
+
+Also, react-helmet inserts meta tags in the end of a header. But most of the crawlers limits their search. At least Facebook couldn't find my headers after gatsby's inlined styles. So I wrote some plain simple helpers for tags inserting. You may find them in components/seo/seo.tsx.
+
+I introduced some great free services for site monitoring: hotjar, mixpanel, heap, google-analytics and google tagmanager. I recommend you to use tagmanager whenever you need to insert static meta tags. It is very convenient. I installed Google Optimiser, Conversion Linker and Facebook Pixel with this. And Facebook Pixel now works fine. But you can try [gatsby-plugin-facebook-analytics](https://www.gatsbyjs.org/packages/gatsby-plugin-facebook-analytics/?=#gatsby-plugin-facebook-analytics). I didn't manage it, though. It fails with Facebook Pixel Helper. Maybe it is my fault.
+
+I checked my blog's SEO health with:
+
+1. [OpenLink Structured Data Sniffer](http://osds.openlinksw.com/)
+2. [SEOQuake](https://www.seoquake.com/index.html)
+3. [Google's Structured Data testing tool](https://search.google.com/structured-data/testing-tool#url=victoriaz.netlify.com%2Frepositories)
+4. [Dareboost](www.dareboost.com)
+5. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/sharing/)
+6. [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+7. Screaming Frog
+
+And a bunch of other tools!
+
 #### Posts
 
-To define custom tags you need to write them in every post in the blok at the beginning of the post. Like this:
+To define custom tags you need to write them in every post in the block at the beginning of the post. Like this:
 
 ```markdown
 ---
@@ -228,21 +276,33 @@ You must provide token and graphQL query.
 Is disabled by default. If you need it, change the value of the "disable" parameter.
 
 3. gatsby-plugin-google-analytics
-You must provide trackingId
+You must provide trackingId.
 
 4. gatsby-plugin-facebook-analytics
-5. You must provide appId
+You must provide appId.
+
+5. gatsby-plugin-mixpanel 
+You must provide apiToken.
+
+6. gatsby-plugin-feed 
+Write a query.
+
+7. gatsby-plugin-hotjar 
+Provide an id.
         
 #### Social
 
-For social buttons is used react-share. You can configure it in templates/post.tsx.
+For social buttons is used sharethis service. You can configure it in components/seo/seo.tsx.
 
-For social icons is used react-icons/lib/fa. You can configure it in layouts/footer.tsx
+For social icons is used react-icons/lib/fa. You can configure it in components/footer/footer.tsx
 
 In the file parser/parser.tsx is stored a parser for google API.
 
 #### Embed 
 
 You can include or exclude scripts for embed links from templates/post.tsx. 
+
+Oh, I forgot some issues. The first one with repositories' readme. Starter doesn't fetch images and code from readme, it fetches text anyway, but I hope I find time to deal with it.
+And the second one is performance. It is not notoriously slow, but doesn't perform as fast as I expected. So, if anyone can advise me how to improve the situation, it will be great.
 
 ### Enjoi!

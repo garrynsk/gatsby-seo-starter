@@ -103,7 +103,6 @@ export const query = graphql`
         userName
         userMoto
         avatar
-        year
         socialLinks {
           label
           url

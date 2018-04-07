@@ -68,7 +68,7 @@ export const theme = {
         header: {
             height: "30%",
         },
-        paddingRight: "20px",
+        paddingRight: "60px",
         paddingLeft: "20px",
 
     },

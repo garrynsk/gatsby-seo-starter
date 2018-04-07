@@ -31,7 +31,7 @@ module.exports = {
         siteUrl: config.siteUrl,
         siteUrlShort: config.siteUrlShort,
         siteTitle: config.siteTitle,
-        siteTitleAlt: `Scala programming blog - VictoriaZ`,
+        siteTitleAlt: config.siteTitleAlt,
         siteDescription: config.siteDescription,
         siteLogo: config.siteLogo,
         siteKeyWords: config.siteKeyWords,
@@ -40,7 +40,6 @@ module.exports = {
         userName: config.userName,
         userMoto: config.userMoto,
         avatar: config.avatar,
-        year: config.year,
         algoliaAppId: config.algoliaAppId,
         algoliaApiKey: config.algoliaApiKey,
         disqusShortname: config.disqusShortname,
@@ -62,7 +61,7 @@ module.exports = {
           {
             resolve: 'gatsby-plugin-mixpanel',
             options: {
-              apiToken: 'ccc51377775adf9ac103654869aaff63',
+              apiToken: config.mixpanelToken,
               pageViews: {
                 '/monads': 'Monads article view', // an event 'Page blog view' will be send to mixpanel a every vist on the /blog page
                 '/about': 'Page about view',
@@ -125,7 +124,7 @@ module.exports = {
             options: {
                 appId: process.env.ALGOLIA_APP_ID,
                 apiKey: process.env.ALGOLIA_API_KEY,
-                indexName: "myblog",
+                indexName: config.algoliaIndexKey,
                 queries,
                 chunkSize: 10000, // default: 1000
             },
@@ -165,8 +164,8 @@ module.exports = {
         {
             resolve: `gatsby-plugin-hotjar`,
             options: {
-              id: 834359,
-              sv: 6
+              id: config.hotjarID,
+              sv: config.hotjarSV
             },
           },
 
