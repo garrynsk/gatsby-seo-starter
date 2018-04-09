@@ -21,11 +21,9 @@ module.exports = {
     algoliaIndexKey: "index",
     disqusShortname: "disqus",
     googleAnalyticsID: "googleAnalyticsID",
-    facebookAnalyticsID: "facebookAnalyticsID",
-    facebookUserID: "facebookUserID",
     twitterID: "@zakharovavi",
     twitterSiteImg: "/img/twitterImg.jpg",
-    mixpanelToken: "mixpanel_token",
+    addThisID: "addThisID",
     socialLinks: [{
             label: "GitHub",
             url: "https://github.com/garrynsk",

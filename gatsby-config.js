@@ -46,6 +46,7 @@ module.exports = {
         socialLinks: config.socialLinks,
         title: config.siteTitle,
         description: config.siteDescription,
+        addThisID: config.addThisID,
     },
     plugins: [
         `gatsby-plugin-sitemap`,
@@ -58,16 +59,6 @@ module.exports = {
         `gatsby-plugin-sharp`,
         `gatsby-plugin-catch-links`,
 
-          {
-            resolve: 'gatsby-plugin-mixpanel',
-            options: {
-              apiToken: config.mixpanelToken,
-              pageViews: {
-                '/monads': 'Monads article view', // an event 'Page blog view' will be send to mixpanel a every vist on the /blog page
-                '/about': 'Page about view',
-              }
-            },
-          },
         {
         resolve: `gatsby-plugin-feed`,
         options: {
@@ -254,15 +245,7 @@ module.exports = {
                 inlineCodeMarker: ">",
             },
         },
-       /** {
-            resolve: `gatsby-plugin-facebook-analytics`,
-            options: {
-                appId: config.facebookAnalyticsID,
-                includeInDevelopment: false,
-                debug: false,
-                language: "en_US",
-            },
-        },*/
+
         {
             resolve: `gatsby-plugin-manifest`,
             options: {

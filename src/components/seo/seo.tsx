@@ -220,8 +220,6 @@ function commonMetaTags(page, article) {
 
 function thirdPartyServices() {
 
-  insertMetaToHead("yandex-verification", "0ea0b2c5c7e1e0b9");
-  insertScriptToHead("text/javascript", '//platform-api.sharethis.com/js/sharethis.js#property=5ac3893ece89f0001364201f&product=sticky-share-buttons');
   insertScriptToHead("text/javascript", withPrefix("/heap.js"));
   insertScriptToHead("text/javascript", withPrefix("/tagmanager.js"));
 

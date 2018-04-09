@@ -70,6 +70,7 @@ export default class Post extends React.Component {
     this.mountFacebook()
     this.mountReddit()
     this.mountTwitter()
+    this.mountAddThis()
   }
 
   mountTwitter = () => {
@@ -90,6 +91,14 @@ export default class Post extends React.Component {
     const script = document.createElement("script")
     script.src =
       "https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.5"
+    script.async = true
+    document.body.appendChild(script)
+  }
+
+  mountAddThis = () => {
+    const script = document.createElement("script")
+    script.src =
+      `//s7.addthis.com/js/300/addthis_widget.js#pubid=${this.data.site.siteMetadata.AddThisID}`
     script.async = true
     document.body.appendChild(script)
   }
@@ -128,6 +137,7 @@ export const pageQuery = graphql`
         siteUrl
         siteTitle
         siteLogo
+        addThisID
       }
     }
     markdownRemark(frontmatter: { path: { eq: $path } }) {

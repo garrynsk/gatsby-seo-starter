@@ -76,9 +76,6 @@ Generates all favicons for Web, Android, iOS, ...
 6. [gatsby-plugin-hotjar](https://www.gatsbyjs.org/packages/gatsby-plugin-hotjar/)
 Hotjar analytics.
 
-7. [gatsby-plugin-mixpanel](https://github.com/thomascarvalho/gatsby-plugin-mixpanel)
-Plugin to integrate mixpanel (with react-mixpanel) on your gatsby project.
-
 #### UX
 
 1. [gatsby-plugin-offline](https://www.gatsbyjs.org/packages/gatsby-plugin-offline/?=gatsby-plugin-offline#gatsby-plugin-offline)
@@ -235,7 +232,7 @@ I tried Prep, React-Snap, but they failed. So I ended up using Netlify prerender
 
 Also, react-helmet inserts meta tags in the end of a header. But most of the crawlers limits their search. At least Facebook couldn't find my headers after gatsby's inlined styles. So I wrote some plain simple helpers for tags inserting. You may find them in components/seo/seo.tsx.
 
-I introduced some great free services for site monitoring: hotjar, mixpanel, heap, google-analytics and google tagmanager. I recommend you to use tagmanager whenever you need to insert static meta tags. It is very convenient. I installed Google Optimiser, Conversion Linker and Facebook Pixel with this. And Facebook Pixel now works fine. But you can try [gatsby-plugin-facebook-analytics](https://www.gatsbyjs.org/packages/gatsby-plugin-facebook-analytics/?=#gatsby-plugin-facebook-analytics). I didn't manage it, though. It fails with Facebook Pixel Helper. Maybe it is my fault.
+I introduced some great free services for site monitoring: hotjar, heap, google-analytics and google tagmanager. I recommend you to use tagmanager whenever you need to insert static meta tags. It is very convenient. I installed Google Optimiser, Conversion Linker and Facebook Pixel with this. And Facebook Pixel now works fine. But you can try [gatsby-plugin-facebook-analytics](https://www.gatsbyjs.org/packages/gatsby-plugin-facebook-analytics/?=#gatsby-plugin-facebook-analytics). I didn't manage it, though. It fails with Facebook Pixel Helper. Maybe it is my fault.
 
 I checked my blog's SEO health with:
 
@@ -292,17 +289,18 @@ Provide an id.
         
 #### Social
 
-For social buttons is used sharethis service. You can configure it in components/seo/seo.tsx.
+For social buttons is used addthis service. You can configure it in templates/post.tsx.
 
-For social icons is used react-icons/lib/fa. You can configure it in components/footer/footer.tsx
+For social icons is used fontawesome. You can configure it in components/socialButtons/socialButtons.tsx
 
-In the file parser/parser.tsx is stored a parser for google API.
+In the file parser/parser.tsx is stored a parser for github API.
 
 #### Embed 
 
 You can include or exclude scripts for embed links from templates/post.tsx. 
 
 Oh, I forgot some issues. The first one with repositories' readme. Starter doesn't fetch images and code from readme, it fetches text anyway, but I hope I find time to deal with it.
-And the second one is performance. It is not notoriously slow, but doesn't perform as fast as I expected. So, if anyone can advise me how to improve the situation, it will be great.
+And the second one is performance. The blog is not notoriously slow, but doesn't perform as fast as I expected. I think, tree-shaking could improve the situation, but Gatsby, unfortunately, still uses Webpack 1.
+So, if anyone can advise me how to speed up the blog, it will be great.
 
 ### Enjoi!

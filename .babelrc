@@ -1,17 +1,13 @@
 {   "presets": [
-      "next/babel"
-    ],
-    "env": {
-      "production": {
-        "presets": []
-      },
-    "plugins": [
-      ["emotion",
-        "babel-plugin-styled-components", {
-        "ssr": true,
-        "displayName": true, 
-        "preprocess": false
-      }]
-    ]
-  }
+  ["env", {
+      "modules": false
+    }]
+],
+"plugins": [
+  ["babel-plugin-styled-components", {
+    "ssr": true,
+    "displayName": true, 
+    "preprocess": false
+  }]
+]
 }
